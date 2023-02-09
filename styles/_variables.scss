@@ -1,6 +1,20 @@
 :root {
+  // background
   --background-primary: #230e2b;
   --background-secondary: #1c0a22;
-  --text-white: #fff;
+
+  // text
+  --text-light: #fff;
+  --text-dark: #6e447b;
+
+  // button
+  --button-primary: linear-gradient(90deg, #ee0979 0%, #ff6a00 100%);
+  --button-secondary: linear-gradient(90deg, #ffc700 0%, #ff005c 100%);
+  --button-red: #f43048;
+
+  // shadow
+  --box-shadow: 0 20px 30px rgb(179 34 31 / 20%);
+
+  // font
   --font-family: "Rubik", "Raleway", "Arial", sans-serif;
 }
