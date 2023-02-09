@@ -1,3 +1,5 @@
+import React from "react";
+import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
@@ -7,6 +9,11 @@ import { Button, Container, Input } from "../components";
 
 const Home = (): JSX.Element => {
   const { t } = useTranslation();
+  const router = useRouter();
+
+  React.useEffect(() => {
+    router.replace("/auth/login");
+  }, [router]);
 
   return (
     <Container>
