@@ -14,34 +14,36 @@ export const Footer = ({ className, ...props }: FooterProps): JSX.Element => {
   return (
     <footer className={cn(styles.footer, className)} {...props}>
       <Container className={cn(styles.footer__container)}>
-        <div className={cn(styles.footer__nav)}>
-          <Link className={cn(styles.footer__link)} href={"/about"} locale={i18n.language}>
-            {t("footer:about")}
-          </Link>
-          <Link className={cn(styles.footer__link)} href={"/about"} locale={i18n.language}>
-            {t("footer:support")}
-          </Link>
-          <Link className={cn(styles.footer__link)} href={"/about"} locale={i18n.language}>
-            {t("footer:advice")}
-          </Link>
-          <Link className={cn(styles.footer__link)} href={"/about"} locale={i18n.language}>
-            {t("footer:contacts")}
-          </Link>
-          <Link className={cn(styles.footer__link)} href={"/about"} locale={i18n.language}>
-            {t("footer:pay-policy")}
-          </Link>
-        </div>
+        <div className={cn(styles.footer__wrapper)}>
+          <div className={cn(styles.footer__nav)}>
+            <Link className={cn(styles.footer__link)} href={"/about"} locale={i18n.language}>
+              {t("footer:about")}
+            </Link>
+            <Link className={cn(styles.footer__link)} href={"/about"} locale={i18n.language}>
+              {t("footer:support")}
+            </Link>
+            <Link className={cn(styles.footer__link)} href={"/about"} locale={i18n.language}>
+              {t("footer:advice")}
+            </Link>
+            <Link className={cn(styles.footer__link)} href={"/about"} locale={i18n.language}>
+              {t("footer:contacts")}
+            </Link>
+            <Link className={cn(styles.footer__link)} href={"/about"} locale={i18n.language}>
+              {t("footer:pay-policy")}
+            </Link>
+          </div>
 
-        <div className={cn(styles.footer__personal)}>
-          <span>{t("footer:personal")}</span>
-        </div>
+          <div className={cn(styles.footer__personal)}>
+            <span>{t("footer:personal")}</span>
+          </div>
 
-        <div className={cn(styles.footer__language)}>
-          <Language language={i18n.language} />
-        </div>
+          <div className={cn(styles.footer__language)}>
+            <Language language={i18n.language} />
+          </div>
 
-        <div className={cn(styles.footer__copyright)}>
-          <span>© Company 2021</span>
+          <div className={cn(styles.footer__copyright)}>
+            <span>© Company 2021</span>
+          </div>
         </div>
       </Container>
     </footer>
