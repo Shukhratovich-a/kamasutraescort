@@ -11,6 +11,8 @@ export const Button = ({ className, children, appearance = "primary", ...props }
         [styles["button--primary"]]: appearance === "primary",
         [styles["button--secondary"]]: appearance === "secondary",
         [styles["button--red"]]: appearance === "red",
+        [styles["button--linear-primary"]]: appearance === "linear-primary",
+        [styles["button--linear-blue"]]: appearance === "linear-blue",
       })}
       {...props}
     >

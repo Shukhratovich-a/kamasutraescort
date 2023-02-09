@@ -26,4 +26,36 @@
   &--red {
     background: var(--button-red);
   }
+
+  &--linear-primary {
+    $border: 1px;
+
+    position: relative;
+
+    width: auto;
+
+    max-width: none;
+    padding: 10px 35px;
+
+    border: solid $border transparent;
+    border-radius: 100px;
+    background: var(--background-primary);
+    background-clip: padding-box;
+
+    &::before {
+      position: absolute;
+      z-index: -1;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+
+      margin: -$border !important;
+
+      content: "";
+
+      border-radius: inherit !important;
+      background: var(--button-primary);
+    }
+  }
 }

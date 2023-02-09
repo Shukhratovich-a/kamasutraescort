@@ -3,10 +3,10 @@ import cn from "classnames";
 
 import { InputProps } from "./Input.props";
 
-import Mail from "./mail.svg";
-import Password from "./password.svg";
-import User from "./user.svg";
-import Error from "./error.svg";
+import Mail from "../../assets/icons/mail.svg";
+import Password from "../../assets/icons/password.svg";
+import User from "../../assets/icons/user.svg";
+import Error from "../../assets/icons/error.svg";
 
 import styles from "./Input.module.scss";
 

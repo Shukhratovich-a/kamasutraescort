@@ -13,7 +13,7 @@ const MyApp = ({ Component, pageProps }: AppProps): JSX.Element => {
   return (
     <>
       <Head>
-        <title>Merit</title>
+        <title>Kamasutraescort</title>
 
         <link rel="icon" href="/favicon.ico" />
       </Head>

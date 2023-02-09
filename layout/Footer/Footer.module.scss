@@ -7,7 +7,7 @@
 
 .footer__wrapper {
   display: grid;
-  grid-template-columns: auto 1fr auto 1fr auto 80px auto;
+  grid-template-columns: auto 1fr auto 1fr auto 50px auto;
   grid-template-areas: "nav . personal . language . copyright";
 }
 
@@ -46,11 +46,11 @@
 
 @media only screen and (max-width: 1200px) {
   .footer__wrapper {
-    grid-template-columns: auto 1fr auto 1fr auto 40px auto;
+    grid-template-columns: auto 1fr auto 1fr auto 30px auto;
   }
 }
 
-@media only screen and (max-width: 1080px) {
+@media only screen and (max-width: 1150px) {
   .footer {
     padding: 50px 0;
   }

@@ -1,0 +1,46 @@
+.body {
+  position: relative;
+
+  overflow: hidden;
+
+  &::after {
+    position: absolute;
+    z-index: -2;
+    right: 50%;
+    bottom: -280px;
+
+    width: 700px;
+    height: 700px;
+
+    content: "";
+    transform: translate(50%);
+
+    border-radius: 50%;
+    background-color: #381a42;
+    filter: blur(150px);
+  }
+}
+
+.login__vector {
+  position: absolute;
+  z-index: -1;
+  right: 50%;
+
+  transform: translate(50%);
+
+  pointer-events: none;
+
+  filter: drop-shadow(var(--box-shadow));
+
+  &--small {
+    bottom: -137px;
+
+    transform: translate(calc(100% + 454px));
+  }
+
+  &--big {
+    bottom: -50px;
+
+    transform: translate(0 - 500px) rotate(41.86deg);
+  }
+}

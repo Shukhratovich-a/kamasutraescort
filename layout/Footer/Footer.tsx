@@ -1,4 +1,5 @@
 import cn from "classnames";
+import { format } from "date-fns";
 import Link from "next/link";
 import { useTranslation } from "next-i18next";
 
@@ -42,7 +43,7 @@ export const Footer = ({ className, ...props }: FooterProps): JSX.Element => {
           </div>
 
           <div className={cn(styles.footer__copyright)}>
-            <span>© Company 2021</span>
+            <span>Kamasutraescort © 2021 - {format(new Date(), "yyyy")}</span>
           </div>
         </div>
       </Container>
