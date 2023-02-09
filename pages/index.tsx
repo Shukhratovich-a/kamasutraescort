@@ -3,7 +3,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 import { withLayout } from "../layout/Layout";
 
-import { Button, Container } from "../components";
+import { Button, Container, Input } from "../components";
 
 const Home = (): JSX.Element => {
   const { t } = useTranslation();
@@ -13,6 +13,10 @@ const Home = (): JSX.Element => {
       <Button appearance="primary">{t("button:enter")}</Button>
       <Button appearance="secondary">{t("button:enter")}</Button>
       <Button appearance="red">{t("button:enter")}</Button>
+
+      <Input appearance="user" placeholder={t("input:username") || ""} />
+      <Input appearance="mail" placeholder={t("input:mail") || ""} />
+      <Input appearance="password" placeholder={t("input:password") || ""} />
     </Container>
   );
 };
