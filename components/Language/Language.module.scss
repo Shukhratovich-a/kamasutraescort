@@ -1,5 +1,6 @@
 .language {
   position: relative;
+
   text-transform: uppercase;
 }
 
@@ -15,6 +16,7 @@
   position: absolute;
   top: 100%;
   left: 0;
+
   display: none;
 
   &--open {
