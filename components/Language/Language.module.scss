@@ -1,0 +1,27 @@
+.language {
+  position: relative;
+  text-transform: uppercase;
+}
+
+.language--selected {
+  cursor: pointer;
+
+  span {
+    margin-right: 6px;
+  }
+}
+
+.language__list {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  display: none;
+
+  &--open {
+    display: inline-block;
+  }
+}
+
+.language__list__item {
+  cursor: pointer;
+}

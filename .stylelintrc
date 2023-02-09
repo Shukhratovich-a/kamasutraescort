@@ -1,0 +1,15 @@
+{
+  "extends": ["stylelint-config-standard-scss", "stylelint-order-config-standard", "stylelint-config-prettier-scss"],
+  "plugins": ["stylelint-order", "stylelint-declaration-block-no-ignored-properties", "stylelint-scss"],
+  "rules": {
+    "indentation": [2],
+    "color-hex-case": "lower",
+    "selector-class-pattern": "^.*$",
+    "declaration-block-no-redundant-longhand-properties": [
+      true,
+      {
+        "ignoreShorthands": ["/grid/"]
+      }
+    ]
+  }
+}
