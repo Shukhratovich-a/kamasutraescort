@@ -9,7 +9,7 @@ import Marker from "./marker.svg";
 
 import styles from "./Language.module.scss";
 
-export const Language = ({ language, languages = ["ru", "en"], className }: LanguageProps): JSX.Element => {
+export const Language = ({ language, languages = ["ru", "en"], className, ...props }: LanguageProps): JSX.Element => {
   const { i18n } = useTranslation();
   const router = useRouter();
   const { pathname, asPath, query } = router;
@@ -32,7 +32,7 @@ export const Language = ({ language, languages = ["ru", "en"], className }: Lang
   };
 
   return (
-    <div className={cn(styles.language, className)}>
+    <div className={cn(styles.language, className)} {...props}>
       <span className={cn(styles["language--selected"])} onClick={() => setIsOpen(!isOpen)}>
         <span>{language}</span>
         <Marker />
