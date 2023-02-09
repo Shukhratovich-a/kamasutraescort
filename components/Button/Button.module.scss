@@ -1,0 +1,29 @@
+.button {
+  display: inline-block;
+
+  width: 100%;
+  max-width: 380px;
+  padding: 23px 40px;
+
+  cursor: pointer;
+
+  color: var(--text-light);
+
+  border: none;
+  border-radius: 100px;
+
+  font-size: 16px;
+  line-height: 24px;
+
+  &--primary {
+    background: var(--button-primary);
+  }
+
+  &--secondary {
+    background: var(--button-secondary);
+  }
+
+  &--red {
+    background: var(--button-red);
+  }
+}

@@ -3,16 +3,16 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 import { withLayout } from "../layout/Layout";
 
-import { Container } from "../components";
+import { Button, Container } from "../components";
 
 const Home = (): JSX.Element => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   return (
     <Container>
-      <button onClick={() => i18n.changeLanguage("ru")}>ru</button>
-      <button onClick={() => i18n.changeLanguage("en")}>en</button>
-      <div>{t("hello-world")}</div>
+      <Button appearance="primary">{t("button:enter")}</Button>
+      <Button appearance="secondary">{t("button:enter")}</Button>
+      <Button appearance="red">{t("button:enter")}</Button>
     </Container>
   );
 };
