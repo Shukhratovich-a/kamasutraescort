@@ -9,7 +9,7 @@ import Marker from "./marker.svg";
 
 import styles from "./Language.module.scss";
 
-export const Language = ({ language, languages = ["ru", "en"], className, ...props }: LanguageProps): JSX.Element => {
+export const Language = ({ className, language, languages = ["ru", "en"], ...props }: LanguageProps): JSX.Element => {
   const { i18n } = useTranslation();
   const router = useRouter();
   const { pathname, asPath, query } = router;
