@@ -25,10 +25,14 @@ export const AuthHeader = ({ className, ...props }: AuthHeaderProps): JSX.Elemen
           {asPath === "/auth/register" ? t("auth:have-account") : t("auth:first-time")}
         </span>
 
-        <Button className={cn(styles.header__link)} appearance="linear-primary">
-          <Link href={asPath === "/auth/register" ? "/auth/login" : "/auth/register"}>
-            {asPath === "/auth/register" ? t("auth:login") : t("auth:register")}
-          </Link>
+        <Button
+          className={cn(styles.header__link)}
+          appearance="linear-primary"
+          onClick={() => {
+            router.replace(asPath === "/auth/register" ? "/auth/login" : "/auth/register");
+          }}
+        >
+          {asPath === "/auth/register" ? t("auth:login") : t("auth:register")}
         </Button>
       </Container>
     </header>

@@ -21,6 +21,48 @@
   }
 }
 
+.login__container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+
+  min-height: 100%;
+
+  text-align: center;
+}
+
+.login__heading {
+  margin-bottom: 10px;
+
+  font-size: 60px;
+  font-weight: 500;
+  line-height: 90px;
+}
+
+.login__description {
+  width: 100%;
+  max-width: 850px;
+
+  margin-bottom: 50px;
+
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.login__form {
+  margin-bottom: 20px;
+}
+
+.login__link {
+  text-align: center;
+
+  color: #925fa4;
+
+  font-size: 14px;
+  line-height: 150%;
+}
+
 .login__vector {
   position: absolute;
   z-index: -1;
