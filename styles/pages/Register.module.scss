@@ -6,14 +6,14 @@
   &::after {
     position: absolute;
     z-index: -2;
+    top: -180px;
     right: 50%;
-    bottom: -280px;
 
     width: 850px;
     height: 850px;
 
     content: "";
-    transform: translate(50%);
+    transform: translate(150px);
 
     border-radius: 50%;
     background-color: #381a42;
@@ -21,7 +21,7 @@
   }
 }
 
-.login__vector {
+.register__vector {
   position: absolute;
   z-index: -1;
   right: 50%;
@@ -33,20 +33,20 @@
   filter: drop-shadow(var(--box-shadow));
 
   &--small {
-    bottom: -137px;
+    bottom: -280px;
 
-    width: 1000px;
-    height: 822px;
+    width: 1622.72px;
+    height: 1333.88px;
 
-    transform: translate(calc(100% + 454px)) rotate(0deg);
+    transform: translate(calc(100% + 500px)) rotate(-137.88deg);
   }
 
   &--big {
-    bottom: -50px;
+    width: 1277.47px;
+    height: 1167.77px;
 
-    width: 1083px;
-    height: 990px;
+    bottom: -325px;
 
-    transform: translate(calc(0px - 500px)) rotate(41.86deg);
+    transform: translate(calc(0px - 510px)) rotate(118.2deg);
   }
 }
