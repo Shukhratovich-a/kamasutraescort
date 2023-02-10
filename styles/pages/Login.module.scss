@@ -27,12 +27,16 @@
   flex-direction: column;
   justify-content: center;
 
+  padding-top: 60px;
+  padding-bottom: 60px;
+
   min-height: 100%;
 
   text-align: center;
 }
 
 .login__heading {
+  margin-top: 0;
   margin-bottom: 10px;
 
   font-size: 60px;
@@ -44,6 +48,7 @@
   width: 100%;
   max-width: 850px;
 
+  margin-top: 0;
   margin-bottom: 50px;
 
   font-size: 16px;
@@ -61,6 +66,11 @@
 
   font-size: 14px;
   line-height: 150%;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
 .login__vector {
@@ -90,5 +100,71 @@
     height: 990px;
 
     transform: translate(calc(0px - 500px)) rotate(41.86deg);
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .login__vector {
+    &--small {
+      bottom: -150px;
+
+      transform: translate(calc(100% + 250px)) rotate(0deg);
+    }
+
+    &--big {
+      transform: translate(calc(0px - 250px)) rotate(41.86deg);
+    }
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .login__heading {
+    font-size: 48px;
+    line-height: 72px;
+  }
+
+  .login__description {
+    max-width: 510px;
+
+    margin-bottom: 30px;
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  .login__container {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .login__heading {
+    font-size: 36px;
+    line-height: 54px;
+  }
+
+  .login__description {
+    max-width: 510px;
+
+    margin-bottom: 30px;
+  }
+
+  .login__vector {
+    &--small {
+      width: 604px;
+      height: 496px;
+
+      bottom: 20px;
+
+      transform: translate(calc(100% + 86px)) rotate(0deg);
+    }
+
+    &--big {
+      width: 653.15px;
+      height: 597.06px;
+
+      top: 90px;
+      bottom: unset;
+
+      transform: translate(calc(0px - 90px)) rotate(41.86deg);
+    }
   }
 }

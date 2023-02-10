@@ -35,3 +35,28 @@
     color: inherit;
   }
 }
+
+@media only screen and (max-width: 650px) {
+  .header {
+    padding-top: 20px;
+    padding-bottom: 50px;
+  }
+
+  .header__container {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "logo"
+      "text"
+      "link";
+
+    justify-items: center;
+  }
+
+  .header__logo {
+    margin-bottom: 45px;
+  }
+
+  .header__text {
+    margin-bottom: 10px;
+  }
+}
