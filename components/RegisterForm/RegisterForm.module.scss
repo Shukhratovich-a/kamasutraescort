@@ -1,3 +1,8 @@
-.register {
-  display: block;
+.register-form {
+  display: grid;
+
+  width: 100%;
+  max-width: 380px;
+  margin: 0 auto;
+  gap: 20px;
 }

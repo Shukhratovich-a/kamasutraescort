@@ -1,8 +1,4 @@
 .body {
-  position: relative;
-
-  overflow: hidden;
-
   &::after {
     position: absolute;
     z-index: -2;
@@ -50,9 +46,6 @@
 
   margin-top: 0;
   margin-bottom: 50px;
-
-  font-size: 16px;
-  line-height: 24px;
 }
 
 .login__form {
@@ -70,50 +63,6 @@
 
   &:hover {
     text-decoration: underline;
-  }
-}
-
-.login__vector {
-  position: absolute;
-  z-index: -1;
-  right: 50%;
-
-  transform: translate(50%);
-
-  pointer-events: none;
-
-  filter: drop-shadow(var(--box-shadow));
-
-  &--small {
-    bottom: -137px;
-
-    width: 1000px;
-    height: 822px;
-
-    transform: translate(calc(100% + 454px)) rotate(0deg);
-  }
-
-  &--big {
-    bottom: -50px;
-
-    width: 1083px;
-    height: 990px;
-
-    transform: translate(calc(0px - 500px)) rotate(41.86deg);
-  }
-}
-
-@media only screen and (max-width: 1000px) {
-  .login__vector {
-    &--small {
-      bottom: -150px;
-
-      transform: translate(calc(100% + 250px)) rotate(0deg);
-    }
-
-    &--big {
-      transform: translate(calc(0px - 250px)) rotate(41.86deg);
-    }
   }
 }
 
@@ -145,26 +94,5 @@
     max-width: 510px;
 
     margin-bottom: 30px;
-  }
-
-  .login__vector {
-    &--small {
-      bottom: 20px;
-
-      width: 604px;
-      height: 496px;
-
-      transform: translate(calc(100% + 86px)) rotate(0deg);
-    }
-
-    &--big {
-      top: 90px;
-      bottom: unset;
-
-      width: 653.15px;
-      height: 597.06px;
-
-      transform: translate(calc(0px - 90px)) rotate(41.86deg);
-    }
   }
 }

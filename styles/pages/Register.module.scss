@@ -1,8 +1,4 @@
 .body {
-  position: relative;
-
-  overflow: hidden;
-
   &::after {
     position: absolute;
     z-index: -2;
@@ -21,32 +17,32 @@
   }
 }
 
-.register__vector {
-  position: absolute;
-  z-index: -1;
-  right: 50%;
+.register__container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
 
-  transform: translate(50%);
+  min-height: 100%;
 
-  pointer-events: none;
+  padding-top: 60px;
+  padding-bottom: 60px;
 
-  filter: drop-shadow(var(--box-shadow));
+  text-align: center;
+}
 
-  &--small {
-    bottom: -280px;
+.register__heading {
+  margin-top: 0;
+  margin-bottom: 10px;
 
-    width: 1622.72px;
-    height: 1333.88px;
+  font-size: 36px;
+  font-weight: 500;
+  line-height: 54px;
+}
 
-    transform: translate(calc(100% + 500px)) rotate(-137.88deg);
-  }
+.register__description {
+  margin-top: 0;
+  margin-bottom: 30px;
 
-  &--big {
-    bottom: -325px;
-
-    width: 1277.47px;
-    height: 1167.77px;
-
-    transform: translate(calc(0px - 510px)) rotate(118.2deg);
-  }
+  color: var(--text-dark);
 }

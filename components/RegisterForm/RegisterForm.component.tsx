@@ -23,7 +23,7 @@ export const RegisterForm = ({ className, ...props }: RegisterFormProps): JSX.El
   };
 
   return (
-    <form className={cn(styles["Register-form"], className)} onSubmit={handleSubmit(onSubmit)} {...props}>
+    <form className={cn(styles["register-form"], className)} onSubmit={handleSubmit(onSubmit)} {...props}>
       <Input
         {...register("mail", { required: { value: true, message: "Заполните имя" } })}
         error={errors.mail}

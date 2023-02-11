@@ -1,5 +1,8 @@
 .wrapper {
+  position: relative;
+
   display: grid;
+  overflow: hidden;
   grid-template-areas:
     "header"
     "main"
@@ -20,4 +23,14 @@
 
 .footer {
   grid-area: footer;
+}
+
+.background {
+  position: fixed;
+  z-index: -1;
+  right: 50%;
+
+  pointer-events: none;
+
+  filter: drop-shadow(var(--box-shadow));
 }
