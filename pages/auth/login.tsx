@@ -2,11 +2,12 @@ import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import cn from "classnames";
+import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 import { withAuthLayout } from "../../layout/Layout";
 
-import { Container, LoginForm } from "../../components";
+import { Container, ForgotPassword, LoginForm } from "../../components";
 
 import VectorBig from "../../assets/background/vector-big.svg";
 import VectorSmall from "../../assets/background/vector-small.svg";
@@ -15,16 +16,26 @@ import styles from "../../styles/pages/Login.module.scss";
 
 const Login = (): JSX.Element => {
   const router = useRouter();
+  const { t } = useTranslation();
+
+  const [forgotState, setForgotState] = React.useState(false);
+
+  React.useEffect(() => {
+    const { password } = router.query;
+    if (password === "forgot") {
+      setForgotState(true);
+    } else {
+      setForgotState(false);
+    }
+  }, [router]);
 
   return (
     <>
+      <ForgotPassword isOpen={forgotState} />
       <Container className={cn(styles.login__container)}>
-        <h1 className={cn(styles.login__heading)}>Знакомства без преград</h1>
+        <h1 className={cn(styles.login__heading)}>{t("auth:login-heading")}</h1>
 
-        <p className={cn(styles.login__description)}>
-          Для современного мира сплочённость команды профессионалов однозначно фиксирует необходимость системы обучения
-          кадров, соответствующей насущным потребностям.
-        </p>
+        <p className={cn(styles.login__description)}>{t("auth:login-description")}</p>
 
         <LoginForm className={cn(styles.login__form)} />
 
@@ -32,10 +43,10 @@ const Login = (): JSX.Element => {
           className={cn(styles.login__link)}
           href={{
             pathname: router.asPath,
-            query: { type: "restore" },
+            query: { password: "forgot" },
           }}
         >
-          Я не помню пароль
+          {t("auth:login-password")}
         </Link>
       </Container>
 
