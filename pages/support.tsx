@@ -4,8 +4,8 @@ import { withAuthLayout } from "../layout/Layout";
 
 import { Container } from "../components";
 
-const About = (): JSX.Element => {
-  return <Container>About</Container>;
+const Support = (): JSX.Element => {
+  return <Container>Support</Container>;
 };
 
 export async function getStaticProps({ locale }: { locale: string }) {
@@ -16,4 +16,4 @@ export async function getStaticProps({ locale }: { locale: string }) {
   };
 }
 
-export default withAuthLayout(About);
+export default withAuthLayout(Support);

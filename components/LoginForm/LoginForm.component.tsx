@@ -30,8 +30,9 @@ export const LoginForm = ({ className, ...props }: LoginFormProps): JSX.Element 
         appearance="mail"
         placeholder={t("input:mail") || ""}
       />
+
       <Input
-        {...register("password", { required: { value: true, message: "Заполните имя" } })}
+        {...register("password", { required: { value: true, message: "Заполните имя" }, minLength: 8 })}
         error={errors.password}
         appearance="password"
         placeholder={t("input:password") || ""}

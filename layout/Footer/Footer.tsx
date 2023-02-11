@@ -20,22 +20,24 @@ export const Footer = ({ className, ...props }: FooterProps): JSX.Element => {
             <Link className={cn(styles.footer__link)} href={"/about"} locale={i18n.language}>
               {t("footer:about")}
             </Link>
-            <Link className={cn(styles.footer__link)} href={"/about"} locale={i18n.language}>
+            <Link className={cn(styles.footer__link)} href={"/support"} locale={i18n.language}>
               {t("footer:support")}
             </Link>
-            <Link className={cn(styles.footer__link)} href={"/about"} locale={i18n.language}>
+            <Link className={cn(styles.footer__link)} href={"/advice"} locale={i18n.language}>
               {t("footer:advice")}
             </Link>
-            <Link className={cn(styles.footer__link)} href={"/about"} locale={i18n.language}>
+            <Link className={cn(styles.footer__link)} href={"/contacts"} locale={i18n.language}>
               {t("footer:contacts")}
             </Link>
-            <Link className={cn(styles.footer__link)} href={"/about"} locale={i18n.language}>
+            <Link className={cn(styles.footer__link)} href={"/pay-policy"} locale={i18n.language}>
               {t("footer:pay-policy")}
             </Link>
           </div>
 
           <div className={cn(styles.footer__personal)}>
-            <span>{t("footer:personal")}</span>
+            <Link className={cn(styles.footer__link)} href={"/personal"} locale={i18n.language}>
+              {t("footer:personal")}
+            </Link>
           </div>
 
           <div className={cn(styles.footer__language)}>
