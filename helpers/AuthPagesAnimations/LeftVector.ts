@@ -1,6 +1,6 @@
 export const leftBig = {
   login: {
-    bottom: "-50px",
+    top: "140px",
     transform: "translate(calc(0px - 500px)) rotate(41.86deg)",
 
     width: "1083px",
@@ -8,8 +8,8 @@ export const leftBig = {
   },
 
   register: {
-    bottom: "-325px",
-    transform: "translate(calc(0px - 510px)) rotate(118.2deg)",
+    top: "235px",
+    transform: "translate(calc(0px - 500px)) rotate(118.2deg)",
 
     width: "1277.47px",
     height: "1167.77px",
@@ -18,12 +18,16 @@ export const leftBig = {
 
 export const leftMedium = {
   login: {
+    top: "140px",
     transform: "translate(calc(0px - 250px)) rotate(41.86deg)",
+
+    width: "1083px",
+    height: "990px",
   },
 
   register: {
-    bottom: "-325px",
-    transform: "translate(calc(0px - 510px)) rotate(118.2deg)",
+    top: "235px",
+    transform: "translate(calc(0px - 250px)) rotate(118.2deg)",
 
     width: "1277.47px",
     height: "1167.77px",
@@ -33,19 +37,17 @@ export const leftMedium = {
 export const leftSmall = {
   login: {
     top: "90px",
-    bottom: "unset",
+    transform: "translate(calc(0px - 100px)) rotate(41.86deg)",
 
     width: "653.15px",
     height: "597.06px",
-
-    transform: "translate(calc(0px - 90px)) rotate(41.86deg)",
   },
 
   register: {
-    bottom: "-325px",
-    transform: "translate(calc(0px - 510px)) rotate(118.2deg)",
+    top: "350px",
+    transform: "translate(calc(0px - 100px)) rotate(146.75deg)",
 
-    width: "1277.47px",
-    height: "1167.77px",
+    width: "765.31px",
+    height: "699.59px",
   },
 };

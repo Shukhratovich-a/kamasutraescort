@@ -1,14 +1,14 @@
 export const rightBig = {
   login: {
-    bottom: "-137px",
-    transform: "translate(calc(100% + 454px)) rotate(0deg)",
+    top: "390px",
+    transform: "translate(calc(100% + 500px)) rotate(0deg)",
 
     width: "1000px",
     height: "822px",
   },
 
   register: {
-    bottom: "-280px",
+    top: "30px",
     transform: "translate(calc(100% + 500px)) rotate(-137.88deg)",
 
     width: "1622.72px",
@@ -18,14 +18,16 @@ export const rightBig = {
 
 export const rightMedium = {
   login: {
-    bottom: "-150px",
-
+    top: "390px",
     transform: " translate(calc(100% + 250px)) rotate(0deg)",
+
+    width: "1000px",
+    height: "822px",
   },
 
   register: {
-    bottom: "-280px",
-    transform: "translate(calc(0px - 250px)) rotate(41.86deg)",
+    top: "30px",
+    transform: "translate(calc(100% + 250px)) rotate(-137.88deg)",
 
     width: "1622.72px",
     height: "1333.88px",
@@ -35,19 +37,17 @@ export const rightMedium = {
 export const rightSmall = {
   login: {
     top: "508px",
-    bottom: "unset",
+    transform: "translate(calc(100% + 100px)) rotate(0deg)",
 
     width: "604px",
     height: "496px",
-
-    transform: "translate(calc(100% + 86px)) rotate(0deg)",
   },
 
   register: {
-    bottom: "-280px",
-    transform: "translate(calc(100% + 500px)) rotate(-137.88deg)",
+    top: "25px",
+    transform: "translate(calc(100% + 100px)) rotate(-137.88deg)",
 
-    width: "1622.72px",
-    height: "1333.88px",
+    width: "785.03px",
+    height: "645.3px",
   },
 };
