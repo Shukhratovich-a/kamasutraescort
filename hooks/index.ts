@@ -1,1 +1,1 @@
-export * from "./useWindowDimensions";
+export * from "./useMediaQuery";
