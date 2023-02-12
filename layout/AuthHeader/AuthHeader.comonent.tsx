@@ -12,7 +12,7 @@ import styles from "./AuthHeader.module.scss";
 export const AuthHeader = ({ className, ...props }: AuthHeaderProps): JSX.Element => {
   const router = useRouter();
   const { t } = useTranslation();
-  const { asPath } = router;
+  const { pathname } = router;
 
   return (
     <header className={cn(styles.header, className)} {...props}>
@@ -22,17 +22,17 @@ export const AuthHeader = ({ className, ...props }: AuthHeaderProps): JSX.Elemen
         </Link>
 
         <span className={cn(styles.header__text)}>
-          {asPath === "/auth/register" ? t("auth:have-account") : t("auth:first-time")}
+          {pathname === "/auth/register" ? t("auth:have-account") : t("auth:first-time")}
         </span>
 
         <Button
           className={cn(styles.header__link)}
           appearance="linear-primary"
           onClick={() => {
-            router.replace(asPath === "/auth/login" ? "/auth/register" : "/auth/login");
+            router.replace(pathname === "/auth/login" ? "/auth/register" : "/auth/login");
           }}
         >
-          {asPath === "/auth/login" ? t("auth:register") : t("auth:login")}
+          {pathname === "/auth/login" ? t("auth:register") : t("auth:login")}
         </Button>
       </Container>
     </header>
