@@ -1,4 +1,4 @@
-import { FunctionComponent } from "react";
+import React, { FunctionComponent } from "react";
 import { useRouter } from "next/router";
 
 import cn from "classnames";
@@ -16,7 +16,6 @@ import VectorLeft from "../assets/background/vector-big.svg";
 import VectorRight from "../assets/background/vector-small.svg";
 
 import styles from "./Layout.module.scss";
-import useMediaQuery from "../hooks/useMediaQuery";
 
 const Layout = ({ children, className }: LayoutProps): JSX.Element => {
   return (
@@ -45,11 +44,13 @@ const AuthLayout = ({ children, className }: LayoutProps): JSX.Element => {
 
   const { pathname } = router;
 
-  const isMedium = useMediaQuery("(max-width: 1000px)");
-  const isSmall = useMediaQuery("(max-width: 650px)");
+  const variantsLeft =
+    typeof window !== "undefined" &&
+    (window.innerWidth <= 650 ? leftSmall : window.innerWidth <= 1000 ? leftMedium : leftBig);
 
-  const variantsLeft = isSmall ? leftSmall : isMedium ? leftMedium : leftBig;
-  const variantsRight = isSmall ? rightSmall : isMedium ? rightMedium : rightBig;
+  const variantsRight =
+    typeof window !== "undefined" &&
+    (window.innerWidth <= 650 ? rightSmall : window.innerWidth <= 1000 ? rightMedium : rightBig);
 
   return (
     <>
@@ -62,7 +63,7 @@ const AuthLayout = ({ children, className }: LayoutProps): JSX.Element => {
 
         <motion.svg
           className={cn(styles.background)}
-          variants={variantsLeft}
+          variants={variantsLeft || leftBig}
           animate={pathname === "/auth/login" ? "login" : "register"}
           initial={pathname === "/auth/login" ? "register" : "login"}
           transition={{ type: "spring", stiffness: 100 }}
@@ -72,7 +73,7 @@ const AuthLayout = ({ children, className }: LayoutProps): JSX.Element => {
 
         <motion.svg
           className={cn(styles.background)}
-          variants={variantsRight}
+          variants={variantsRight || rightBig}
           animate={pathname === "/auth/login" ? "login" : "register"}
           initial={pathname === "/auth/login" ? "register" : "login"}
           transition={{ type: "spring", stiffness: 100 }}
