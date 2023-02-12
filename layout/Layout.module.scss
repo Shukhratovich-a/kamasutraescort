@@ -26,11 +26,12 @@
 }
 
 .background {
-  position: fixed;
+  position: absolute;
   z-index: -1;
   right: 50%;
 
   pointer-events: none;
+  will-change: right, transform, width, height;
 
   filter: drop-shadow(var(--box-shadow));
 }
