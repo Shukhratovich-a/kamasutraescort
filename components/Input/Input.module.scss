@@ -40,6 +40,15 @@
   &::placeholder {
     color: var(--input-placeholder);
   }
+
+  &:-webkit-autofill,
+  &:-webkit-autofill:focus {
+    transition: background-color 600000s 0s, color 600000s 0s;
+  }
+
+  &[data-autocompleted] {
+    background-color: transparent !important;
+  }
 }
 
 .input__icon {
