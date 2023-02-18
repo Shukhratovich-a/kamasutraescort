@@ -1,6 +1,6 @@
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
-import { withAuthLayout } from "../layout/Layout";
+import { withLayout } from "../layout/Layout";
 
 import { Container } from "../components";
 
@@ -16,4 +16,4 @@ export async function getStaticProps({ locale }: { locale: string }) {
   };
 }
 
-export default withAuthLayout(Support);
+export default withLayout(Support);

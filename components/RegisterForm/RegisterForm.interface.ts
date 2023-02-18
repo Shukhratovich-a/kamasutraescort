@@ -1,7 +1,7 @@
 export interface IRegisterForm {
   username: string;
-  mail: string;
+  email: string;
   password: string;
   gender: "male" | "female" | "massage";
-  date: Date;
+  birthDate: Date;
 }

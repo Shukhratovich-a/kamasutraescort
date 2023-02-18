@@ -2,30 +2,38 @@ import React from "react";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useSession } from "next-auth/react";
+import axios from "axios";
+
+import { API } from "../helpers";
+
+import { AuthResponceInterface } from "../interfaces";
 
 import { withLayout } from "../layout/Layout";
 
-import { Button, Container, Input } from "../components";
-
 const Home = (): JSX.Element => {
-  const { t } = useTranslation();
+  const { i18n } = useTranslation();
+
+  const { data: session } = useSession();
   const router = useRouter();
 
   React.useEffect(() => {
-    router.replace("/auth/login");
-  }, [router]);
+    (async () => {
+      if (session?.token) {
+        const { data } = await axios.post<AuthResponceInterface>(
+          API.auth.checkUser,
+          {},
+          { headers: { Authorization: `${session.token}` } }
+        );
 
-  return (
-    <Container>
-      <Button appearance="primary">{t("button:enter")}</Button>
-      <Button appearance="secondary">{t("button:enter")}</Button>
-      <Button appearance="red">{t("button:enter")}</Button>
+        if (data.status !== 200) {
+          return router.push("/auth/login", "/auth/login", { locale: i18n.language });
+        }
+      }
+    })();
+  });
 
-      <Input appearance="user" placeholder={t("input:username") || ""} />
-      <Input appearance="mail" placeholder={t("input:mail") || ""} />
-      <Input appearance="password" placeholder={t("input:password") || ""} />
-    </Container>
-  );
+  return session?.token ? <>wia</> : <>no a</>;
 };
 
 export async function getStaticProps({ locale }: { locale: string }) {

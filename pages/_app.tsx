@@ -1,8 +1,7 @@
 import React from "react";
 import Head from "next/head";
-
+import { SessionProvider } from "next-auth/react";
 import { appWithTranslation } from "next-i18next";
-
 import { AppProps } from "next/app";
 
 import "../utils/i18n";
@@ -18,7 +17,9 @@ const MyApp = ({ Component, pageProps }: AppProps): JSX.Element => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Component {...pageProps} />
+      <SessionProvider>
+        <Component {...pageProps} />
+      </SessionProvider>
     </>
   );
 };

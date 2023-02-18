@@ -1,5 +1,5 @@
 {
-  "user": "Enter your name",
-  "mail": "Enter email",
+  "username": "Enter your name",
+  "email": "Enter email",
   "password": "Enter password"
 }

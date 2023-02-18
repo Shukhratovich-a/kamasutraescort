@@ -1,3 +1,5 @@
+import { useRouter } from "next/router";
+import { signIn } from "next-auth/react";
 import cn from "classnames";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "next-i18next";
@@ -10,7 +12,8 @@ import { Button, Input } from "..";
 import styles from "./LoginForm.module.scss";
 
 export const LoginForm = ({ className, ...props }: LoginFormProps): JSX.Element => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const router = useRouter();
 
   const {
     register,
@@ -19,16 +22,30 @@ export const LoginForm = ({ className, ...props }: LoginFormProps): JSX.Element 
   } = useForm<ILoginForm>();
 
   const onSubmit = async (formData: ILoginForm) => {
-    console.log(formData);
+    const user = await signIn("credentials", {
+      usernameOrEmail: formData.username,
+      password: formData.password,
+      redirect: false,
+      callbackUrl: "/",
+    });
+
+    if (user?.status === 200) {
+      router.push("/", "/", { locale: i18n.language });
+    }
   };
 
   return (
-    <form className={cn(styles["login-form"], className)} onSubmit={handleSubmit(onSubmit)} {...props}>
+    <form
+      className={cn(styles["login-form"], className)}
+      onSubmit={handleSubmit(onSubmit)}
+      {...props}
+      autoComplete={"off"}
+    >
       <Input
         {...register("username", { required: { value: true, message: "Заполните имя" } })}
         error={errors.username}
-        appearance="mail"
-        placeholder={t("input:mail") || ""}
+        appearance="user"
+        placeholder={t("input:username") || ""}
       />
 
       <Input

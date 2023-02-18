@@ -5,7 +5,7 @@ import cn from "classnames";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
-import { withAuthLayout } from "../../layout/Layout";
+import { withLayout } from "../../layout/Layout";
 
 import { Container, ForgotPassword, LoginForm } from "../../components";
 
@@ -58,4 +58,4 @@ export async function getStaticProps({ locale }: { locale: string }) {
   };
 }
 
-export default withAuthLayout(Login, styles.body);
+export default withLayout(Login, styles.body);
