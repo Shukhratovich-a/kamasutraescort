@@ -1,19 +1,17 @@
-import { NavItem, NavItems } from "../interfaces/nav.interface";
+import { NavItem, NavEnum } from "../interfaces/";
 
-export const NavList: NavItem[] = [
-  {
-    id: NavItems.Home,
-    name: "home",
-    route: "/",
-  },
-  {
-    id: NavItems.Messages,
-    name: "messages",
-    route: "/message",
-  },
-  {
-    id: NavItems.Subscription,
-    name: "subscription",
-    route: "/subscription",
-  },
-];
+export const navList: NavItem[] = [...Object.values(NavEnum)].map((nav: NavEnum) => {
+  if (nav === "home") {
+    return {
+      id: nav,
+      name: nav,
+      route: `/`,
+    };
+  }
+
+  return {
+    id: nav,
+    name: nav,
+    route: `/${nav}`,
+  };
+});
