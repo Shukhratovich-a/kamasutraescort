@@ -4,16 +4,16 @@ import { withLayout } from "../layout/Layout";
 
 import { Container } from "../components";
 
-const Profile = (): JSX.Element => {
-  return <Container>Profile</Container>;
+const NotFoundError = (): JSX.Element => {
+  return <Container>NotFoundError</Container>;
 };
 
-export async function getStaticProps({ locale }: { locale: string }) {
+export const getStaticProps = async ({ locale }: { locale: string }) => {
   return {
     props: {
       ...(await serverSideTranslations(locale)),
     },
   };
-}
+};
 
-export default withLayout(Profile);
+export default withLayout(NotFoundError);

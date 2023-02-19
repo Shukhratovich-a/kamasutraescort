@@ -8,12 +8,12 @@ const Subscription = (): JSX.Element => {
   return <Container>Subscription</Container>;
 };
 
-export async function getStaticProps({ locale }: { locale: string }) {
+export const getStaticProps = async ({ locale }: { locale: string }) => {
   return {
     props: {
       ...(await serverSideTranslations(locale)),
     },
   };
-}
+};
 
 export default withLayout(Subscription);

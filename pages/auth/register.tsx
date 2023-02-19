@@ -24,12 +24,12 @@ const Register = (): JSX.Element => {
   );
 };
 
-export async function getStaticProps({ locale }: { locale: string }) {
+export const getStaticProps = async ({ locale }: { locale: string }) => {
   return {
     props: {
       ...(await serverSideTranslations(locale)),
     },
   };
-}
+};
 
 export default withLayout(Register, styles.body);

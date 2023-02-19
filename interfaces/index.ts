@@ -1,3 +1,5 @@
 export * from "./user.interface";
 export * from "./login.interface";
 export * from "./auth.interface";
+export * from "./nav.interface";
+export * from "./profile.interface";

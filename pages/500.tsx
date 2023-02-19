@@ -4,16 +4,16 @@ import { withLayout } from "../layout/Layout";
 
 import { Container } from "../components";
 
-const Message = (): JSX.Element => {
-  return <Container>Message</Container>;
+const InternalServerError = (): JSX.Element => {
+  return <Container>InternalServerError</Container>;
 };
 
-export async function getStaticProps({ locale }: { locale: string }) {
+export const getStaticProps = async ({ locale }: { locale: string }) => {
   return {
     props: {
       ...(await serverSideTranslations(locale)),
     },
   };
-}
+};
 
-export default withLayout(Message);
+export default withLayout(InternalServerError);

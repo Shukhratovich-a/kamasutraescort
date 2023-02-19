@@ -1,11 +1,9 @@
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
-import { withLayout } from "../layout/Layout";
+import { withProfileLayout } from "../../layout/Layout";
 
-import { Container } from "../components";
-
-const About = (): JSX.Element => {
-  return <Container>About</Container>;
+const Favorites = (): JSX.Element => {
+  return <>dfsf</>;
 };
 
 export const getStaticProps = async ({ locale }: { locale: string }) => {
@@ -16,4 +14,4 @@ export const getStaticProps = async ({ locale }: { locale: string }) => {
   };
 };
 
-export default withLayout(About);
+export default withProfileLayout(Favorites);
