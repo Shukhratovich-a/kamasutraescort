@@ -5,5 +5,5 @@ module.exports = {
   },
 
   defaultNS: "translation",
-  ns: ["translation", "footer", "button", "input", "auth", "nav"],
+  ns: ["translation", "footer", "button", "input", "auth", "nav", "profile"],
 };
