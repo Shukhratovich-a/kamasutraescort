@@ -31,8 +31,6 @@ export const authOptions: NextAuthOptions = {
           password,
         });
 
-        console.log(data);
-
         if (data) {
           return data;
         } else return null;

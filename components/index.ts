@@ -5,3 +5,6 @@ export * from "./Input/Input.component";
 export * from "./LoginForm/LoginForm.component";
 export * from "./ForgotPassword/ForgotPassword.component";
 export * from "./RegisterForm/RegisterForm.component";
+export * from "./Nav/Nav.component";
+export * from "./HeaderProfile/HeaderProfile.component";
+export * from "./BgVectors/BgVectors.component";

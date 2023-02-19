@@ -1,0 +1,36 @@
+.profile__link {
+  display: flex;
+  align-items: center;
+
+  padding: 10px;
+
+  text-decoration: none;
+
+  color: inherit;
+
+  border-radius: 50px;
+
+  &:hover {
+    background-color: var(--background-secondary);
+  }
+
+  &--active {
+    background-color: var(--background-secondary);
+  }
+}
+
+.profile__image {
+  margin-right: 15px;
+}
+
+.profile__name {
+  display: inline-block;
+  overflow: hidden;
+
+  max-width: 150px;
+
+  margin-right: 5px;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}

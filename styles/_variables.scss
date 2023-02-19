@@ -1,11 +1,18 @@
 :root {
+  // accent
+  --accent: #fe6703;
+
   // background
   --background-primary: #230e2b;
   --background-secondary: #1c0a22;
+  --background-header: #2d1436;
 
   // text
   --text-light: #fff;
   --text-dark: #6e447b;
+
+  // gradient
+  --gradient-primary: linear-gradient(90deg, #ee0979 0%, #ff6a00 100%);
 
   // button
   --button-primary: linear-gradient(90deg, #ee0979 0%, #ff6a00 100%);

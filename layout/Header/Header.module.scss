@@ -1,3 +1,33 @@
 .header {
-  display: block;
+  color: var(--white);
+
+  background-color: var(--background-header);
+}
+
+.header__container {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 50px;
+  grid-template-areas: "link nav profile";
+
+  align-items: center;
+}
+
+.header__link {
+  text-decoration: none;
+
+  color: inherit;
+
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 33px;
+  grid-area: link;
+}
+
+.header__nav {
+  grid-area: nav;
+}
+
+.header__profile {
+  grid-area: profile;
 }
