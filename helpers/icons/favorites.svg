@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  viewBox="0 0 20 20">
+  <defs>
+    <linearGradient id="a" x1="292.68" x2="302.31" y1="-393.76" y2="-393.76"
+      gradientTransform="matrix(1 0 0 -1 -287.64 -388.94)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ee0979" />
+      <stop offset="1" stop-color="#ff6a00" />
+    </linearGradient>
+    <linearGradient xlink:href="#a" id="b" x1="289.28" x2="305.96" y1="-403.78" y2="-403.78" />
+  </defs>
+
+
+  <defs>
+    <clipPath id="b">
+      <path d="M0 0h20v20H0z" style="fill:none" />
+    </clipPath>
+  </defs>
+
+  <g style="clip-path:url(#b)">
+    <path
+      d="M15.83 0H4.23c-.94 0-1.78.78-1.78 1.7v17.16c0 .31.09.57.22.76.16.23.43.37.72.37.27 0 .56-.12.82-.35l5.19-4.41c.18-.14.4-.22.63-.22.24 0 .47.08.63.22l5.17 4.41c.27.23.53.35.8.35.45 0 .9-.35.9-1.14V1.7c0-.92-.77-1.7-1.71-1.7Z"
+      fill="#42204e" />
+  </g>
+</svg>
