@@ -1,7 +1,9 @@
+import { GenderEnum } from "../../interfaces";
+
 export interface IRegisterForm {
   username: string;
   email: string;
   password: string;
-  gender: "male" | "female" | "massage";
+  gender: GenderEnum;
   birthDate: Date;
 }

@@ -7,3 +7,8 @@ export interface UserInterface {
   createdAt?: Date;
   updatedAt?: Date;
 }
+
+export enum GenderEnum {
+  Male = "male",
+  Female = "female",
+}

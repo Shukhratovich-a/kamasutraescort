@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import { signIn } from "next-auth/react";
 import cn from "classnames";
 import axios from "axios";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { useTranslation } from "next-i18next";
 
 import { API } from "../../helpers";
@@ -11,7 +11,7 @@ import { RegisterFormProps } from "./RegisterForm.props";
 import { IRegisterForm } from "./RegisterForm.interface";
 import { AuthResponceInterface } from "../../interfaces";
 
-import { Button, Input } from "..";
+import { Button, GenderSelect, Input } from "..";
 
 import styles from "./RegisterForm.module.scss";
 
@@ -22,6 +22,7 @@ export const RegisterForm = ({ className, ...props }: RegisterFormProps): JSX.El
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors },
   } = useForm<IRegisterForm>();
 
@@ -30,7 +31,7 @@ export const RegisterForm = ({ className, ...props }: RegisterFormProps): JSX.El
       username: formData.username,
       email: formData.email,
       password: formData.password,
-      gender: "male",
+      gender: formData.gender,
       birthDate: new Date(),
     });
 
@@ -62,6 +63,15 @@ export const RegisterForm = ({ className, ...props }: RegisterFormProps): JSX.El
         error={errors.email}
         appearance="mail"
         placeholder={t("input:email") || ""}
+      />
+
+      <Controller
+        control={control}
+        name="gender"
+        rules={{ required: { value: true, message: "Укажите рейтинг" } }}
+        render={({ field }) => (
+          <GenderSelect gender={field.value} ref={field.ref} setGender={field.onChange} isEditable />
+        )}
       />
 
       <Input
