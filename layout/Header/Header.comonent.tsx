@@ -4,7 +4,8 @@ import cn from "classnames";
 
 import { HeaderProps } from "./Header.props";
 
-import { Container, Nav, HeaderProfile } from "../../components";
+import { Container, HeaderProfile } from "../../components";
+import { Nav } from "../Nav/Nav.component";
 
 import styles from "./Header.module.scss";
 

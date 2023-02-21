@@ -7,7 +7,8 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 import { withLayout } from "../../layout/Layout";
 
-import { Container, ForgotPassword, LoginForm } from "../../components";
+import { Container, ForgotPassword } from "../../components";
+import { LoginForm } from "../../page-components";
 
 import styles from "../../styles/pages/Login.module.scss";
 

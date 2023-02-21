@@ -8,7 +8,7 @@ import { useTranslation } from "next-i18next";
 import { LoginFormProps } from "./LoginForm.props";
 import { ILoginForm } from "./LoginForm.interface";
 
-import { Button, Input } from "..";
+import { Button, Input } from "../../components";
 
 import styles from "./LoginForm.module.scss";
 

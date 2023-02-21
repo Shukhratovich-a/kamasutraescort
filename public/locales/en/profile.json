@@ -2,5 +2,8 @@
   "profile": "Profile",
   "favorites": "Favorites",
   "account": "Personal account",
-  "exit": "Exit"
+  "exit": "Exit",
+  "main-info": "Main information",
+  "personal-info": "Personal information",
+  "account-info": "Account"
 }

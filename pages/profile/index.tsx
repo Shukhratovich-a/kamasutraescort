@@ -1,13 +1,17 @@
 import React from "react";
-import { GetServerSideProps } from "next";
+import { GetServerSideProps, GetServerSidePropsContext } from "next";
 import { useRouter } from "next/router";
 import { getSession } from "next-auth/react";
+import { Session } from "next-auth";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { ParsedUrlQuery } from "querystring";
+
+import { ProfileInfo } from "../../page-components/ProfileInfo/ProfileInfo.component";
 
 import { withProfileLayout } from "../../layout/Layout";
 
-const Profile = ({ session }: { session: object }): JSX.Element => {
+const Profile = ({ session }: ProfilePageProps): JSX.Element => {
   const router = useRouter();
   const { i18n } = useTranslation();
 
@@ -17,11 +21,14 @@ const Profile = ({ session }: { session: object }): JSX.Element => {
     }
   });
 
-  return <>dfsf</>;
+  return <ProfileInfo session={session} />;
 };
 
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
+export const getServerSideProps: GetServerSideProps<ProfilePageProps> = async (
+  ctx: GetServerSidePropsContext<ParsedUrlQuery>
+) => {
   const session = await getSession(ctx);
+
   return {
     props: {
       session: session,
@@ -31,3 +38,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 };
 
 export default withProfileLayout(Profile);
+
+export interface ProfilePageProps extends Record<string, unknown> {
+  session: Session | null;
+}

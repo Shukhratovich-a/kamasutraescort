@@ -8,7 +8,8 @@ import { Header } from "./Header/Header.comonent";
 import { AuthHeader } from "./AuthHeader/AuthHeader.comonent";
 import { Footer } from "./Footer/Footer.component";
 
-import { Container, ProfileMenu, Vectors } from "../components";
+import { Container, Vectors } from "../components";
+import { ProfileMenu } from "./ProfileMenu/ProfileMenu.component";
 
 import styles from "./Layout.module.scss";
 

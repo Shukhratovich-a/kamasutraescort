@@ -14,7 +14,7 @@ import styles from "./Input.module.scss";
 
 export const Input = React.forwardRef(
   (
-    { className, appearance = "user", error, ...props }: InputProps,
+    { className, appearance = "none", error, ...props }: InputProps,
     ref: React.ForwardedRef<HTMLInputElement>
   ): JSX.Element => {
     const [isShow, setIsShow] = React.useState(false);
@@ -26,7 +26,13 @@ export const Input = React.forwardRef(
         })}
       >
         <span className={cn(styles.input__icon)}>
-          {appearance === "mail" ? <Mail /> : appearance === "password" ? <Password /> : <User />}
+          {appearance === "mail" ? (
+            <Mail />
+          ) : appearance === "password" ? (
+            <Password />
+          ) : appearance === "user" ? (
+            <User />
+          ) : null}
         </span>
 
         <input

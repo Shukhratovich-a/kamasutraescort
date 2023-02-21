@@ -12,7 +12,7 @@ import { RegisterFormProps } from "./RegisterForm.props";
 import { IRegisterForm } from "./RegisterForm.interface";
 import { AuthResponceInterface } from "../../interfaces";
 
-import { Button, GenderSelect, Input } from "..";
+import { Button, GenderSelect, Input } from "../../components";
 
 import styles from "./RegisterForm.module.scss";
 

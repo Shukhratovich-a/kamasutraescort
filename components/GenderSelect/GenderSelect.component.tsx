@@ -9,7 +9,7 @@ import styles from "./GenderSelect.module.scss";
 
 export const GenderSelect = React.forwardRef(
   (
-    { className, gender, error, setGender, isEditable, ...props }: GenderSelectProps,
+    { className, gender = GenderEnum.Male, error, setGender, isEditable, ...props }: GenderSelectProps,
     ref: React.ForwardedRef<HTMLDivElement>
   ): JSX.Element => {
     const [genderArray] = React.useState<GenderEnum[]>([...Object.values(GenderEnum)]);

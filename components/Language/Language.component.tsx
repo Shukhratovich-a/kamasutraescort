@@ -31,8 +31,26 @@ export const Language = ({ className, language, languages = ["ru", "en"], ...pro
     return i18n.changeLanguage(lang);
   };
 
+  const handleSpaceToOpen = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.code != "Space") return;
+    setIsOpen(!isOpen);
+  };
+
+  const handleSpaceToSelect = (e: React.KeyboardEvent<HTMLSpanElement>, lang: string) => {
+    if (e.code == "Tab") return setIsOpen(false);
+
+    if (e.code != "Space") return;
+
+    setLanguageState(lang);
+    setIsOpen(false);
+
+    router.push({ pathname, query }, asPath, { locale: lang });
+
+    return i18n.changeLanguage(lang);
+  };
+
   return (
-    <div className={cn(styles.language, className)} {...props}>
+    <div className={cn(styles.language, className)} {...props} tabIndex={0} onKeyDown={(e) => handleSpaceToOpen(e)}>
       <span className={cn(styles["language--selected"])} onClick={() => setIsOpen(!isOpen)}>
         <span>{language}</span>
         <Marker />
@@ -46,7 +64,13 @@ export const Language = ({ className, language, languages = ["ru", "en"], ...pro
         {languages.map(
           (lang) =>
             lang !== languageState && (
-              <span className={cn(styles.language__list__item)} key={lang} onClick={() => handleChange(lang)}>
+              <span
+                className={cn(styles.language__list__item)}
+                key={lang}
+                tabIndex={1}
+                onClick={() => handleChange(lang)}
+                onKeyDown={(e) => handleSpaceToSelect(e, lang)}
+              >
                 {lang}
               </span>
             )

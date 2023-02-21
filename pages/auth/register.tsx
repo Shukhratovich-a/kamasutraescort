@@ -1,16 +1,14 @@
 import cn from "classnames";
-// import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 import { withLayout } from "../../layout/Layout";
 
-import { Container, RegisterForm } from "../../components";
+import { Container } from "../../components";
+import { RegisterForm } from "../../page-components";
 
 import styles from "../../styles/pages/Register.module.scss";
 
 const Register = (): JSX.Element => {
-  // const { t } = useTranslation();
-
   return (
     <>
       <Container className={cn(styles.register__container)}>

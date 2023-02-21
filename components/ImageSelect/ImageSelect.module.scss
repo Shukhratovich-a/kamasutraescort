@@ -1,0 +1,51 @@
+.select {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 370px;
+  gap: 8px;
+
+  grid-template-areas:
+    "first first first"
+    "second third fourth";
+}
+
+.select__first {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid var(--link);
+  border-radius: 50px;
+  grid-area: first;
+}
+
+.select__image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+
+  border: 1px solid var(--link);
+}
+
+.select__second {
+  height: 88px;
+
+  border-radius: 30px;
+  grid-area: second;
+}
+
+.select__third {
+  height: 88px;
+
+  border-radius: 30px;
+  grid-area: third;
+}
+
+.select__fourth {
+  height: 88px;
+
+  border-radius: 30px;
+  grid-area: fourth;
+}
