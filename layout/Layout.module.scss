@@ -11,6 +11,15 @@
   grid-template-rows: auto 1fr auto;
 
   min-height: 100vh;
+
+  &--profile {
+    &__container {
+      display: flex;
+
+      padding-top: 30px;
+      gap: 20px;
+    }
+  }
 }
 
 .header {

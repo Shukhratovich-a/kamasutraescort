@@ -2,9 +2,11 @@ import cn from "classnames";
 
 import { ButtonProps } from "./Button.props";
 
+import Waiting from "../../assets/spinners/waiting.svg";
+
 import styles from "./Button.module.scss";
 
-export const Button = ({ className, children, appearance = "primary", ...props }: ButtonProps) => {
+export const Button = ({ className, children, appearance = "primary", isLoading = false, ...props }: ButtonProps) => {
   return (
     <button
       className={cn(styles.button, className, {
@@ -16,7 +18,7 @@ export const Button = ({ className, children, appearance = "primary", ...props }
       })}
       {...props}
     >
-      {children}
+      {isLoading ? <Waiting /> : <span>{children}</span>}
     </button>
   );
 };

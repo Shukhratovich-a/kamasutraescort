@@ -1,9 +1,12 @@
 import React from "react";
+import { GetServerSideProps, GetServerSidePropsContext } from "next";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { signOut, useSession } from "next-auth/react";
+import { getSession, signOut } from "next-auth/react";
+import { Session } from "next-auth";
 import axios from "axios";
+import { ParsedUrlQuery } from "querystring";
 
 import { API } from "../helpers";
 
@@ -13,15 +16,13 @@ import { withLayout } from "../layout/Layout";
 
 import { Container } from "../components";
 
-const Home = (): JSX.Element => {
+const Home = ({ session }: HomePageProps): JSX.Element => {
   const { i18n } = useTranslation();
-
-  const { data: session } = useSession();
   const router = useRouter();
 
   React.useEffect(() => {
-    try {
-      (async () => {
+    (async () => {
+      try {
         if (session?.token) {
           const { data } = await axios.post<AuthResponceInterface>(
             API.auth.checkUser,
@@ -34,21 +35,30 @@ const Home = (): JSX.Element => {
             return router.push("/auth/login", "/auth/login", { locale: i18n.language });
           }
         }
-      })();
-    } catch {
-      signOut();
-    }
+      } catch {
+        signOut();
+      }
+    })();
   });
 
-  return <Container>{session?.token ? <>wia</> : <>no a</>}</Container>;
+  return <Container>{session?.token ? <>With token</> : <>Not token</>}</Container>;
 };
 
-export const getStaticProps = async ({ locale }: { locale: string }) => {
+export const getServerSideProps: GetServerSideProps<HomePageProps> = async (
+  ctx: GetServerSidePropsContext<ParsedUrlQuery>
+) => {
+  const session = await getSession(ctx);
+
   return {
     props: {
-      ...(await serverSideTranslations(locale)),
+      session: session,
+      ...(await serverSideTranslations(String(ctx.locale))),
     },
   };
 };
 
 export default withLayout(Home);
+
+export interface HomePageProps extends Record<string, unknown> {
+  session: Session | null;
+}

@@ -39,23 +39,13 @@ export const withLayout = <T extends Record<string, unknown>>(Component: Functio
 };
 
 const ProfileLayout = ({ children, className }: LayoutProps): JSX.Element => {
-  const { data: session } = useSession();
-
   return (
-    <div className={cn(styles.wrapper, className)}>
-      {session?.token ? <Header /> : <AuthHeader />}
-
-      <main className={cn(styles.main)}>
-        <Container>
-          <ProfileMenu />
-          {children}
-        </Container>
-      </main>
-
-      <Footer className={cn(styles.footer)} />
-
-      <Vectors />
-    </div>
+    <Layout className={cn(cn(styles["wrapper--profile"], className))}>
+      <Container className={cn(cn(styles["wrapper--profile__container"]))}>
+        <ProfileMenu />
+        {children}
+      </Container>
+    </Layout>
   );
 };
 

@@ -1,3 +1,4 @@
+import React from "react";
 import { useRouter } from "next/router";
 import { signIn } from "next-auth/react";
 import cn from "classnames";
@@ -19,6 +20,8 @@ export const RegisterForm = ({ className, ...props }: RegisterFormProps): JSX.El
   const { t, i18n } = useTranslation();
   const router = useRouter();
 
+  const [isLoading, setLoading] = React.useState(false);
+
   const {
     register,
     handleSubmit,
@@ -27,25 +30,36 @@ export const RegisterForm = ({ className, ...props }: RegisterFormProps): JSX.El
   } = useForm<IRegisterForm>();
 
   const onSubmit = async (formData: IRegisterForm) => {
-    const { data } = await axios.post<AuthResponceInterface>(API.auth.register, {
-      username: formData.username,
-      email: formData.email,
-      password: formData.password,
-      gender: formData.gender,
-      birthDate: new Date(),
-    });
+    setLoading(true);
 
-    if (data.status) {
-      const user = await signIn("credentials", {
-        usernameOrEmail: formData.username,
+    try {
+      const { data } = await axios.post<AuthResponceInterface>(API.auth.register, {
+        username: formData.username,
+        email: formData.email,
         password: formData.password,
-        redirect: false,
-        callbackUrl: "/",
+        gender: formData.gender,
+        birthDate: new Date(),
       });
 
-      if (user?.status === 200) {
-        router.push("/", "/", { locale: i18n.language });
+      if (data.status) {
+        const user = await signIn("credentials", {
+          usernameOrEmail: formData.username,
+          password: formData.password,
+          redirect: false,
+          callbackUrl: "/",
+        });
+
+        if (user?.status === 200) {
+          router.push("/", "/", { locale: i18n.language });
+          setLoading(false);
+        } else {
+          setLoading(false);
+        }
       }
+    } catch {
+      setLoading(false);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -80,7 +94,7 @@ export const RegisterForm = ({ className, ...props }: RegisterFormProps): JSX.El
         appearance="password"
         placeholder={t("input:password") || ""}
       />
-      <Button>{t("button:enter")}</Button>
+      <Button isLoading={isLoading}>{t("button:enter")}</Button>
     </form>
   );
 };

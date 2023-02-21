@@ -1,3 +1,4 @@
+import React from "react";
 import { useRouter } from "next/router";
 import { signIn } from "next-auth/react";
 import cn from "classnames";
@@ -15,6 +16,8 @@ export const LoginForm = ({ className, ...props }: LoginFormProps): JSX.Element 
   const { t, i18n } = useTranslation();
   const router = useRouter();
 
+  const [isLoading, setLoading] = React.useState(false);
+
   const {
     register,
     handleSubmit,
@@ -22,15 +25,26 @@ export const LoginForm = ({ className, ...props }: LoginFormProps): JSX.Element 
   } = useForm<ILoginForm>();
 
   const onSubmit = async (formData: ILoginForm) => {
-    const user = await signIn("credentials", {
-      usernameOrEmail: formData.username,
-      password: formData.password,
-      redirect: false,
-      callbackUrl: "/",
-    });
+    setLoading(true);
 
-    if (user?.status === 200) {
-      router.push("/", "/", { locale: i18n.language });
+    try {
+      const user = await signIn("credentials", {
+        usernameOrEmail: formData.username,
+        password: formData.password,
+        redirect: false,
+        callbackUrl: "/",
+      });
+
+      if (user?.status === 200) {
+        router.push("/", "/", { locale: i18n.language });
+        setLoading(false);
+      } else {
+        setLoading(false);
+      }
+    } catch {
+      setLoading(false);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -54,7 +68,7 @@ export const LoginForm = ({ className, ...props }: LoginFormProps): JSX.Element 
         appearance="password"
         placeholder={t("input:password") || ""}
       />
-      <Button>{t("button:enter")}</Button>
+      <Button isLoading={isLoading}>{t("button:enter")}</Button>
     </form>
   );
 };
