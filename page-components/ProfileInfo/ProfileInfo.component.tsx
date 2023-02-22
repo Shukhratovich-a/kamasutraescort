@@ -1,7 +1,6 @@
 import cn from "classnames";
 import { Controller, useForm } from "react-hook-form";
 import { useTranslation } from "next-i18next";
-import { format } from "date-fns";
 
 import { GenderEnum } from "../../interfaces";
 import { IProfileForm } from "./IProfileForm.interface";
@@ -26,7 +25,7 @@ export const ProfileInfo = ({ session }: ProfileInfoProps): JSX.Element => {
     console.log(formData);
   };
 
-  return (
+  return session ? (
     <div className={cn(styles["profile-info"])} onSubmit={handleSubmit(onSubmit)}>
       <h2 className={cn(styles["profile-info__heading"])}>{t("profile:profile")}</h2>
 
@@ -63,7 +62,7 @@ export const ProfileInfo = ({ session }: ProfileInfoProps): JSX.Element => {
           <label className={cn(styles["profile-info__label"])}>
             <span className={cn(styles["profile-info__label__text"])}>Дата рождения</span>
             <Input
-              defaultValue={format(new Date(String(session?.user.birthDate)), "dd.mm.yyyy")}
+              defaultValue={String(session?.user.birthDate)}
               placeholder="Ваше имя"
               {...register("birthDate", { required: { value: true, message: "Заполните имя" } })}
               error={errors.birthDate}
@@ -174,5 +173,7 @@ export const ProfileInfo = ({ session }: ProfileInfoProps): JSX.Element => {
         <Button className={cn(styles["profile-info__button"])}>Сохранить</Button>
       </form>
     </div>
+  ) : (
+    <></>
   );
 };

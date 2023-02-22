@@ -44,7 +44,7 @@ export const ForgotPassword = ({ isOpen = false, ...props }: ForgotPasswordProps
             {...register("mail", { required: { value: true, message: "Заполните имя" } })}
             error={errors.mail}
             appearance={"mail"}
-            placeholder={t("input:mail") || "mail"}
+            placeholder={t("input:email") || "email"}
           />
           <Button type="submit">{t("auth:login-password-request")}</Button>
         </form>

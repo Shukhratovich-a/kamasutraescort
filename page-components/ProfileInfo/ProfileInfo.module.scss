@@ -46,7 +46,7 @@
 
 .profile-info__label {
   display: grid;
-  grid-template-columns: 1fr 380px;
+  grid-template-columns: 1fr minmax(280px, 380px);
   gap: 20px;
 
   align-items: center;
@@ -63,4 +63,45 @@
 .profile-info__button {
   max-width: 250px;
   margin-left: auto;
+}
+
+@media only screen and (max-width: 1220px) {
+  .profile-info__label {
+    grid-template-columns: minmax(280px, 380px);
+    gap: 5px;
+
+    &--about {
+      .profile-info__label__text {
+        margin-top: 0;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .profile-info {
+    grid-template-columns: minmax(280px, 380px);
+    grid-template-areas:
+      "heading"
+      "image"
+      "info";
+  }
+}
+
+@media only screen and (max-width: 720px) {
+  .profile-info__button {
+    max-width: 100%;
+    margin: 0 auto;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .profile-info__label__text {
+    margin-left: 30px;
+
+    color: var(--text-dark);
+
+    font-size: 12px;
+    line-height: 18px;
+  }
 }

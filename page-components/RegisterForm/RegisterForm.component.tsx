@@ -10,7 +10,7 @@ import { API } from "../../helpers";
 
 import { RegisterFormProps } from "./RegisterForm.props";
 import { IRegisterForm } from "./RegisterForm.interface";
-import { AuthResponceInterface } from "../../interfaces";
+import { AuthResponceInterface, GenderEnum } from "../../interfaces";
 
 import { Button, GenderSelect, Input } from "../../components";
 
@@ -82,9 +82,16 @@ export const RegisterForm = ({ className, ...props }: RegisterFormProps): JSX.El
       <Controller
         control={control}
         name="gender"
+        defaultValue={GenderEnum.Male}
         rules={{ required: { value: true, message: "Укажите рейтинг" } }}
         render={({ field }) => (
-          <GenderSelect gender={field.value} ref={field.ref} setGender={field.onChange} isEditable />
+          <GenderSelect
+            gender={field.value}
+            ref={field.ref}
+            setGender={field.onChange}
+            error={errors.gender}
+            isEditable
+          />
         )}
       />
 

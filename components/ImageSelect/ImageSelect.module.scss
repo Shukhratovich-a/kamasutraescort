@@ -1,7 +1,9 @@
+$width: 100vw;
+
 .select {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 370px;
+  grid-template-rows: 370px 88px;
   gap: 8px;
 
   grid-template-areas:
@@ -30,22 +32,34 @@
 }
 
 .select__second {
-  height: 88px;
-
   border-radius: 30px;
   grid-area: second;
 }
 
 .select__third {
-  height: 88px;
-
   border-radius: 30px;
   grid-area: third;
 }
 
 .select__fourth {
-  height: 88px;
-
   border-radius: 30px;
   grid-area: fourth;
+}
+
+@media only screen and (max-width: 1000px) {
+  .select {
+    grid-template-rows: 500px 120px;
+  }
+}
+
+@media only screen and (max-width: 420px) {
+  .select {
+    grid-template-rows: calc(($width - 30px) * 1.32) calc(($width - 30px - 16px) / 3);
+  }
+}
+
+@media only screen and (max-width: 375px) {
+  .select {
+    grid-template-rows: calc(($width - 20px) * 1.32) calc(($width - 20px - 16px) / 3);
+  }
 }

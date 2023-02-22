@@ -26,7 +26,7 @@ export const authOptions: NextAuthOptions = {
       async authorize(credentials) {
         const { usernameOrEmail, password } = credentials as LoginInterface;
 
-        const { data } = await axios.post(API.auth.login, {
+        const { data } = await axios.patch(API.auth.login, {
           usernameOrEmail,
           password,
         });
@@ -40,13 +40,13 @@ export const authOptions: NextAuthOptions = {
 
   callbacks: {
     async jwt({ token, user }) {
-      return { ...token, ...user };
+      return { ...(await token), ...(await user) };
     },
 
     async session({ session, token }) {
       session.user = token.user;
       session.token = token.accessToken;
-      return session;
+      return await session;
     },
   },
 
