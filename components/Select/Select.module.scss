@@ -1,9 +1,9 @@
 .select {
   position: relative;
-  max-height: 70px;
 
   width: 100%;
   max-width: 380px;
+  max-height: 70px;
 
   &--open {
     svg {
@@ -20,18 +20,20 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 23px 30px;
 
-  border-radius: 35px;
-  background-color: var(--input-background);
+  padding: 23px 30px;
 
   cursor: pointer;
 
   text-transform: capitalize;
 
+  border-radius: 35px;
+  background-color: var(--input-background);
+
   &--placeholder {
-    text-transform: none;
     user-select: none;
+    text-transform: none;
+
     color: var(--input-placeholder);
   }
 
@@ -42,23 +44,28 @@
 
 .select__list {
   position: absolute;
-  width: 100%;
+  z-index: 9;
+  top: calc(100% + 5px);
   right: 0;
   left: 0;
-  top: calc(100% + 5px);
+
+  overflow: hidden;
+
+  width: 100%;
+
+  border: 1px solid var(--input-placeholder);
   border-radius: 35px;
   background-color: var(--input-background);
-  overflow: hidden;
-  z-index: 9;
-  border: 1px solid var(--input-placeholder);
   box-shadow: var(--box-shadow);
 }
 
 .select__list__item {
+  overflow: hidden;
+
   padding: 23px 30px;
+
   cursor: pointer;
   text-transform: capitalize;
-  overflow: hidden;
 
   & + & {
     border-top: 1px solid var(--input-placeholder);
