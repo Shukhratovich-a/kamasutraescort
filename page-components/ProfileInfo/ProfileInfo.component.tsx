@@ -1,19 +1,22 @@
 import cn from "classnames";
 import { Controller, useForm } from "react-hook-form";
-import { useTranslation } from "next-i18next";
+import { i18n, useTranslation } from "next-i18next";
 
 import { GenderEnum } from "../../interfaces";
 import { IProfileForm } from "./IProfileForm.interface";
 
 import { ProfileInfoProps } from "./ProfileInfo.props";
 
-import { Button, GenderSelect, Input, Textarea } from "../../components";
+import { Button, GenderSelect, Input, Select, Textarea, ImageSelect } from "../../components";
 
 import styles from "./ProfileInfo.module.scss";
-import { ImageSelect } from "../../components/ImageSelect/ImageSelect.component";
+import axios from "axios";
+import { API } from "../../helpers";
+import { signIn } from "next-auth/react";
+import React from "react";
 
-export const ProfileInfo = ({ session }: ProfileInfoProps): JSX.Element => {
-  const { t } = useTranslation();
+export const ProfileInfo = ({ session, hairs, eyes }: ProfileInfoProps): JSX.Element => {
+  const { t, i18n } = useTranslation();
   const {
     register,
     handleSubmit,
@@ -21,8 +24,37 @@ export const ProfileInfo = ({ session }: ProfileInfoProps): JSX.Element => {
     formState: { errors },
   } = useForm<IProfileForm>();
 
-  const onSubmit = (formData: IProfileForm) => {
-    console.log(formData);
+  const [isLoading, setLoading] = React.useState(false);
+
+  const onSubmit = async (formData: IProfileForm) => {
+    setLoading(true);
+
+    const { data } = await axios.patch(
+      API.user.edit + session?.user.id,
+      {
+        ...formData,
+      },
+      {
+        headers: {
+          Authorization: JSON.stringify(session?.token),
+        },
+      }
+    );
+
+    if (data.status === 202) {
+      const user = await signIn("credentials", {
+        usernameOrEmail: formData.username,
+        password: formData.password,
+        redirect: false,
+        callbackUrl: "/" + i18n.language,
+      });
+
+      if (user?.status === 200) {
+        setLoading(false);
+      } else {
+        setLoading(false);
+      }
+    }
   };
 
   return session ? (
@@ -115,21 +147,41 @@ export const ProfileInfo = ({ session }: ProfileInfoProps): JSX.Element => {
 
           <label className={cn(styles["profile-info__label"])}>
             <span className={cn(styles["profile-info__label__text"])}>Цвет волос</span>
-            <Input
-              defaultValue={session?.user.hairColor}
-              placeholder="Предпочитаю не отвечать"
-              {...register("hairColor", { required: { value: false, message: "Заполните имя" } })}
-              error={errors.hairColor}
+            <Controller
+              defaultValue={session.user.hairColor?.id}
+              control={control}
+              name="hairColor"
+              rules={{ required: false }}
+              render={({ field }) => (
+                <Select
+                  selectArray={hairs}
+                  ref={field.ref}
+                  selected={field.value}
+                  setSelected={field.onChange}
+                  placeholder={"Предпочитаю не отвечать"}
+                  isEditable
+                />
+              )}
             />
           </label>
 
           <label className={cn(styles["profile-info__label"])}>
             <span className={cn(styles["profile-info__label__text"])}>Цвет глаз</span>
-            <Input
-              defaultValue={session?.user.eyeColor}
-              placeholder="Предпочитаю не отвечать"
-              {...register("eyeColor", { required: { value: false, message: "Заполните имя" } })}
-              error={errors.eyeColor}
+            <Controller
+              defaultValue={session.user.eyeColor?.id}
+              control={control}
+              name="eyeColor"
+              rules={{ required: false }}
+              render={({ field }) => (
+                <Select
+                  selectArray={eyes}
+                  ref={field.ref}
+                  selected={field.value}
+                  setSelected={field.onChange}
+                  placeholder={"Предпочитаю не отвечать"}
+                  isEditable
+                />
+              )}
             />
           </label>
 
@@ -168,9 +220,21 @@ export const ProfileInfo = ({ session }: ProfileInfoProps): JSX.Element => {
               error={errors.email}
             />
           </label>
+
+          <label className={cn(styles["profile-info__label"])}>
+            <span className={cn(styles["profile-info__label__text"])}>Password</span>
+            <Input
+              type={"password"}
+              placeholder="Введите e-mail"
+              {...register("password", { required: { value: true, message: "Заполните имя" } })}
+              error={errors.password}
+            />
+          </label>
         </div>
 
-        <Button className={cn(styles["profile-info__button"])}>Сохранить</Button>
+        <Button className={cn(styles["profile-info__button"])} isLoading={isLoading}>
+          Сохранить
+        </Button>
       </form>
     </div>
   ) : (

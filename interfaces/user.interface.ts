@@ -1,3 +1,5 @@
+import { SelectItem } from "./select.interface";
+
 export interface UserInterface {
   id?: number;
   username: string;
@@ -9,8 +11,8 @@ export interface UserInterface {
   about?: string;
   goal?: string;
   gender: GenderEnum;
-  hairColor?: number;
-  eyeColor?: number;
+  hairColor?: SelectItem;
+  eyeColor?: SelectItem;
 
   createdAt?: Date;
   updatedAt?: Date;

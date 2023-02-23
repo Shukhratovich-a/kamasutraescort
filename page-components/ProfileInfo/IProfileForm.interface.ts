@@ -3,6 +3,7 @@ import { GenderEnum } from "../../interfaces";
 export interface IProfileForm {
   id?: number;
   username?: string;
+  password: string;
   fullname?: string;
   email?: string;
   birthDate?: Date;

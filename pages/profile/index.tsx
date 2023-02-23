@@ -10,13 +10,13 @@ import { ProfileInfo } from "../../page-components/ProfileInfo/ProfileInfo.compo
 import { withProfileLayout } from "../../layout/Layout";
 import axios from "axios";
 import { API } from "../../helpers";
-import { AuthResponceInterface } from "../../interfaces";
+import { AuthResponceInterface, SelectItem } from "../../interfaces";
 import { authOptions } from "../api/auth/[...nextauth]";
 
-const Profile = ({ session }: ProfilePageProps): JSX.Element => {
+const Profile = ({ session, hairs, eyes }: ProfilePageProps): JSX.Element => {
   const { data: s } = useSession({ required: true });
 
-  return <ProfileInfo session={s} />;
+  return <ProfileInfo session={s} hairs={hairs} eyes={eyes} />;
 };
 
 export const getServerSideProps: GetServerSideProps<ProfilePageProps> = async (
@@ -33,20 +33,25 @@ export const getServerSideProps: GetServerSideProps<ProfilePageProps> = async (
     };
   } else {
     try {
-      const { data } = await axios.patch<AuthResponceInterface>(
+      const { data: user } = await axios.patch<AuthResponceInterface>(
         API.auth.checkUser,
         {},
         { headers: { Authorization: JSON.stringify(session?.token) } }
       );
 
-      if (data.status === 200)
+      if (user.status === 200) {
+        const { data: hairs } = await axios.get<SelectItem[]>("http://localhost:3001/api/hairs");
+        const { data: eyes } = await axios.get<SelectItem[]>("http://localhost:3001/api/eye-color");
+
         return await {
           props: {
+            hairs,
+            eyes,
             session,
             ...(await serverSideTranslations(String(ctx.locale))),
           },
         };
-      else {
+      } else {
         return { notFound: true };
       }
     } catch {
@@ -59,5 +64,6 @@ export default withProfileLayout(Profile);
 
 export interface ProfilePageProps extends Record<string, unknown> {
   session: Session | null;
-  // isUser: boolean;
+  hairs: SelectItem[];
+  eyes: SelectItem[];
 }

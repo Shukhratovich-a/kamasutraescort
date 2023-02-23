@@ -6,4 +6,7 @@ export const API = {
     register: DOMAIN + "/auth/register",
     checkUser: DOMAIN + "/auth/check-user",
   },
+  user: {
+    edit: DOMAIN + "/user/edit/",
+  },
 };

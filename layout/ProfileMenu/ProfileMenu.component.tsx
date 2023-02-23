@@ -13,7 +13,7 @@ import styles from "./ProfileMenu.module.scss";
 
 export const ProfileMenu = () => {
   const { data: session } = useSession();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const router = useRouter();
   const { asPath } = router;
 
@@ -37,7 +37,7 @@ export const ProfileMenu = () => {
             ))}
         </ul>
 
-        <button className={cn(styles.profile__link)} onClick={() => signOut()}>
+        <button className={cn(styles.profile__link)} onClick={() => signOut({ callbackUrl: "/" + i18n.language })}>
           <ExitIcon />
           <span>{t(`profile:exit`)}</span>
         </button>

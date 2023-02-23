@@ -16,11 +16,28 @@ export const Language = ({ className, language, languages = ["ru", "en"], ...pro
 
   const [languageState, setLanguageState] = React.useState<string>(language);
   const [isOpen, setIsOpen] = React.useState<boolean>(false);
+  const langRef: React.RefObject<HTMLDivElement> = React.useRef(null);
 
   React.useEffect(() => {
     setIsOpen(false);
     setLanguageState(language);
   }, [language]);
+
+  React.useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    function handleClickOutside(evt: any) {
+      if (langRef?.current && !langRef?.current.contains(evt.target)) {
+        setIsOpen(false);
+      }
+    }
+
+    if (!isOpen) return;
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [langRef, isOpen]);
 
   const handleChange = (lang: string) => {
     setLanguageState(lang);
@@ -50,7 +67,13 @@ export const Language = ({ className, language, languages = ["ru", "en"], ...pro
   };
 
   return (
-    <div className={cn(styles.language, className)} {...props} tabIndex={0} onKeyDown={(e) => handleSpaceToOpen(e)}>
+    <div
+      className={cn(styles.language, className)}
+      {...props}
+      tabIndex={0}
+      onKeyDown={(e) => handleSpaceToOpen(e)}
+      ref={langRef}
+    >
       <span className={cn(styles["language--selected"])} onClick={() => setIsOpen(!isOpen)}>
         <span>{language}</span>
         <Marker />

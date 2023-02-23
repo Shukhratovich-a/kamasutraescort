@@ -3,6 +3,7 @@ export * from "./Language/Language.component";
 export * from "./Button/Button.component";
 export * from "./Input/Input.component";
 export * from "./Textarea/Textarea.component";
+export * from "./Select/Select.component";
 export * from "./GenderSelect/GenderSelect.component";
 export * from "./ForgotPassword/ForgotPassword.component";
 export * from "./HeaderProfile/HeaderProfile.component";

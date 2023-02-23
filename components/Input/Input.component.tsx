@@ -14,7 +14,7 @@ import styles from "./Input.module.scss";
 
 export const Input = React.forwardRef(
   (
-    { className, appearance = "none", error, ...props }: InputProps,
+    { className, appearance = "none", error, type, ...props }: InputProps,
     ref: React.ForwardedRef<HTMLInputElement>
   ): JSX.Element => {
     const [isShow, setIsShow] = React.useState(false);
@@ -37,7 +37,7 @@ export const Input = React.forwardRef(
 
         <input
           className={cn(styles.input)}
-          type={appearance === "password" && !isShow ? "password" : "text"}
+          type={(appearance === "password" || type === "password") && !isShow ? "password" : "text"}
           ref={ref}
           {...props}
         />
@@ -53,7 +53,7 @@ export const Input = React.forwardRef(
           </span>
         )}
 
-        {appearance === "password" && !error && (
+        {(appearance === "password" || type === "password") && !error && (
           <span className={cn(styles.input__mode)} onClick={() => setIsShow(!isShow)}>
             {isShow ? <Hide /> : <Show />}
           </span>

@@ -19,8 +19,8 @@ export const GenderSelect = React.forwardRef(
       setGender(i);
     };
 
-    const handleSpace = (i: GenderEnum, e: React.KeyboardEvent<HTMLButtonElement>) => {
-      if (!isEditable || e.code != "Space" || !setGender) return;
+    const handleSpace = (i: GenderEnum, evt: React.KeyboardEvent<HTMLButtonElement>) => {
+      if (!isEditable || evt.code != "Space" || !setGender) return;
       setGender(i);
     };
 
@@ -40,7 +40,7 @@ export const GenderSelect = React.forwardRef(
             type="button"
             tabIndex={isEditable ? 0 : -1}
             onClick={() => onClick(genderItem)}
-            onKeyDown={(e: React.KeyboardEvent<HTMLButtonElement>) => handleSpace(genderItem, e)}
+            onKeyDown={(evt: React.KeyboardEvent<HTMLButtonElement>) => handleSpace(genderItem, evt)}
             key={genderItem}
           >
             {genderItem}

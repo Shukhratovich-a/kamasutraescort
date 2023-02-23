@@ -41,7 +41,7 @@ export const RegisterForm = ({ className, ...props }: RegisterFormProps): JSX.El
         birthDate: new Date(),
       });
 
-      if (data.status) {
+      if (data.status === 201) {
         const user = await signIn("credentials", {
           usernameOrEmail: formData.username,
           password: formData.password,
