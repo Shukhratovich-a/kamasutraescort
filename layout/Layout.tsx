@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from "react";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 import cn from "classnames";
 
 import { LayoutProps } from "./Layout.props";
@@ -15,10 +16,12 @@ import styles from "./Layout.module.scss";
 
 const Layout = ({ children, className }: LayoutProps): JSX.Element => {
   const { data: session } = useSession();
+  const router = useRouter();
+  const { asPath } = router;
 
   return (
     <div className={cn(styles.wrapper, className)}>
-      {session?.token ? <Header /> : <AuthHeader />}
+      {session?.token && !asPath.startsWith("/auth") ? <Header /> : <AuthHeader />}
 
       <main className={cn(styles.main)}>{children}</main>
 
@@ -41,10 +44,10 @@ export const withLayout = <T extends Record<string, unknown>>(Component: Functio
 
 const ProfileLayout = ({ children, className }: LayoutProps): JSX.Element => {
   return (
-    <Layout className={cn(cn(styles["wrapper--profile"], className))}>
-      <Container className={cn(cn(styles["wrapper--profile__container"]))}>
+    <Layout className={cn(styles["wrapper--profile"], className)}>
+      <Container className={cn(styles["wrapper--profile__container"])}>
         <ProfileMenu />
-        {children}
+        <div className={cn(styles["wrapper--profile__right"])}>{children}</div>
       </Container>
     </Layout>
   );

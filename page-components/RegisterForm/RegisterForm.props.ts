@@ -1,3 +1,7 @@
 import { DetailedHTMLProps, FormHTMLAttributes } from "react";
 
-export interface RegisterFormProps extends DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> {}
+import { SelectItem } from "../../interfaces";
+
+export interface RegisterFormProps extends DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> {
+  regions: SelectItem[];
+}

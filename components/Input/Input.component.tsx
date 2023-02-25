@@ -37,7 +37,7 @@ export const Input = React.forwardRef(
 
         <input
           className={cn(styles.input)}
-          type={(appearance === "password" || type === "password") && !isShow ? "password" : "text"}
+          type={(appearance === "password" || type === "password") && !isShow ? "password" : type}
           ref={ref}
           {...props}
         />

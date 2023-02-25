@@ -1,0 +1,19 @@
+.favorites {
+  display: grid;
+  gap: 20px;
+}
+
+.favorites__heading {
+  margin: 0;
+
+  font-size: 28px;
+
+  font-weight: 500;
+  line-height: 42px;
+}
+
+.favorites__list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}

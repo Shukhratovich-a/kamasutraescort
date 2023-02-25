@@ -4,12 +4,22 @@ import { useSession } from "next-auth/react";
 
 import { withLayout } from "../layout/Layout";
 
-import { Container } from "../components";
+import { Container, DateSelect } from "../components";
 
 const Home = (): JSX.Element => {
   const { data: session } = useSession();
 
-  return <Container>{session?.token ? <>With token</> : <>Not token</>}</Container>;
+  return (
+    <Container>
+      {session?.token ? (
+        <>
+          <DateSelect date={new Date(2000, 1, 1)} />
+        </>
+      ) : (
+        <>Not token</>
+      )}
+    </Container>
+  );
 };
 
 export const getServerSideProps = async ({ locale }: { locale: string }) => {

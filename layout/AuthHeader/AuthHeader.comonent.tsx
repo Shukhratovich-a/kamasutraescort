@@ -11,28 +11,32 @@ import styles from "./AuthHeader.module.scss";
 
 export const AuthHeader = ({ className, ...props }: AuthHeaderProps): JSX.Element => {
   const router = useRouter();
-  const { t } = useTranslation();
-  const { pathname } = router;
+  const { t, i18n } = useTranslation();
+  const { asPath } = router;
 
   return (
     <header className={cn(styles.header, className)} {...props}>
       <Container className={cn(styles.header__container)}>
-        <Link className={cn(styles.header__logo)} href={"/"}>
+        <Link className={cn(styles.header__logo)} href={"/"} locale={i18n.language}>
           <span>Kamasutraescort</span>
         </Link>
 
         <span className={cn(styles.header__text)}>
-          {pathname === "/auth/register" ? t("auth:have-account") : t("auth:first-time")}
+          {asPath === "/auth/register" ? t("auth:have-account") : t("auth:first-time")}
         </span>
 
         <Button
           className={cn(styles.header__link)}
           appearance="linear-primary"
           onClick={() => {
-            router.replace(pathname === "/auth/login" ? "/auth/register" : "/auth/login");
+            router.push(
+              asPath === "/auth/login" ? "/auth/register" : "/auth/login",
+              asPath === "/auth/login" ? "/auth/register" : "/auth/login",
+              { locale: i18n.language }
+            );
           }}
         >
-          {pathname === "/auth/login" ? t("auth:register") : t("auth:login")}
+          {asPath === "/auth/login" ? t("auth:register") : t("auth:login")}
         </Button>
       </Container>
     </header>

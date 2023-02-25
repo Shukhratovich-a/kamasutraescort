@@ -9,4 +9,13 @@ export const API = {
   user: {
     edit: DOMAIN + "/user/edit/",
   },
+  eyes: {
+    getAll: DOMAIN + "/eye-color",
+  },
+  hairs: {
+    getAll: DOMAIN + "/hairs",
+  },
+  regions: {
+    getAll: DOMAIN + "/regions",
+  },
 };

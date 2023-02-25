@@ -1,5 +1,6 @@
 import React from "react";
 import cn from "classnames";
+import { useTranslation } from "next-i18next";
 
 import { GenderEnum } from "../../interfaces";
 
@@ -13,6 +14,7 @@ export const GenderSelect = React.forwardRef(
     ref: React.ForwardedRef<HTMLDivElement>
   ): JSX.Element => {
     const [genderArray] = React.useState<GenderEnum[]>([...Object.values(GenderEnum)]);
+    const { t } = useTranslation();
 
     const onClick = (i: GenderEnum) => {
       if (!isEditable || !setGender) return;
@@ -43,7 +45,7 @@ export const GenderSelect = React.forwardRef(
             onKeyDown={(evt: React.KeyboardEvent<HTMLButtonElement>) => handleSpace(genderItem, evt)}
             key={genderItem}
           >
-            {genderItem}
+            {t(`gender:${genderItem}`)}
           </button>
         ))}
       </div>

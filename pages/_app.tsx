@@ -8,7 +8,7 @@ import "../utils/i18n";
 
 import "../styles/globals.scss";
 
-const MyApp = ({ Component, pageProps: { session, ...pageProps } }: AppProps): JSX.Element => {
+const MyApp = ({ Component, pageProps: { ...pageProps } }: AppProps): JSX.Element => {
   return (
     <>
       <Head>
@@ -17,7 +17,7 @@ const MyApp = ({ Component, pageProps: { session, ...pageProps } }: AppProps): J
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <SessionProvider session={session}>
+      <SessionProvider>
         <Component {...pageProps} />
       </SessionProvider>
     </>

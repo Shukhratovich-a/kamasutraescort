@@ -1,9 +1,10 @@
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 import { withProfileLayout } from "../../layout/Layout";
+import { AccountInfo } from "../../page-components";
 
-const Bill = (): JSX.Element => {
-  return <>dfsf</>;
+const Account = (): JSX.Element => {
+  return <AccountInfo />;
 };
 
 export const getStaticProps = async ({ locale }: { locale: string }) => {
@@ -14,4 +15,4 @@ export const getStaticProps = async ({ locale }: { locale: string }) => {
   };
 };
 
-export default withProfileLayout(Bill);
+export default withProfileLayout(Account);

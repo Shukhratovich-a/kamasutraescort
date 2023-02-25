@@ -1,4 +1,4 @@
-.profile-info {
+.profile {
   display: grid;
   grid-template-columns: 280px 1fr;
   gap: 20px;
@@ -9,7 +9,7 @@
     "image info";
 }
 
-.profile-info__heading {
+.profile__heading {
   margin: 0;
 
   font-size: 28px;
@@ -20,18 +20,18 @@
   grid-area: heading;
 }
 
-.profile-info__image {
+.profile__image {
   grid-area: image;
 }
 
-.profile-info__info {
+.profile__info {
   grid-area: info;
 
   display: grid;
   gap: 50px;
 }
 
-.profile-info__info__heading {
+.profile__info__heading {
   margin: 0;
 
   font-size: 18px;
@@ -39,12 +39,12 @@
   line-height: 27px;
 }
 
-.profile-info__main-info {
+.profile__main {
   display: grid;
   gap: 20px;
 }
 
-.profile-info__label {
+.profile__label {
   display: grid;
   grid-template-columns: 1fr minmax(280px, 380px);
   gap: 20px;
@@ -54,24 +54,24 @@
   &--about {
     align-items: start;
 
-    .profile-info__label__text {
+    .profile__label__text {
       margin-top: 23px;
     }
   }
 }
 
-.profile-info__button {
+.profile__button {
   max-width: 250px;
   margin-left: auto;
 }
 
 @media only screen and (max-width: 1220px) {
-  .profile-info__label {
+  .profile__label {
     grid-template-columns: minmax(280px, 380px);
     gap: 5px;
 
     &--about {
-      .profile-info__label__text {
+      .profile__label__text {
         margin-top: 0;
       }
     }
@@ -79,7 +79,7 @@
 }
 
 @media only screen and (max-width: 1000px) {
-  .profile-info {
+  .profile {
     grid-template-columns: minmax(280px, 380px);
     grid-template-areas:
       "heading"
@@ -89,14 +89,14 @@
 }
 
 @media only screen and (max-width: 720px) {
-  .profile-info__button {
+  .profile__button {
     max-width: 100%;
     margin: 0 auto;
   }
 }
 
 @media only screen and (max-width: 500px) {
-  .profile-info__label__text {
+  .profile__label__text {
     margin-left: 30px;
 
     color: var(--text-dark);

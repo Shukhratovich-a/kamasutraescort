@@ -3,14 +3,16 @@ import { SelectItem } from "./select.interface";
 export interface UserInterface {
   id?: number;
   username: string;
-  fullname?: string;
   email: string;
-  birthDate?: Date;
+  gender: GenderEnum;
+  birthDate: Date;
+  region: SelectItem;
+
+  fullname?: string;
   height?: number;
   weight?: number;
   about?: string;
   goal?: string;
-  gender: GenderEnum;
   hairColor?: SelectItem;
   eyeColor?: SelectItem;
 

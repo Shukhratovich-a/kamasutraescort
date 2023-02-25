@@ -6,4 +6,5 @@ export interface ProfileInfoProps extends DetailedHTMLProps<HTMLAttributes<HTMLD
   session: Session | null;
   hairs: SelectItem[];
   eyes: SelectItem[];
+  regions: SelectItem[];
 }

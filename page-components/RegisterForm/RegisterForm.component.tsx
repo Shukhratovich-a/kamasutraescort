@@ -12,11 +12,13 @@ import { RegisterFormProps } from "./RegisterForm.props";
 import { IRegisterForm } from "./RegisterForm.interface";
 import { AuthResponceInterface, GenderEnum } from "../../interfaces";
 
-import { Button, GenderSelect, Input } from "../../components";
+import { Button, GenderSelect, Input, Select } from "../../components";
+
+import Region from "../../assets/icons/region.svg";
 
 import styles from "./RegisterForm.module.scss";
 
-export const RegisterForm = ({ className, ...props }: RegisterFormProps): JSX.Element => {
+export const RegisterForm = ({ className, regions, ...props }: RegisterFormProps): JSX.Element => {
   const { t, i18n } = useTranslation();
   const router = useRouter();
 
@@ -38,6 +40,7 @@ export const RegisterForm = ({ className, ...props }: RegisterFormProps): JSX.El
         email: formData.email,
         password: formData.password,
         gender: formData.gender,
+        region: formData.region,
         birthDate: new Date(),
       });
 
@@ -95,13 +98,31 @@ export const RegisterForm = ({ className, ...props }: RegisterFormProps): JSX.El
         )}
       />
 
+      <Controller
+        control={control}
+        name="region"
+        rules={{ required: { value: true, message: "Укажите рейтинг" } }}
+        render={({ field }) => (
+          <Select
+            selectArray={regions}
+            selected={field.value}
+            setSelected={field.onChange}
+            error={errors.region}
+            icon={<Region />}
+            placeholder={"Region"}
+            ref={field.ref}
+            isEditable
+          />
+        )}
+      />
+
       <Input
         {...register("password", { required: { value: true, message: "Заполните имя" }, minLength: 8 })}
         error={errors.password}
         appearance="password"
         placeholder={t("input:password") || ""}
       />
-      <Button isLoading={isLoading}>{t("button:enter")}</Button>
+      <Button isLoading={isLoading}>{t("button:create-account")}</Button>
     </form>
   );
 };

@@ -18,7 +18,7 @@ export const Button = ({ className, children, appearance = "primary", isLoading 
       })}
       {...props}
     >
-      {isLoading ? <Waiting /> : <span>{children}</span>}
+      {isLoading ? <Waiting /> : children}
     </button>
   );
 };

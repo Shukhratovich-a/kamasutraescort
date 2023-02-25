@@ -1,21 +1,22 @@
+import React from "react";
+import { signIn, useSession } from "next-auth/react";
 import cn from "classnames";
 import { Controller, useForm } from "react-hook-form";
-import { i18n, useTranslation } from "next-i18next";
+import { useTranslation } from "next-i18next";
+import axios from "axios";
+
+import { API } from "../../helpers";
 
 import { GenderEnum } from "../../interfaces";
 import { IProfileForm } from "./IProfileForm.interface";
 
 import { ProfileInfoProps } from "./ProfileInfo.props";
 
-import { Button, GenderSelect, Input, Select, Textarea, ImageSelect } from "../../components";
+import { Button, GenderSelect, Input, Select, Textarea, ImageSelect, DateSelect } from "../../components";
 
 import styles from "./ProfileInfo.module.scss";
-import axios from "axios";
-import { API } from "../../helpers";
-import { signIn } from "next-auth/react";
-import React from "react";
 
-export const ProfileInfo = ({ session, hairs, eyes }: ProfileInfoProps): JSX.Element => {
+export const ProfileInfo = ({ session, hairs, eyes, regions }: ProfileInfoProps): JSX.Element => {
   const { t, i18n } = useTranslation();
   const {
     register,
@@ -25,6 +26,7 @@ export const ProfileInfo = ({ session, hairs, eyes }: ProfileInfoProps): JSX.Ele
   } = useForm<IProfileForm>();
 
   const [isLoading, setLoading] = React.useState(false);
+  const currentSession = useSession();
 
   const onSubmit = async (formData: IProfileForm) => {
     setLoading(true);
@@ -36,7 +38,7 @@ export const ProfileInfo = ({ session, hairs, eyes }: ProfileInfoProps): JSX.Ele
       },
       {
         headers: {
-          Authorization: JSON.stringify(session?.token),
+          Authorization: JSON.stringify(currentSession.data?.token),
         },
       }
     );
@@ -58,21 +60,21 @@ export const ProfileInfo = ({ session, hairs, eyes }: ProfileInfoProps): JSX.Ele
   };
 
   return session ? (
-    <div className={cn(styles["profile-info"])} onSubmit={handleSubmit(onSubmit)}>
-      <h2 className={cn(styles["profile-info__heading"])}>{t("profile:profile")}</h2>
+    <div className={cn(styles["profile"])} onSubmit={handleSubmit(onSubmit)}>
+      <h2 className={cn(styles["profile__heading"])}>{t("profile:profile")}</h2>
 
-      <div className={cn(styles["profile-info__image"])}>
+      <div className={cn(styles["profile__image"])}>
         <ImageSelect />
       </div>
 
-      <form className={cn(styles["profile-info__info"])}>
-        <div className={cn(styles["profile-info__main-info"])}>
-          <h3 className={cn(styles["profile-info__main-info__heading"], styles["profile-info__info__heading"])}>
+      <form className={cn(styles["profile__info"])}>
+        <div className={cn(styles["profile__main"])}>
+          <h3 className={cn(styles["profile__main__heading"], styles["profile__info__heading"])}>
             {t("profile:main-info")}
           </h3>
 
-          <label className={cn(styles["profile-info__label"])}>
-            <span className={cn(styles["profile-info__label__text"])}>Имя</span>
+          <label className={cn(styles["profile__label"])}>
+            <span className={cn(styles["profile__label__text"])}>Имя</span>
             <Input
               defaultValue={session?.user.username}
               placeholder="Ваше имя"
@@ -81,8 +83,8 @@ export const ProfileInfo = ({ session, hairs, eyes }: ProfileInfoProps): JSX.Ele
             />
           </label>
 
-          <label className={cn(styles["profile-info__label"])}>
-            <span className={cn(styles["profile-info__label__text"])}>Полное имя</span>
+          <label className={cn(styles["profile__label"])}>
+            <span className={cn(styles["profile__label__text"])}>Полное имя</span>
             <Input
               defaultValue={session?.user.fullname}
               placeholder="Ваше имя"
@@ -91,18 +93,39 @@ export const ProfileInfo = ({ session, hairs, eyes }: ProfileInfoProps): JSX.Ele
             />
           </label>
 
-          <label className={cn(styles["profile-info__label"])}>
-            <span className={cn(styles["profile-info__label__text"])}>Дата рождения</span>
-            <Input
-              defaultValue={String(session?.user.birthDate)}
-              placeholder="Ваше имя"
-              {...register("birthDate", { required: { value: true, message: "Заполните имя" } })}
-              error={errors.birthDate}
+          <label className={cn(styles["profile__label"])}>
+            <span className={cn(styles["profile__label__text"])}>Дата рождения</span>
+            <Controller
+              defaultValue={session.user.birthDate}
+              control={control}
+              name="birthDate"
+              rules={{ required: { value: true, message: "Укажите рейтинг" } }}
+              render={({ field }) => <DateSelect date={field.value} ref={field.ref} />}
             />
           </label>
 
-          <label className={cn(styles["profile-info__label"])}>
-            <span className={cn(styles["profile-info__label__text"])}>Пол</span>
+          <label className={cn(styles["profile__label"])}>
+            <span className={cn(styles["profile__label__text"])}>Цвет волос</span>
+            <Controller
+              defaultValue={session.user.region.id}
+              control={control}
+              name="region"
+              rules={{ required: false }}
+              render={({ field }) => (
+                <Select
+                  selectArray={regions}
+                  ref={field.ref}
+                  selected={field.value}
+                  setSelected={field.onChange}
+                  placeholder={"Предпочитаю не отвечать"}
+                  isEditable
+                />
+              )}
+            />
+          </label>
+
+          <label className={cn(styles["profile__label"])}>
+            <span className={cn(styles["profile__label__text"])}>Пол</span>
             <Controller
               defaultValue={session ? session?.user.gender : GenderEnum.Male}
               control={control}
@@ -120,33 +143,35 @@ export const ProfileInfo = ({ session, hairs, eyes }: ProfileInfoProps): JSX.Ele
           </label>
         </div>
 
-        <div className={cn(styles["profile-info__main-info"])}>
-          <h3 className={cn(styles["profile-info__main-info__heading"], styles["profile-info__info__heading"])}>
+        <div className={cn(styles["profile__main"])}>
+          <h3 className={cn(styles["profile__main__heading"], styles["profile__info__heading"])}>
             {t("profile:personal-info")}
           </h3>
 
-          <label className={cn(styles["profile-info__label"])}>
-            <span className={cn(styles["profile-info__label__text"])}>Рост</span>
+          <label className={cn(styles["profile__label"])}>
+            <span className={cn(styles["profile__label__text"])}>Рост</span>
             <Input
               defaultValue={session?.user.height}
               placeholder="Предпочитаю не отвечать"
               {...register("height", { required: { value: false, message: "Заполните имя" } })}
               error={errors.height}
+              type={"number"}
             />
           </label>
 
-          <label className={cn(styles["profile-info__label"])}>
-            <span className={cn(styles["profile-info__label__text"])}>Вес</span>
+          <label className={cn(styles["profile__label"])}>
+            <span className={cn(styles["profile__label__text"])}>Вес</span>
             <Input
               defaultValue={session?.user.weight}
               placeholder="Предпочитаю не отвечать"
               {...register("weight", { required: { value: false, message: "Заполните имя" } })}
               error={errors.weight}
+              type={"number"}
             />
           </label>
 
-          <label className={cn(styles["profile-info__label"])}>
-            <span className={cn(styles["profile-info__label__text"])}>Цвет волос</span>
+          <label className={cn(styles["profile__label"])}>
+            <span className={cn(styles["profile__label__text"])}>Цвет волос</span>
             <Controller
               defaultValue={session.user.hairColor?.id}
               control={control}
@@ -165,8 +190,8 @@ export const ProfileInfo = ({ session, hairs, eyes }: ProfileInfoProps): JSX.Ele
             />
           </label>
 
-          <label className={cn(styles["profile-info__label"])}>
-            <span className={cn(styles["profile-info__label__text"])}>Цвет глаз</span>
+          <label className={cn(styles["profile__label"])}>
+            <span className={cn(styles["profile__label__text"])}>Цвет глаз</span>
             <Controller
               defaultValue={session.user.eyeColor?.id}
               control={control}
@@ -185,8 +210,8 @@ export const ProfileInfo = ({ session, hairs, eyes }: ProfileInfoProps): JSX.Ele
             />
           </label>
 
-          <label className={cn(styles["profile-info__label"])}>
-            <span className={cn(styles["profile-info__label__text"])}>Цель знакомства</span>
+          <label className={cn(styles["profile__label"])}>
+            <span className={cn(styles["profile__label__text"])}>Цель знакомства</span>
             <Input
               defaultValue={session?.user.goal}
               placeholder="Предпочитаю не отвечать"
@@ -195,8 +220,8 @@ export const ProfileInfo = ({ session, hairs, eyes }: ProfileInfoProps): JSX.Ele
             />
           </label>
 
-          <label className={cn(styles["profile-info__label"], styles["profile-info__label--about"])}>
-            <span className={cn(styles["profile-info__label__text"])}>О себе</span>
+          <label className={cn(styles["profile__label"], styles["profile__label--about"])}>
+            <span className={cn(styles["profile__label__text"])}>О себе</span>
             <Textarea
               defaultValue={session?.user.about}
               placeholder="Напишите о себе"
@@ -206,13 +231,13 @@ export const ProfileInfo = ({ session, hairs, eyes }: ProfileInfoProps): JSX.Ele
           </label>
         </div>
 
-        <div className={cn(styles["profile-info__main-info"])}>
-          <h3 className={cn(styles["profile-info__main-info__heading"], styles["profile-info__info__heading"])}>
-            {t("profile:account-info")}
+        <div className={cn(styles["profile__main"])}>
+          <h3 className={cn(styles["profile__main__heading"], styles["profile__info__heading"])}>
+            {t("profile:account")}
           </h3>
 
-          <label className={cn(styles["profile-info__label"])}>
-            <span className={cn(styles["profile-info__label__text"])}>E-mail</span>
+          <label className={cn(styles["profile__label"])}>
+            <span className={cn(styles["profile__label__text"])}>E-mail</span>
             <Input
               defaultValue={session?.user.email}
               placeholder="Введите e-mail"
@@ -221,8 +246,8 @@ export const ProfileInfo = ({ session, hairs, eyes }: ProfileInfoProps): JSX.Ele
             />
           </label>
 
-          <label className={cn(styles["profile-info__label"])}>
-            <span className={cn(styles["profile-info__label__text"])}>Password</span>
+          <label className={cn(styles["profile__label"])}>
+            <span className={cn(styles["profile__label__text"])}>Password</span>
             <Input
               type={"password"}
               placeholder="Введите e-mail"
@@ -232,7 +257,7 @@ export const ProfileInfo = ({ session, hairs, eyes }: ProfileInfoProps): JSX.Ele
           </label>
         </div>
 
-        <Button className={cn(styles["profile-info__button"])} isLoading={isLoading}>
+        <Button className={cn(styles["profile__button"])} isLoading={isLoading}>
           Сохранить
         </Button>
       </form>

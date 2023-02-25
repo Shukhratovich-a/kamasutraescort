@@ -14,7 +14,7 @@ import styles from "../../styles/pages/Login.module.scss";
 
 const Login = (): JSX.Element => {
   const router = useRouter();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const [forgotState, setForgotState] = React.useState(false);
 
@@ -43,6 +43,7 @@ const Login = (): JSX.Element => {
             pathname: router.asPath,
             query: { password: "forgot" },
           }}
+          locale={i18n.language}
         >
           {t("auth:login-password")}
         </Link>

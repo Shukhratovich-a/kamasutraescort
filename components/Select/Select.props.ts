@@ -6,8 +6,12 @@ import { SelectItem } from "../../interfaces";
 export interface SelectProps extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
   isEditable?: boolean;
   selectArray: SelectItem[];
+
   selected?: number;
-  setSelected?: (selected: number) => void;
-  error?: FieldError;
+  setSelected?: (selected: number | null) => void;
+
   placeholder?: string;
+  icon?: JSX.Element;
+
+  error?: FieldError;
 }

@@ -7,13 +7,14 @@ import { SelectItem } from "../../interfaces";
 
 import { SelectProps } from "./Select.props";
 
-import Marker from "./marker.svg";
+import Marker from "../../assets/icons/marker.svg";
+import Error from "../../assets/icons/error.svg";
 
 import styles from "./Select.module.scss";
 
 export const Select = React.forwardRef(
   (
-    { selected, setSelected, selectArray, isEditable = false, placeholder, ...props }: SelectProps,
+    { selected, setSelected, selectArray, isEditable = false, placeholder, icon, error, ...props }: SelectProps,
     ref: React.ForwardedRef<HTMLDivElement>
   ): JSX.Element => {
     const { i18n } = useTranslation();
@@ -26,7 +27,7 @@ export const Select = React.forwardRef(
 
     const onClick = (id: number): void => {
       if (!setSelected || !isEditable) return;
-      setSelected(id);
+      setSelected(id === 0 ? null : id);
       setIsOpen(false);
     };
 
@@ -55,7 +56,13 @@ export const Select = React.forwardRef(
           transition={{ duration: 0.1, default: { ease: "easeOut" } }}
         >
           {selectArray.map((selectItem: SelectItem) => (
-            <div className={cn(styles.select__list__item)} key={selectItem.id} onClick={() => onClick(selectItem.id)}>
+            <div
+              className={cn(styles.select__list__item, {
+                [styles["select__list__item--null"]]: selectItem.id === 0,
+              })}
+              key={selectItem.id}
+              onClick={() => onClick(selectItem.id)}
+            >
               {language === "en" ? selectItem.nameEn : selectItem.nameRu}
             </div>
           ))}
@@ -67,20 +74,37 @@ export const Select = React.forwardRef(
       <div
         className={cn(styles.select, {
           [styles["select--open"]]: isOpen,
+          [styles["select--error"]]: error,
         })}
         {...props}
         ref={listRef}
+        onClick={() => setIsOpen(!isOpen)}
       >
+        {icon && <span className={cn(styles.select__icon)}>{icon}</span>}
+
         <div
           className={cn(styles.select__selected, {
             [styles["select__selected--placeholder"]]: !selected,
           })}
-          onClick={() => setIsOpen(!isOpen)}
           ref={ref}
         >
           {selectedItem ? (language === "en" ? selectedItem.nameEn : selectedItem.nameRu) : placeholder}
-          <Marker />
         </div>
+
+        {error ? (
+          <span
+            className={cn(styles.input__error, {
+              [styles["input__error--active"]]: error,
+            })}
+            title={error && error.message}
+          >
+            <Error />
+          </span>
+        ) : (
+          <span className={cn(styles.select__marker)}>
+            <Marker />
+          </span>
+        )}
 
         {buildSelectItems()}
       </div>

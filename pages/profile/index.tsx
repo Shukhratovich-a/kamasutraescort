@@ -1,6 +1,5 @@
 import React from "react";
 import { GetServerSideProps, GetServerSidePropsContext } from "next";
-import { useSession } from "next-auth/react";
 import { getServerSession, Session } from "next-auth";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { ParsedUrlQuery } from "querystring";
@@ -9,14 +8,12 @@ import { ProfileInfo } from "../../page-components/ProfileInfo/ProfileInfo.compo
 
 import { withProfileLayout } from "../../layout/Layout";
 import axios from "axios";
-import { API } from "../../helpers";
+import { API, selectDefaultKeys } from "../../helpers";
 import { AuthResponceInterface, SelectItem } from "../../interfaces";
 import { authOptions } from "../api/auth/[...nextauth]";
 
-const Profile = ({ session, hairs, eyes }: ProfilePageProps): JSX.Element => {
-  const { data: s } = useSession({ required: true });
-
-  return <ProfileInfo session={s} hairs={hairs} eyes={eyes} />;
+const Profile = ({ session, hairs, eyes, regions }: ProfilePageProps): JSX.Element => {
+  return <ProfileInfo session={session} hairs={hairs} eyes={eyes} regions={regions} />;
 };
 
 export const getServerSideProps: GetServerSideProps<ProfilePageProps> = async (
@@ -40,22 +37,41 @@ export const getServerSideProps: GetServerSideProps<ProfilePageProps> = async (
       );
 
       if (user.status === 200) {
-        const { data: hairs } = await axios.get<SelectItem[]>("http://localhost:3001/api/hairs");
-        const { data: eyes } = await axios.get<SelectItem[]>("http://localhost:3001/api/eye-color");
+        const { data: hairs } = await axios.get<SelectItem[]>(API.hairs.getAll);
+        const { data: eyes } = await axios.get<SelectItem[]>(API.eyes.getAll);
+        const { data: regions } = await axios.get(API.regions.getAll);
+
+        hairs.unshift({
+          ...selectDefaultKeys,
+        });
+        eyes.unshift({
+          ...selectDefaultKeys,
+        });
 
         return await {
           props: {
             hairs,
             eyes,
+            regions,
             session,
             ...(await serverSideTranslations(String(ctx.locale))),
           },
         };
       } else {
-        return { notFound: true };
+        return {
+          redirect: {
+            destination: "/auth/login",
+            permanent: true,
+          },
+        };
       }
     } catch {
-      return { notFound: true };
+      return {
+        redirect: {
+          destination: "/auth/login",
+          permanent: true,
+        },
+      };
     }
   }
 };
@@ -66,4 +82,5 @@ export interface ProfilePageProps extends Record<string, unknown> {
   session: Session | null;
   hairs: SelectItem[];
   eyes: SelectItem[];
+  regions: SelectItem[];
 }

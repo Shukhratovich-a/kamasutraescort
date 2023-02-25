@@ -22,7 +22,7 @@ export const HeaderProfile = ({ className, ...props }: HeaderProfileProps): JSX.
         className={cn(styles.profile__link, className, {
           [styles["profile__link--active"]]: asPath.startsWith("/profile"),
         })}
-        href="/profile"
+        href={asPath.startsWith("/profile") ? asPath : "/profile"}
         locale={i18n.language}
       >
         <User className={cn(styles.profile__image)} />

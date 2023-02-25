@@ -94,6 +94,18 @@ input {
   overflow: visible;
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  margin: 0;
+
+  appearance: none;
+}
+
+/* Firefox */
+input[type="number"] {
+  appearance: textfield;
+}
+
 button,
 select {
   text-transform: none;
