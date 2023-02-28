@@ -2,7 +2,10 @@
   padding: 30px 0;
 
   font-size: 14px;
-  line-height: 21px;
+  line-height: 20px;
+
+  position: relative;
+  z-index: 2;
 }
 
 .footer__wrapper {
@@ -27,7 +30,7 @@
   grid-area: copyright;
 
   font-size: 14px !important;
-  line-height: 21px !important;
+  line-height: 20px !important;
 }
 
 .footer__link {

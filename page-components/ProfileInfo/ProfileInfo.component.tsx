@@ -12,7 +12,15 @@ import { IProfileForm } from "./IProfileForm.interface";
 
 import { ProfileInfoProps } from "./ProfileInfo.props";
 
-import { Button, GenderSelect, Input, Select, Textarea, ImageSelect, DateSelect } from "../../components";
+import {
+  Button,
+  GenderSelect,
+  Input,
+  Select,
+  Textarea,
+  ImageSelect,
+  DateSelect,
+} from "../../components";
 
 import styles from "./ProfileInfo.module.scss";
 
@@ -64,7 +72,12 @@ export const ProfileInfo = ({ session, hairs, eyes, regions }: ProfileInfoProps)
       <h2 className={cn(styles["profile__heading"])}>{t("profile:profile")}</h2>
 
       <div className={cn(styles["profile__image"])}>
-        <ImageSelect />
+        <ImageSelect
+          firstImage={session.user.images?.profileImageFirst}
+          secondImage={session.user.images?.profileImageSecond}
+          thirdImage={session.user.images?.profileImageThirth}
+          fourthImage={session.user.images?.profileImageFourth}
+        />
       </div>
 
       <form className={cn(styles["profile__info"])}>

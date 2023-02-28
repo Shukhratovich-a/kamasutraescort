@@ -1,5 +1,5 @@
 import React from "react";
-import Link from "next/link";
+// import Link from "next/link";
 import { useRouter } from "next/router";
 import cn from "classnames";
 import { useTranslation } from "next-i18next";
@@ -14,7 +14,8 @@ import styles from "../../styles/pages/Login.module.scss";
 
 const Login = (): JSX.Element => {
   const router = useRouter();
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
+  // const { i18n } = useTranslation();
 
   const [forgotState, setForgotState] = React.useState(false);
 
@@ -37,7 +38,7 @@ const Login = (): JSX.Element => {
 
         <LoginForm className={cn(styles.login__form)} />
 
-        <Link
+        {/* <Link
           className={cn(styles.login__link)}
           href={{
             pathname: router.asPath,
@@ -46,7 +47,7 @@ const Login = (): JSX.Element => {
           locale={i18n.language}
         >
           {t("auth:login-password")}
-        </Link>
+        </Link> */}
       </Container>
     </>
   );

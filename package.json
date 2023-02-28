@@ -27,7 +27,8 @@
     "react-dom": "18.2.0",
     "react-hook-form": "^7.43.1",
     "rooks": "^7.4.3",
-    "sass": "^1.58.0"
+    "sass": "^1.58.0",
+    "swiper": "^9.0.5"
   },
   "devDependencies": {
     "@svgr/webpack": "^6.5.1",

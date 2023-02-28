@@ -23,7 +23,12 @@
 
     border-radius: 30px;
 
-    background: linear-gradient(180deg, rgb(0 0 0 / 0%) 57.73%, rgb(0 0 0 / 20%) 67.67%, rgb(0 0 0 / 20%) 83.76%);
+    background: linear-gradient(
+      180deg,
+      rgb(0 0 0 / 0%) 57.73%,
+      rgb(0 0 0 / 20%) 67.67%,
+      rgb(0 0 0 / 20%) 83.76%
+    );
   }
 }
 
@@ -96,6 +101,10 @@
   font-size: 16px;
   font-weight: 500;
   line-height: 150%;
+
+  &::first-letter {
+    text-transform: uppercase;
+  }
 }
 
 .user__region {
@@ -103,4 +112,8 @@
 
   font-size: 12px;
   line-height: 18px;
+
+  &::first-letter {
+    text-transform: uppercase;
+  }
 }

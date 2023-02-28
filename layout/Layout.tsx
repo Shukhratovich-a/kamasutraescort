@@ -25,14 +25,21 @@ const Layout = ({ children, className }: LayoutProps): JSX.Element => {
 
       <main className={cn(styles.main)}>{children}</main>
 
-      <Footer className={cn(styles.footer)} />
+      <Footer
+        className={cn(styles.footer, {
+          [styles.footer__auth]: asPath.startsWith("/auth"),
+        })}
+      />
 
       <Vectors />
     </div>
   );
 };
 
-export const withLayout = <T extends Record<string, unknown>>(Component: FunctionComponent<T>, className?: string) => {
+export const withLayout = <T extends Record<string, unknown>>(
+  Component: FunctionComponent<T>,
+  className?: string
+) => {
   return function withLayoutComponent(props: T): JSX.Element {
     return (
       <Layout className={className}>
@@ -42,26 +49,11 @@ export const withLayout = <T extends Record<string, unknown>>(Component: Functio
   };
 };
 
-const ProfileLayout = ({ children, className }: LayoutProps): JSX.Element => {
+export const ProfileLayout = ({ children }: LayoutProps): JSX.Element => {
   return (
-    <Layout className={cn(styles["wrapper--profile"], className)}>
-      <Container className={cn(styles["wrapper--profile__container"])}>
-        <ProfileMenu />
-        <div className={cn(styles["wrapper--profile__right"])}>{children}</div>
-      </Container>
-    </Layout>
+    <Container className={cn(styles["wrapper--profile__container"])}>
+      <ProfileMenu />
+      <div className={cn(styles["wrapper--profile__right"])}>{children}</div>
+    </Container>
   );
-};
-
-export const withProfileLayout = <T extends Record<string, unknown>>(
-  Component: FunctionComponent<T>,
-  className?: string
-) => {
-  return function withLayoutComponent(props: T): JSX.Element {
-    return (
-      <ProfileLayout className={className}>
-        <Component {...props} />
-      </ProfileLayout>
-    );
-  };
 };

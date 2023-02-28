@@ -21,8 +21,12 @@ $width: 100vw;
   grid-area: first;
 }
 
-.select__image {
+.select__selector {
+  position: relative;
+
   display: flex;
+
+  overflow: hidden;
   align-items: center;
   justify-content: center;
 
@@ -44,6 +48,14 @@ $width: 100vw;
 .select__fourth {
   border-radius: 30px;
   grid-area: fourth;
+}
+
+.select__image {
+  position: absolute;
+
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 @media only screen and (max-width: 1000px) {

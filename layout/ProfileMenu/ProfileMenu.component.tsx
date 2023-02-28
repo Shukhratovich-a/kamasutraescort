@@ -26,9 +26,10 @@ export const ProfileMenu = () => {
               <li className={cn(styles.profile__item)} key={item.id}>
                 <Link
                   className={cn(styles.profile__link, {
-                    [styles["profile__link--active"]]: asPath === `/profile${item.route}`,
+                    [styles["profile__link--active"]]:
+                      asPath === `/${session.user.username}${item.route}`,
                   })}
-                  href={`/profile${item.route}`}
+                  href={`/${session.user.username}${item.route}`}
                 >
                   {item.icon}
                   <span>{t(`profile:${item.name}`)}</span>
@@ -37,7 +38,10 @@ export const ProfileMenu = () => {
             ))}
         </ul>
 
-        <button className={cn(styles.profile__link)} onClick={() => signOut({ callbackUrl: "/" + i18n.language })}>
+        <button
+          className={cn(styles.profile__link)}
+          onClick={() => signOut({ callbackUrl: "/" + i18n.language })}
+        >
           <ExitIcon />
           <span>{t(`profile:exit`)}</span>
         </button>

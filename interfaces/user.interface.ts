@@ -1,3 +1,4 @@
+import { ImageInterface } from "./image.interface";
 import { SelectItem } from "./select.interface";
 
 export interface UserInterface {
@@ -15,6 +16,7 @@ export interface UserInterface {
   goal?: string;
   hairColor?: SelectItem;
   eyeColor?: SelectItem;
+  images?: ImageInterface;
 
   createdAt?: Date;
   updatedAt?: Date;

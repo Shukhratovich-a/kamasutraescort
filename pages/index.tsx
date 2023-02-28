@@ -1,20 +1,28 @@
 import React from "react";
+import { GetServerSideProps, GetServerSidePropsContext } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { useSession } from "next-auth/react";
+import { ParsedUrlQuery } from "querystring";
+import { getServerSession, Session } from "next-auth";
+import axios from "axios";
+import cn from "classnames";
+
+import { authOptions } from "./api/auth/[...nextauth]";
+
+import { UserInterface } from "../interfaces";
+import { API } from "../helpers";
 
 import { withLayout } from "../layout/Layout";
 
-import { Container, DateSelect } from "../components";
+import { AuthHomePage } from "../page-components";
+import { Container } from "../components";
 
-const Home = (): JSX.Element => {
-  const { data: session } = useSession();
+import styles from "../styles/pages/Home.module.scss";
 
+const Home = ({ session, men, women, others }: HomePageProps): JSX.Element => {
   return (
-    <Container>
+    <Container className={cn(styles.container)}>
       {session?.token ? (
-        <>
-          <DateSelect date={new Date(2000, 1, 1)} />
-        </>
+        <AuthHomePage session={session} men={men} women={women} others={others} />
       ) : (
         <>Not token</>
       )}
@@ -22,12 +30,41 @@ const Home = (): JSX.Element => {
   );
 };
 
-export const getServerSideProps = async ({ locale }: { locale: string }) => {
+export const getServerSideProps: GetServerSideProps<HomePageProps> = async ({
+  req,
+  res,
+  locale,
+}: GetServerSidePropsContext<ParsedUrlQuery>) => {
+  const session = await getServerSession(req, res, authOptions);
+
+  if (!session?.token)
+    return {
+      props: {
+        session,
+        ...(await serverSideTranslations(String(locale))),
+      },
+    };
+
+  const { data: men } = await axios.get(API.user.getByGender + "/female");
+  const { data: women } = await axios.get(API.user.getByGender + "/male");
+  const { data: others } = await axios.get(API.user.getByGender + "/shemale");
+
   return {
     props: {
-      ...(await serverSideTranslations(locale)),
+      men,
+      women,
+      others,
+      session,
+      ...(await serverSideTranslations(String(locale))),
     },
   };
 };
 
 export default withLayout(Home);
+
+export interface HomePageProps extends Record<string, unknown> {
+  session: Session | null;
+  men?: UserInterface[];
+  women?: UserInterface[];
+  others?: UserInterface[];
+}

@@ -1,0 +1,22 @@
+.users__heading {
+  margin: 0;
+  margin-bottom: 20px;
+
+  font-size: 28px;
+
+  font-weight: 500;
+  line-height: 42px;
+
+  &::first-letter {
+    text-transform: uppercase;
+  }
+}
+
+.users__list {
+  position: relative;
+
+  overflow: visible;
+
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+}

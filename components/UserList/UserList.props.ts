@@ -2,8 +2,8 @@ import { DetailedHTMLProps, HTMLAttributes } from "react";
 
 import { UserInterface } from "../../interfaces";
 
-export interface UserProps
+export interface UserListProps
   extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
-  user: UserInterface;
-  type?: "favorite" | "none";
+  users: UserInterface[];
+  heading: string;
 }

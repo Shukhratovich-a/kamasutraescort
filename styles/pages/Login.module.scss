@@ -1,21 +1,21 @@
-.body {
-  &::after {
-    position: absolute;
-    z-index: -2;
-    right: 50%;
-    bottom: -280px;
+// .body {
+//   &::after {
+//     position: absolute;
+//     z-index: -2;
+//     right: 50%;
+//     bottom: -280px;
 
-    width: 850px;
-    height: 850px;
+//     width: 850px;
+//     height: 850px;
 
-    content: "";
-    transform: translate(50%);
+//     content: "";
+//     transform: translate(50%);
 
-    border-radius: 50%;
-    background-color: #381a42;
-    filter: blur(150px);
-  }
-}
+//     border-radius: 50%;
+//     background-color: #381a42;
+//     filter: blur(150px);
+//   }
+// }
 
 .login__container {
   display: flex;

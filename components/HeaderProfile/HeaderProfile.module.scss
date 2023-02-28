@@ -21,6 +21,9 @@
 
 .profile__image {
   margin-right: 15px;
+
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 .profile__name {
@@ -33,4 +36,8 @@
 
   white-space: nowrap;
   text-overflow: ellipsis;
+
+  &::first-letter {
+    text-transform: uppercase;
+  }
 }
