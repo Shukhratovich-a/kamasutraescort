@@ -21,6 +21,7 @@ export const Select = React.forwardRef(
     const { language } = i18n;
 
     const [isOpen, setIsOpen] = React.useState<boolean>(false);
+
     const listRef: React.RefObject<HTMLDivElement> = React.useRef(null);
 
     const selectedItem = selectArray.find((item) => item.id === selected);
@@ -75,6 +76,7 @@ export const Select = React.forwardRef(
         className={cn(styles.select, {
           [styles["select--open"]]: isOpen,
           [styles["select--error"]]: error,
+          [styles["select--focus"]]: isOpen,
         })}
         {...props}
         ref={listRef}

@@ -9,7 +9,7 @@ import { Header } from "./Header/Header.comonent";
 import { AuthHeader } from "./AuthHeader/AuthHeader.comonent";
 import { Footer } from "./Footer/Footer.component";
 
-import { Container, Vectors } from "../components";
+import { Container } from "../components";
 import { ProfileMenu } from "./ProfileMenu/ProfileMenu.component";
 
 import styles from "./Layout.module.scss";
@@ -21,25 +21,26 @@ const Layout = ({ children, className }: LayoutProps): JSX.Element => {
 
   return (
     <div className={cn(styles.wrapper, className)}>
-      {session?.token && !asPath.startsWith("/auth") ? <Header /> : <AuthHeader />}
+      {session?.token && !asPath.startsWith("/auth") ? <Header className={cn(styles.header)} /> : <AuthHeader />}
 
-      <main className={cn(styles.main)}>{children}</main>
+      <main
+        className={cn(styles.main, {
+          [styles["main--auth"]]: session?.token,
+        })}
+      >
+        {children}
+      </main>
 
       <Footer
         className={cn(styles.footer, {
           [styles.footer__auth]: asPath.startsWith("/auth"),
         })}
       />
-
-      <Vectors />
     </div>
   );
 };
 
-export const withLayout = <T extends Record<string, unknown>>(
-  Component: FunctionComponent<T>,
-  className?: string
-) => {
+export const withLayout = <T extends Record<string, unknown>>(Component: FunctionComponent<T>, className?: string) => {
   return function withLayoutComponent(props: T): JSX.Element {
     return (
       <Layout className={className}>

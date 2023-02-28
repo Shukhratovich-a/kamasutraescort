@@ -4,3 +4,4 @@ export * from "./api.helper";
 export * from "./nav.helper";
 export * from "./profile.helper";
 export * from "./select.helper";
+export * from "./calculateFullAge.helper";

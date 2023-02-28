@@ -1,5 +1,11 @@
 .select__marker {
   transition: transform 0.1s ease;
+
+  svg {
+    path {
+      transition: stroke 0.1s ease;
+    }
+  }
 }
 
 .select {
@@ -17,10 +23,26 @@
 
   cursor: pointer;
 
+  transition: border 0.25s ease-out;
+
   text-transform: capitalize;
+
+  border: 1px solid var(--input-placeholder);
 
   border-radius: 35px;
   background-color: var(--input-background);
+
+  &--focus {
+    border: 1px solid var(--text-light);
+
+    .select__marker {
+      svg {
+        path {
+          stroke: var(--text-light);
+        }
+      }
+    }
+  }
 
   &--error {
     box-shadow: inset 0 -2px 0 #a01414;

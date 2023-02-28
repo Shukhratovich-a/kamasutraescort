@@ -4,8 +4,8 @@ import { withLayout } from "../layout/Layout";
 
 import { Container } from "../components";
 
-const NotFoundError = (): JSX.Element => {
-  return <Container>NotFoundError</Container>;
+const NotFound = (): JSX.Element => {
+  return <Container>NotFound</Container>;
 };
 
 export const getStaticProps = async ({ locale }: { locale: string }) => {
@@ -16,4 +16,4 @@ export const getStaticProps = async ({ locale }: { locale: string }) => {
   };
 };
 
-export default withLayout(NotFoundError);
+export default withLayout(NotFound);

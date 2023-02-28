@@ -11,7 +11,6 @@ import User from "../../assets/icons/profile.svg";
 
 import styles from "./HeaderProfile.module.scss";
 import { DOMAIN } from "../../helpers";
-import axios from "axios";
 // import Image from "next/image";
 
 export const HeaderProfile = ({ className, ...props }: HeaderProfileProps): JSX.Element => {
@@ -19,22 +18,6 @@ export const HeaderProfile = ({ className, ...props }: HeaderProfileProps): JSX.
   const router = useRouter();
   const { asPath } = router;
   const { i18n } = useTranslation();
-  const [withImage, setWithImage] = React.useState(false);
-
-  const fetchImage = React.useCallback(async () => {
-    try {
-      if (!session) return;
-
-      const { data } = await axios.get(`${DOMAIN}/${session.user.images?.avatar}`);
-      if (data) setWithImage(data);
-    } catch {
-      setWithImage(false);
-    }
-  }, [session]);
-
-  React.useEffect(() => {
-    fetchImage();
-  }, [fetchImage]);
 
   return (
     <div className={cn(styles.profile, className)} {...props}>
@@ -42,12 +25,10 @@ export const HeaderProfile = ({ className, ...props }: HeaderProfileProps): JSX.
         className={cn(styles.profile__link, className, {
           [styles["profile__link--active"]]: asPath.startsWith(`/${session?.user.username}`),
         })}
-        href={
-          asPath.startsWith(`/${session?.user.username}`) ? asPath : `/${session?.user.username}`
-        }
+        href={asPath.startsWith(`/${session?.user.username}`) ? asPath : `/${session?.user.username}`}
         locale={i18n.language}
       >
-        {withImage && session ? (
+        {session?.user.images?.avatar ? (
           <img
             className={cn(styles.profile__image)}
             src={`${DOMAIN}/${session.user.images?.avatar}`}

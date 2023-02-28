@@ -8,22 +8,17 @@ import Close from "../../assets/icons/close.svg";
 import SayHello from "../../assets/icons/sayHello.svg";
 
 import styles from "./User.module.scss";
-import { format, intervalToDuration, parse } from "date-fns";
-import { DOMAIN } from "../../helpers";
+import { calculateFullAge, DOMAIN } from "../../helpers";
+import { useRouter } from "next/router";
+import { useTranslation } from "next-i18next";
 
-export const User = ({ user, type = "none", ...props }: UserProps) => {
-  function calculateFullAge(dob: Date) {
-    const dateString = format(new Date(dob), "dd/MM/yyyy");
-    const birthDate = parse(dateString, "dd/MM/yyyy", new Date());
-
-    const { years, months, days } = intervalToDuration({ start: birthDate, end: new Date() });
-    return { years, months, days };
-  }
-
+export const User = ({ className, user, type = "none", ...props }: UserProps) => {
   const { years } = calculateFullAge(user.birthDate);
+  const router = useRouter();
+  const { i18n } = useTranslation();
 
   return (
-    <div className={cn(styles.user)} {...props}>
+    <div className={cn(styles.user, className)} {...props}>
       {type === "favorite" && (
         <button className={cn(styles.user__close)}>
           <Close />
@@ -47,8 +42,11 @@ export const User = ({ user, type = "none", ...props }: UserProps) => {
           <span className={cn(styles.user__region)}>{user.region.nameEn}</span>
         </div>
 
-        <Button className={cn(styles.user__button)}>
-          <span>Поприветствовать</span>
+        <Button
+          className={cn(styles.user__button)}
+          onClick={() => router.push(`/${user.username}`, `/${user.username}`, { locale: i18n.language })}
+        >
+          <span>Показать профиль</span>
           <SayHello />
         </Button>
       </div>

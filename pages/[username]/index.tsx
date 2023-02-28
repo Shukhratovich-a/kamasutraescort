@@ -3,14 +3,16 @@ import { GetServerSideProps, GetServerSidePropsContext } from "next";
 import { getServerSession, Session } from "next-auth";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { ParsedUrlQuery } from "querystring";
+import axios from "axios";
 
-import { ProfileInfo } from "../../page-components/ProfileInfo/ProfileInfo.component";
+import { authOptions } from "../api/auth/[...nextauth]";
+import { API, selectDefaultKeys } from "../../helpers";
+
+import { AuthResponceInterface, SelectItem, UserInterface } from "../../interfaces";
 
 import { ProfileLayout, withLayout } from "../../layout/Layout";
-import axios from "axios";
-import { API, selectDefaultKeys } from "../../helpers";
-import { AuthResponceInterface, SelectItem, UserInterface } from "../../interfaces";
-import { authOptions } from "../api/auth/[...nextauth]";
+
+import { NotFound, UserProfile, ProfileInfo } from "../../page-components";
 
 const Profile = ({ ownProfile, user }: ProfilePageProps): JSX.Element => {
   return ownProfile ? (
@@ -22,8 +24,10 @@ const Profile = ({ ownProfile, user }: ProfilePageProps): JSX.Element => {
         regions={ownProfile.regions}
       />
     </ProfileLayout>
+  ) : user ? (
+    <UserProfile user={user} />
   ) : (
-    <>{user?.username}</>
+    <NotFound />
   );
 };
 
@@ -99,9 +103,7 @@ export const getServerSideProps: GetServerSideProps<ProfilePageProps> = async ({
     }
   } else {
     try {
-      const { data: user } = await axios.get<UserInterface>(
-        API.user.getByUsername + `/${params.username}`
-      );
+      const { data: user } = await axios.get<UserInterface>(API.user.getByUsername + `/${params.username}`);
 
       if (!user) {
         return { notFound: true };

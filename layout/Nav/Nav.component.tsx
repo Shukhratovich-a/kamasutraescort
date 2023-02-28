@@ -10,13 +10,18 @@ import { NavProps } from "./Nav.props";
 
 import styles from "./Nav.module.scss";
 
-export const Nav = ({ className, ...props }: NavProps): JSX.Element => {
+export const Nav = ({ className, isSticky = false, ...props }: NavProps): JSX.Element => {
   const { t } = useTranslation();
   const router = useRouter();
   const { asPath } = router;
 
   return (
-    <nav className={cn(styles.nav, className)} {...props}>
+    <nav
+      className={cn(styles.nav, className, {
+        [styles["nav--sticky"]]: isSticky,
+      })}
+      {...props}
+    >
       <ul className={cn(styles.nav__list)}>
         {navList.map((navItem) => (
           <li className={cn(styles.nav__item)} key={navItem.id}>

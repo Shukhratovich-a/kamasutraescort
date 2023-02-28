@@ -3,6 +3,16 @@
 
   color: var(--white);
 
+  will-change: box-shadow;
+
+  &--sticky {
+    box-shadow: var(--box-shadow);
+
+    &::after {
+      opacity: 1 !important;
+    }
+  }
+
   &::after {
     position: absolute;
     z-index: 1;
@@ -12,10 +22,13 @@
     left: 0;
 
     content: "";
+
+    transition: opacity 0.15s ease-out;
     pointer-events: none;
 
     opacity: 0.7;
     background-color: var(--background-header);
+    will-change: opacity;
   }
 }
 

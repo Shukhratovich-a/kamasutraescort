@@ -26,8 +26,8 @@ export const UserList = ({ users, heading }: UserListProps) => {
         modules={[FreeMode]}
       >
         {users.map((user) => (
-          <SwiperSlide key={user.id}>
-            <User user={user} key={user.id} />
+          <SwiperSlide className={cn(styles.user__slide)} key={user.id}>
+            <User className={cn(styles.user)} user={user} key={user.id} />
           </SwiperSlide>
         ))}
       </Swiper>

@@ -18,12 +18,16 @@ export const Input = React.forwardRef(
     ref: React.ForwardedRef<HTMLInputElement>
   ): JSX.Element => {
     const [isShow, setIsShow] = React.useState(false);
+    const [isFocus, setIsFocus] = React.useState(false);
 
     return (
       <label
         className={cn(styles.input__label, className, {
           [styles["input__label--error"]]: error,
+          [styles["input__label--focus"]]: isFocus,
         })}
+        onFocus={() => setIsFocus(true)}
+        onBlur={() => setIsFocus(false)}
       >
         <span className={cn(styles.input__icon)}>
           {appearance === "mail" ? (

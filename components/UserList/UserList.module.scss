@@ -13,10 +13,9 @@
 }
 
 .users__list {
-  position: relative;
-
-  display: grid;
-
   overflow: visible;
-  grid-template-columns: repeat(5, 1fr);
+}
+
+.user__slide {
+  max-width: 220px;
 }

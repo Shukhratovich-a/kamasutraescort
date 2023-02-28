@@ -13,6 +13,7 @@
   min-height: 100vh;
 
   background-image: url("../assets/background/bg.JPG");
+  background-size: cover;
 
   &::after {
     position: fixed;
@@ -43,6 +44,11 @@
 }
 
 .header {
+  position: fixed !important;
+  z-index: 9;
+  top: 0;
+  right: 0;
+  left: 0;
   grid-area: header;
 }
 
@@ -50,6 +56,10 @@
   position: relative;
   z-index: 2;
   grid-area: main;
+
+  &--auth {
+    padding-top: 120px;
+  }
 }
 
 .footer {
