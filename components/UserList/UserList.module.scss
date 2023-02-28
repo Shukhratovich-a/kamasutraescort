@@ -15,8 +15,8 @@
 .users__list {
   position: relative;
 
-  overflow: visible;
-
   display: grid;
+
+  overflow: visible;
   grid-template-columns: repeat(5, 1fr);
 }
