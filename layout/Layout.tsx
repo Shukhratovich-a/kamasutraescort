@@ -16,20 +16,13 @@ import styles from "./Layout.module.scss";
 
 const Layout = ({ children, className }: LayoutProps): JSX.Element => {
   const { data: session } = useSession();
-  const router = useRouter();
-  const { asPath } = router;
+  const { asPath } = useRouter();
 
   return (
     <div className={cn(styles.wrapper, className)}>
       {session?.token && !asPath.startsWith("/auth") ? <Header className={cn(styles.header)} /> : <AuthHeader />}
 
-      <main
-        className={cn(styles.main, {
-          [styles["main--auth"]]: session?.token,
-        })}
-      >
-        {children}
-      </main>
+      <main className={cn(styles.main)}>{children}</main>
 
       <Footer
         className={cn(styles.footer, {

@@ -33,11 +33,13 @@
   &--profile {
     &__container {
       display: grid;
-      grid-template-columns: 280px 1fr;
 
       align-items: start;
 
+      margin-top: 120px;
+
       padding-top: 30px;
+      grid-template-columns: 280px 1fr;
       gap: 20px;
     }
   }
@@ -56,10 +58,6 @@
   position: relative;
   z-index: 2;
   grid-area: main;
-
-  &--auth {
-    padding-top: 120px;
-  }
 }
 
 .footer {

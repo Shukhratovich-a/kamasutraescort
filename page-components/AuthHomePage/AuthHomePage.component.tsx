@@ -16,12 +16,6 @@ export const AuthHomePage = ({ session, men, women }: AuthHomePageProps): JSX.El
       {session?.user.gender === "male"
         ? women?.length && <UserList users={women} heading={"Ищу девушку"} />
         : men && <UserList users={men} heading={"Ищу парня"} />}
-
-      {/* <ul>
-        {others?.map((user) => (
-          <div key={user.id}>{user.username}</div>
-        ))}
-      </ul> */}
     </div>
   );
 };

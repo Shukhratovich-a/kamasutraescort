@@ -21,11 +21,7 @@ import styles from "../styles/pages/Home.module.scss";
 const Home = ({ session, men, women, others }: HomePageProps): JSX.Element => {
   return (
     <Container className={cn(styles.container)}>
-      {session?.token ? (
-        <AuthHomePage session={session} men={men} women={women} others={others} />
-      ) : (
-        <>Not token</>
-      )}
+      {session?.token ? <AuthHomePage session={session} men={men} women={women} others={others} /> : <>Not token</>}
     </Container>
   );
 };
@@ -37,13 +33,14 @@ export const getServerSideProps: GetServerSideProps<HomePageProps> = async ({
 }: GetServerSidePropsContext<ParsedUrlQuery>) => {
   const session = await getServerSession(req, res, authOptions);
 
-  if (!session?.token)
+  if (!session?.token) {
     return {
       props: {
         session,
         ...(await serverSideTranslations(String(locale))),
       },
     };
+  }
 
   const { data: men } = await axios.get(API.user.getByGender + "/female");
   const { data: women } = await axios.get(API.user.getByGender + "/male");

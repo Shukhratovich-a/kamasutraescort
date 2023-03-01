@@ -14,6 +14,11 @@ export const API = {
     edit: DOMAIN + "/user/edit/",
   },
 
+  image: {
+    upload: DOMAIN + "/image/",
+    delete: DOMAIN + "/image/",
+  },
+
   eyes: {
     getAll: DOMAIN + "/eye-color",
   },

@@ -1,36 +1,35 @@
 import React from "react";
 // import Link from "next/link";
-import { useRouter } from "next/router";
 import cn from "classnames";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 import { withLayout } from "../../layout/Layout";
 
-import { Container, ForgotPassword } from "../../components";
+import { Container } from "../../components";
 import { LoginForm } from "../../page-components";
 
 import styles from "../../styles/pages/Login.module.scss";
 
 const Login = (): JSX.Element => {
-  const router = useRouter();
+  // const router = useRouter();
   const { t } = useTranslation();
   // const { i18n } = useTranslation();
 
-  const [forgotState, setForgotState] = React.useState(false);
+  // const [forgotState, setForgotState] = React.useState(false);
 
-  React.useEffect(() => {
-    const { password } = router.query;
-    if (password === "forgot") {
-      setForgotState(true);
-    } else {
-      setForgotState(false);
-    }
-  }, [router]);
+  // React.useEffect(() => {
+  //   const { password } = router.query;
+  //   if (password === "forgot") {
+  //     setForgotState(true);
+  //   } else {
+  //     setForgotState(false);
+  //   }
+  // }, [router]);
 
   return (
     <>
-      <ForgotPassword isOpen={forgotState} />
+      {/* <ForgotPassword isOpen={forgotState} /> */}
       <Container className={cn(styles.login__container)}>
         <h1 className={cn(styles.login__heading)}>{t("auth:login-heading")}</h1>
 
