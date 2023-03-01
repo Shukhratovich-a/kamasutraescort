@@ -5,22 +5,27 @@ import { useTranslation } from "next-i18next";
 import React from "react";
 import cn from "classnames";
 
+import { DOMAIN } from "../../helpers";
+
 import { HeaderProfileProps } from "./HeaderProfile.props";
 
 import User from "../../assets/icons/profile.svg";
 
 import styles from "./HeaderProfile.module.scss";
-import { DOMAIN } from "../../helpers";
-// import Image from "next/image";
 
-export const HeaderProfile = ({ className, ...props }: HeaderProfileProps): JSX.Element => {
+export const HeaderProfile = ({ className, isMobile = false, ...props }: HeaderProfileProps): JSX.Element => {
   const { data: session } = useSession();
   const router = useRouter();
   const { asPath } = router;
   const { i18n } = useTranslation();
 
   return (
-    <div className={cn(styles.profile, className)} {...props}>
+    <div
+      className={cn(styles.profile, className, {
+        [styles["profile--mobile"]]: isMobile,
+      })}
+      {...props}
+    >
       <Link
         className={cn(styles.profile__link, className, {
           [styles["profile__link--active"]]: asPath.startsWith(`/${session?.user.username}`),
@@ -40,7 +45,7 @@ export const HeaderProfile = ({ className, ...props }: HeaderProfileProps): JSX.
           <User className={cn(styles.profile__image)} />
         )}
 
-        <span className={cn(styles.profile__name)}>{session && session.user.username}</span>
+        {!isMobile && <span className={cn(styles.profile__name)}>{session && session.user.username}</span>}
       </Link>
     </div>
   );

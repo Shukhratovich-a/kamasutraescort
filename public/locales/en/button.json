@@ -1,5 +1,6 @@
 {
-  "enter": "Enter",
-  "create-account": "Create an account",
-  "save": "Save"
+  "enter": "enter",
+  "create-account": "create an account",
+  "save": "save",
+  "show-profile": "show profile"
 }

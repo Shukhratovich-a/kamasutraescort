@@ -57,8 +57,53 @@
 
 .header__nav {
   grid-area: nav;
+
+  transition: transform 0.25s ease-out;
+  will-change: transform;
 }
 
 .header__profile {
   grid-area: profile;
+}
+
+.header__button {
+  padding: 0;
+
+  border: none;
+  grid-area: button;
+
+  background-color: transparent;
+}
+
+@media only screen and (max-width: 810px) {
+  .header {
+    padding: 10px 0;
+
+    background-color: var(--background-header);
+  }
+
+  .header__container {
+    grid-template-columns: 1fr auto auto;
+    gap: 40px;
+    grid-template-areas: "link profile button";
+  }
+
+  .header__link {
+    font-size: 18px;
+    line-height: 24px;
+  }
+}
+
+@media only screen and (max-width: 810px) {
+  .header__container {
+    gap: 20px;
+  }
+
+  .header__nav {
+    transform: translate(-100%);
+
+    &--open {
+      transform: translate(0);
+    }
+  }
 }

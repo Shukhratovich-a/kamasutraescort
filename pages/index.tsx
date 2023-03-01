@@ -21,7 +21,7 @@ import styles from "../styles/pages/Home.module.scss";
 const Home = ({ session, men, women, others }: HomePageProps): JSX.Element => {
   return (
     <Container className={cn(styles.container)}>
-      {session?.token ? <AuthHomePage session={session} men={men} women={women} others={others} /> : <>Not token</>}
+      {session ? <AuthHomePage session={session} men={men} women={women} others={others} /> : <>Not token</>}
     </Container>
   );
 };

@@ -3,16 +3,36 @@ import Link from "next/link";
 import { useTranslation } from "react-i18next";
 import cn from "classnames";
 
+import { useMediaQuery } from "../../hooks";
 import { HeaderProps } from "./Header.props";
 
 import { Container, HeaderProfile } from "../../components";
 import { Nav } from "../Nav/Nav.component";
 
+import Burger from "../../assets/icons/burger.svg";
+import Close from "../../assets/icons/x.svg";
+
 import styles from "./Header.module.scss";
 
 export const Header = ({ className, ...props }: HeaderProps): JSX.Element => {
   const { i18n } = useTranslation();
-  const [isSticky, setIsSticky] = React.useState(false);
+  const [isSticky, setIsSticky] = React.useState<boolean>(false);
+  const [isOpen, setIsOpen] = React.useState<boolean>(false);
+
+  const isMobile = useMediaQuery("(max-width: 810px)");
+
+  const handleScroll = React.useCallback(() => {
+    if (isMobile) return;
+    const scrollTop = window.scrollY;
+    const stickyClass = scrollTop >= 50 ? true : false;
+    setIsSticky(stickyClass);
+  }, [isMobile]);
+
+  const handleClick = () => {
+    if (!isMobile) return;
+
+    setIsOpen(!isOpen);
+  };
 
   React.useEffect(() => {
     if (window === undefined) return;
@@ -20,13 +40,7 @@ export const Header = ({ className, ...props }: HeaderProps): JSX.Element => {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
-
-  const handleScroll = () => {
-    const scrollTop = window.scrollY;
-    const stickyClass = scrollTop >= 50 ? true : false;
-    setIsSticky(stickyClass);
-  };
+  }, [handleScroll]);
 
   return (
     <header
@@ -40,9 +54,21 @@ export const Header = ({ className, ...props }: HeaderProps): JSX.Element => {
           <span>Kamasutraescort</span>
         </Link>
 
-        <Nav className={cn(styles.header__nav)} isSticky={isSticky} />
+        <Nav
+          className={cn(styles.header__nav, {
+            [styles["header__nav--open"]]: isMobile && isOpen,
+          })}
+          isSticky={isSticky}
+          isMobile={isMobile}
+        />
 
-        <HeaderProfile className={styles.header__profile} />
+        <HeaderProfile className={styles.header__profile} isMobile={isMobile} />
+
+        {isMobile && (
+          <button className={cn(styles.header__button)} onClick={handleClick}>
+            {isOpen ? <Close /> : <Burger />}
+          </button>
+        )}
       </Container>
     </header>
   );

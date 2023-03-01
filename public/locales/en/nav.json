@@ -1,5 +1,5 @@
 {
-  "home": "Home",
-  "messages": "Messages",
-  "subscription": "Subscription"
+  "home": "home",
+  "adv": "advertisement",
+  "subscription": "subscription"
 }

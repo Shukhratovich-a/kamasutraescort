@@ -1,6 +1,6 @@
 export enum NavEnum {
   Home = "home",
-  Messages = "messages",
+  Adv = "adv",
   Subscription = "subscription",
 }
 

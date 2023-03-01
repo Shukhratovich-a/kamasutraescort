@@ -24,6 +24,10 @@
   line-height: 24px;
 
   will-change: padding;
+
+  &::first-letter {
+    text-transform: uppercase;
+  }
 }
 
 .nav--sticky {
@@ -62,5 +66,45 @@
 
   &:hover {
     color: var(--accent);
+  }
+}
+
+.nav--mobile {
+  position: fixed;
+  top: 70px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  padding-top: 30px;
+
+  background-color: var(--background-secondary);
+
+  .nav__list {
+    display: block;
+  }
+
+  .nav__link {
+    &::before {
+      content: none;
+    }
+
+    &--active {
+      color: var(--accent);
+
+      &::before {
+        opacity: 1;
+      }
+    }
+
+    &:hover {
+      color: var(--accent);
+    }
+  }
+}
+
+@media only screen and (max-width: 810px) {
+  .nav__item {
+    padding: 15px 0;
   }
 }

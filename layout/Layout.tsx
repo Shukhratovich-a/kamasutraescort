@@ -18,17 +18,31 @@ const Layout = ({ children, className }: LayoutProps): JSX.Element => {
   const { data: session } = useSession();
   const { asPath } = useRouter();
 
-  return (
+  return session ? (
     <div className={cn(styles.wrapper, className)}>
-      {session?.token && !asPath.startsWith("/auth") ? <Header className={cn(styles.header)} /> : <AuthHeader />}
+      {session && !asPath.startsWith("/auth") ? <Header className={cn(styles.header)} /> : <AuthHeader />}
 
-      <main className={cn(styles.main)}>{children}</main>
+      <main
+        className={cn(styles.main, {
+          [styles["main--auth"]]: !asPath.startsWith("/auth"),
+        })}
+      >
+        {children}
+      </main>
 
       <Footer
         className={cn(styles.footer, {
           [styles.footer__auth]: asPath.startsWith("/auth"),
         })}
       />
+    </div>
+  ) : (
+    <div className={cn(styles.wrapper, className)}>
+      <AuthHeader />
+
+      <main className={cn(styles.main)}>{children}</main>
+
+      <Footer className={cn(styles.footer)} />
     </div>
   );
 };

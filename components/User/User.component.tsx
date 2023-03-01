@@ -15,7 +15,7 @@ import { useTranslation } from "next-i18next";
 export const User = ({ className, user, type = "none", ...props }: UserProps) => {
   const { years } = calculateFullAge(user.birthDate);
   const router = useRouter();
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   return (
     <div className={cn(styles.user, className)} {...props}>
@@ -39,14 +39,17 @@ export const User = ({ className, user, type = "none", ...props }: UserProps) =>
           <h3 className={cn(styles.user__name)}>
             {user.username} {years}
           </h3>
-          <span className={cn(styles.user__region)}>{user.region.nameEn}</span>
+
+          <span className={cn(styles.user__region)}>
+            {i18n.language === "en" ? user.region.nameEn : user.region.nameRu}
+          </span>
         </div>
 
         <Button
           className={cn(styles.user__button)}
           onClick={() => router.push(`/${user.username}`, `/${user.username}`, { locale: i18n.language })}
         >
-          <span>Показать профиль</span>
+          <span>{t("button:show-profile")}</span>
           <SayHello />
         </Button>
       </div>
