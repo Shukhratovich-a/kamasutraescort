@@ -36,7 +36,7 @@ export const HeaderProfile = ({ className, isMobile = false, ...props }: HeaderP
         {session?.user.avatar ? (
           <img
             className={cn(styles.profile__image)}
-            src={`${DOMAIN}/${session.user.avatar.filename}`}
+            src={`${DOMAIN}/files/avatar/${session.user.avatar.filename}`}
             width={40}
             height={40}
             alt={session.user.username}
