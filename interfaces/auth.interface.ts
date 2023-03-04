@@ -8,3 +8,7 @@ export interface AuthResponceInterface {
   accessToken: JWT;
   user: UserInterface;
 }
+
+export interface CheckUserInterface {
+  token: string;
+}

@@ -14,7 +14,7 @@ import { ProfileInfoProps } from "./ProfileInfo.props";
 
 import {
   Button,
-  GenderSelect,
+  // GenderSelect,
   Input,
   Select,
   Textarea,
@@ -69,7 +69,7 @@ export const ProfileInfo = ({ session, hairs, eyes, regions }: ProfileInfoProps)
 
   return session ? (
     <div className={cn(styles["profile"])} onSubmit={handleSubmit(onSubmit)}>
-      <h2 className={cn(styles["profile__heading"])}>{t("profile:profile")}</h2>
+      {/* <h2 className={cn(styles["profile__heading"])}>{t("profile:profile")}</h2>
 
       <div className={cn(styles["profile__image"])}>
         <ImageSelect
@@ -273,7 +273,7 @@ export const ProfileInfo = ({ session, hairs, eyes, regions }: ProfileInfoProps)
         <Button className={cn(styles["profile__button"])} isLoading={isLoading}>
           Сохранить
         </Button>
-      </form>
+      </form> */}
     </div>
   ) : (
     <></>

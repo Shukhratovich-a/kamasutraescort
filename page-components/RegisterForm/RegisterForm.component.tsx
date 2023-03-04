@@ -1,26 +1,25 @@
 import React from "react";
 import { useRouter } from "next/router";
-import { signIn } from "next-auth/react";
 import cn from "classnames";
-import axios from "axios";
-import { Controller, useForm } from "react-hook-form";
 import { useTranslation } from "next-i18next";
-
-import { API } from "../../helpers";
+import { Controller, useForm } from "react-hook-form";
 
 import { RegisterFormProps } from "./RegisterForm.props";
 import { IRegisterForm } from "./RegisterForm.interface";
-import { AuthResponceInterface, GenderEnum } from "../../interfaces";
 
-import { Button, GenderSelect, Input, Select } from "../../components";
+import { Button, Input, Select, DateSelect } from "../../components";
 
 import Region from "../../assets/icons/region.svg";
 
 import styles from "./RegisterForm.module.scss";
+import axios from "axios";
+import { API } from "../../helpers";
+import { AuthResponceInterface } from "../../interfaces";
+import { signIn } from "next-auth/react";
 
-export const RegisterForm = ({ className, regions, ...props }: RegisterFormProps): JSX.Element => {
+export const RegisterForm = ({ className, regions, ...props }: RegisterFormProps) => {
   const { t, i18n } = useTranslation();
-  const router = useRouter();
+  const { pathname, push } = useRouter();
 
   const [isLoading, setLoading] = React.useState(false);
 
@@ -28,32 +27,34 @@ export const RegisterForm = ({ className, regions, ...props }: RegisterFormProps
     register,
     handleSubmit,
     control,
+    watch,
     formState: { errors },
-  } = useForm<IRegisterForm>();
+  } = useForm<IRegisterForm>({ mode: "onSubmit" });
 
   const onSubmit = async (formData: IRegisterForm) => {
     setLoading(true);
 
     try {
-      const { data } = await axios.post<AuthResponceInterface>(API.auth.register, {
+      const body = {
         username: formData.username,
         email: formData.email,
-        password: formData.password,
-        gender: formData.gender,
+        password: formData.confirmPassword,
+        birthDate: formData.birthDate,
+        role: pathname.split("/").at(-1),
         region: formData.region,
-        birthDate: new Date(),
-      });
+      };
 
-      if (data.status === 201) {
-        const user = await signIn("credentials", {
-          usernameOrEmail: formData.username,
-          password: formData.password,
+      const { data: user } = await axios.post<AuthResponceInterface>(API.auth.register, { ...body });
+
+      if (user.status) {
+        const data = await signIn("credentials", {
+          token: user.accessToken,
           redirect: false,
           callbackUrl: "/",
         });
 
-        if (user?.status === 200) {
-          router.push("/", "/", { locale: i18n.language });
+        if (data?.status === 200) {
+          push("/", "/", { locale: i18n.language });
           setLoading(false);
         } else {
           setLoading(false);
@@ -67,35 +68,28 @@ export const RegisterForm = ({ className, regions, ...props }: RegisterFormProps
   };
 
   return (
-    <form className={cn(styles["register-form"], className)} onSubmit={handleSubmit(onSubmit)} {...props}>
+    <form className={cn(styles.form, className)} onSubmit={handleSubmit(onSubmit)} {...props}>
       <Input
-        {...register("username", { required: { value: true, message: "Заполните имя" } })}
-        error={errors.username}
+        {...register("username", { required: { value: true, message: "dfs" }, minLength: 3 })}
+        className={cn(styles.form__input)}
         appearance="user"
         placeholder={t("input:username") || ""}
+        error={errors.username}
       />
 
       <Input
-        {...register("email", { required: { value: true, message: "Заполните имя" } })}
-        error={errors.email}
+        {...register("email", { required: { value: true, message: "" }, minLength: 5 })}
+        className={cn(styles.form__input)}
         appearance="mail"
         placeholder={t("input:email") || ""}
+        error={errors.email}
       />
 
       <Controller
         control={control}
-        name="gender"
-        defaultValue={GenderEnum.Male}
+        name="birthDate"
         rules={{ required: { value: true, message: "Укажите рейтинг" } }}
-        render={({ field }) => (
-          <GenderSelect
-            gender={field.value}
-            ref={field.ref}
-            setGender={field.onChange}
-            error={errors.gender}
-            isEditable
-          />
-        )}
+        render={({ field }) => <DateSelect date={field.value} setDate={field.onChange} ref={field.ref} />}
       />
 
       <Controller
@@ -104,12 +98,13 @@ export const RegisterForm = ({ className, regions, ...props }: RegisterFormProps
         rules={{ required: { value: true, message: "Укажите рейтинг" } }}
         render={({ field }) => (
           <Select
+            className={cn(styles.form__input)}
             selectArray={regions}
             selected={field.value}
             setSelected={field.onChange}
             error={errors.region}
             icon={<Region />}
-            placeholder={"Region"}
+            placeholder={t("input:region") || ""}
             ref={field.ref}
             isEditable
           />
@@ -117,12 +112,28 @@ export const RegisterForm = ({ className, regions, ...props }: RegisterFormProps
       />
 
       <Input
-        {...register("password", { required: { value: true, message: "Заполните имя" }, minLength: 8 })}
-        error={errors.password}
+        {...register("password", { required: { value: true, message: "" }, minLength: 8 })}
+        className={cn(styles.form__input)}
         appearance="password"
         placeholder={t("input:password") || ""}
+        error={errors.password}
       />
-      <Button isLoading={isLoading}>{t("button:create-account")}</Button>
+
+      <Input
+        {...register("confirmPassword", {
+          required: { value: true, message: "const" },
+          minLength: 8,
+          validate: (value) => watch("password") === value || "sdasd",
+        })}
+        className={cn(styles.form__input)}
+        appearance="password"
+        placeholder={t("input:confirm-password") || ""}
+        error={errors.confirmPassword}
+      />
+
+      <Button className={styles.form__button} isLoading={isLoading} type="submit">
+        {t("button:create-account")}
+      </Button>
     </form>
   );
 };

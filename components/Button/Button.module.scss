@@ -17,6 +17,10 @@
   font-size: 16px;
   line-height: 24px;
 
+  &::first-letter {
+    text-transform: uppercase;
+  }
+
   &--primary {
     background: var(--button-primary);
   }
@@ -49,6 +53,7 @@
       padding: 2px;
 
       content: "";
+      pointer-events: none;
 
       border-radius: 50px;
       background: var(--gradient-primary);

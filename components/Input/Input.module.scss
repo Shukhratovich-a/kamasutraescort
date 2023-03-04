@@ -20,6 +20,7 @@
   }
 
   &--error {
+    border: 1px solid #a01414;
     box-shadow: inset 0 -2px 0 #a01414;
   }
 
@@ -46,6 +47,8 @@
   appearance: none;
 
   &::placeholder {
+    user-select: none;
+
     color: var(--input-placeholder);
   }
 

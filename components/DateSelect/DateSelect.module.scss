@@ -20,6 +20,8 @@
 
   cursor: pointer;
 
+  border: 1px solid var(--input-placeholder);
+
   border-radius: 35px;
   background-color: var(--input-background);
 
@@ -37,7 +39,7 @@
   right: 0;
   left: 0;
 
-  display: none;
+  // display: none;
 
   overflow: auto;
 
@@ -62,7 +64,33 @@
   cursor: pointer;
   user-select: contain;
 
+  &--active {
+    background: var(--gradient-primary);
+  }
+
   & + & {
     border-top: 1px solid var(--input-placeholder);
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .select-wrapper {
+    grid-template-columns: 80px 1fr 80px;
+  }
+
+  .select__selected {
+    padding: 18px 20px;
+
+    border-radius: 30px;
+  }
+
+  .select__list__item {
+    padding: 18px 20px;
+  }
+}
+
+@media only screen and (max-width: 350px) {
+  .select__list__item {
+    padding: 18px 10px;
   }
 }

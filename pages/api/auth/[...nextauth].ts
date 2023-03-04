@@ -4,7 +4,7 @@ import type { NextAuthOptions } from "next-auth";
 import axios from "axios";
 
 import { API } from "../../../helpers";
-import { LoginInterface } from "../../../interfaces";
+import { CheckUserInterface } from "../../../interfaces";
 
 export const authOptions: NextAuthOptions = {
   secret: process.env.AUTH_SECRET,
@@ -13,23 +13,22 @@ export const authOptions: NextAuthOptions = {
     CredentialsProvider({
       name: "Credentials",
       credentials: {
-        usernameOrEmail: {
-          label: "UsernameOrEmail",
+        token: {
+          label: "token",
           type: "text",
-        },
-        password: {
-          label: "Password",
-          type: "password",
         },
       },
 
       async authorize(credentials) {
-        const { usernameOrEmail, password } = credentials as LoginInterface;
+        const { token } = credentials as CheckUserInterface;
 
-        const { data } = await axios.patch(API.auth.login, {
-          usernameOrEmail,
-          password,
-        });
+        const { data } = await axios.patch(
+          API.auth.checkUser,
+          {},
+          { headers: { Authorization: JSON.stringify(token) } }
+        );
+
+        // console.log(data);
 
         if (data) {
           return data;

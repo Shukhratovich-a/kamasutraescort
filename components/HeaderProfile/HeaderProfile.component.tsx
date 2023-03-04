@@ -33,10 +33,10 @@ export const HeaderProfile = ({ className, isMobile = false, ...props }: HeaderP
         href={asPath.startsWith(`/${session?.user.username}`) ? asPath : `/${session?.user.username}`}
         locale={i18n.language}
       >
-        {session?.user.images?.avatar ? (
+        {session?.user.avatar ? (
           <img
             className={cn(styles.profile__image)}
-            src={`${DOMAIN}/${session.user.images?.avatar}`}
+            src={`${DOMAIN}/${session.user.avatar.filename}`}
             width={40}
             height={40}
             alt={session.user.username}

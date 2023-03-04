@@ -1,0 +1,67 @@
+import { useTranslation } from "next-i18next";
+import cn from "classnames";
+import { useRouter } from "next/router";
+
+import { RoleSelectProps } from "./RoleSelect.props";
+
+import User from "../../assets/roleIcons/user.svg";
+import Advertiser from "../../assets/roleIcons/advertiser.svg";
+
+import { Button } from "../";
+
+import styles from "./RoleSelect.module.scss";
+
+export const RoleSelect = ({ isOpen = false, ...props }: RoleSelectProps): JSX.Element => {
+  const { t, i18n } = useTranslation();
+
+  const { pathname, push, replace } = useRouter();
+
+  return isOpen ? (
+    <div className={cn(styles.select)} {...props}>
+      <div
+        className={cn(styles.select__back)}
+        onClick={() => push(pathname, pathname, { locale: i18n.language })}
+      ></div>
+
+      <div className={cn(styles.select__inner)}>
+        <ul className={cn(styles.select__list)}>
+          <li className={cn(styles.select__item)}>
+            <h3 className={cn(styles.select__item__heading)}>User</h3>
+
+            <User className={cn(styles.select__item__image)} />
+
+            <p className={cn(styles.select__item__text)}>Keep updated on activity in your area!</p>
+
+            <Button
+              className={cn(styles.select__item__button)}
+              appearance="primary"
+              onClick={() => replace("/auth/register/user", "/auth/register/user", { locale: i18n.language })}
+            >
+              {t("auth:register")}
+            </Button>
+          </li>
+
+          <li className={cn(styles.select__item)}>
+            <h3 className={cn(styles.select__item__heading)}>Advertiser</h3>
+
+            <Advertiser className={cn(styles.select__item__image)} />
+
+            <p className={cn(styles.select__item__text)}>Get listed for free today!</p>
+
+            <Button
+              className={cn(styles.select__item__button)}
+              appearance="secondary"
+              onClick={() =>
+                replace("/auth/register/advertiser", "/auth/register/advertiser", { locale: i18n.language })
+              }
+            >
+              {t("auth:register")}
+            </Button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  ) : (
+    <></>
+  );
+};

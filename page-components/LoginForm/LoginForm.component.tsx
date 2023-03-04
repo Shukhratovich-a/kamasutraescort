@@ -4,6 +4,10 @@ import { signIn } from "next-auth/react";
 import cn from "classnames";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "next-i18next";
+import axios from "axios";
+
+import { API } from "../../helpers";
+import { AuthResponceInterface, LoginInterface } from "../../interfaces";
 
 import { LoginFormProps } from "./LoginForm.props";
 import { ILoginForm } from "./LoginForm.interface";
@@ -27,17 +31,27 @@ export const LoginForm = ({ className, ...props }: LoginFormProps): JSX.Element 
   const onSubmit = async (formData: ILoginForm) => {
     setLoading(true);
 
-    try {
-      const user = await signIn("credentials", {
-        usernameOrEmail: formData.username,
-        password: formData.password,
-        redirect: false,
-        callbackUrl: "/",
-      });
+    const body: LoginInterface = {
+      usernameOrEmail: formData.username,
+      password: formData.password,
+    };
 
-      if (user?.status === 200) {
-        router.push("/", "/", { locale: i18n.language });
-        setLoading(false);
+    try {
+      const { data: user } = await axios.patch<AuthResponceInterface>(API.auth.login, { ...body });
+
+      if (user.status === 200) {
+        const data = await signIn("credentials", {
+          token: user.accessToken,
+          redirect: false,
+          callbackUrl: "/",
+        });
+
+        if (data?.status === 200) {
+          router.push("/", "/", { locale: i18n.language });
+          setLoading(false);
+        } else {
+          setLoading(false);
+        }
       } else {
         setLoading(false);
       }
@@ -68,7 +82,9 @@ export const LoginForm = ({ className, ...props }: LoginFormProps): JSX.Element 
         appearance="password"
         placeholder={t("input:password") || ""}
       />
-      <Button isLoading={isLoading}>{t("button:enter")}</Button>
+      <Button isLoading={isLoading} type="submit">
+        {t("button:enter")}
+      </Button>
     </form>
   );
 };

@@ -16,23 +16,33 @@ export const Footer = ({ className, ...props }: FooterProps): JSX.Element => {
     <footer className={cn(styles.footer, className)} {...props}>
       <Container className={cn(styles.footer__container)}>
         <div className={cn(styles.footer__wrapper)}>
-          <div className={cn(styles.footer__nav)}>
-            <Link className={cn(styles.footer__link)} href={"/about"} locale={i18n.language}>
-              {t("footer:about")}
-            </Link>
-            <Link className={cn(styles.footer__link)} href={"/support"} locale={i18n.language}>
-              {t("footer:support")}
-            </Link>
-            <Link className={cn(styles.footer__link)} href={"/advice"} locale={i18n.language}>
-              {t("footer:advice")}
-            </Link>
-            <Link className={cn(styles.footer__link)} href={"/contacts"} locale={i18n.language}>
-              {t("footer:contacts")}
-            </Link>
-            <Link className={cn(styles.footer__link)} href={"/pay-policy"} locale={i18n.language}>
-              {t("footer:pay-policy")}
-            </Link>
-          </div>
+          <ul className={cn(styles.footer__nav)}>
+            <li className={cn(styles.footer__item)}>
+              <Link className={cn(styles.footer__link)} href={"/about"} locale={i18n.language}>
+                {t("footer:about")}
+              </Link>
+            </li>
+            <li className={cn(styles.footer__item)}>
+              <Link className={cn(styles.footer__link)} href={"/support"} locale={i18n.language}>
+                {t("footer:support")}
+              </Link>
+            </li>
+            <li className={cn(styles.footer__item)}>
+              <Link className={cn(styles.footer__link)} href={"/advice"} locale={i18n.language}>
+                {t("footer:advice")}
+              </Link>
+            </li>
+            <li className={cn(styles.footer__item)}>
+              <Link className={cn(styles.footer__link)} href={"/contacts"} locale={i18n.language}>
+                {t("footer:contacts")}
+              </Link>
+            </li>
+            <li className={cn(styles.footer__item)}>
+              <Link className={cn(styles.footer__link)} href={"/pay-policy"} locale={i18n.language}>
+                {t("footer:pay-policy")}
+              </Link>
+            </li>
+          </ul>
 
           <div className={cn(styles.footer__personal)}>
             <Link className={cn(styles.footer__link)} href={"/personal"} locale={i18n.language}>

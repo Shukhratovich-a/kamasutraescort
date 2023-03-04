@@ -1,8 +1,9 @@
-export interface ImageInterface {
+import { UserInterface } from "./user.interface";
+
+export interface AvatarInterface {
   id: number;
-  avatar: string | null;
-  profileImageFirst: string | null;
-  profileImageSecond: string | null;
-  profileImageThirth: string | null;
-  profileImageFourth: string | null;
+  filename: string;
+  user: UserInterface;
+  createdAt: Date;
+  updatedAt: Date;
 }

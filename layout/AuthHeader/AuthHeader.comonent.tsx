@@ -1,7 +1,8 @@
-import cn from "classnames";
+import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
+import cn from "classnames";
 
 import { AuthHeaderProps } from "./AuthHeader.props";
 
@@ -30,13 +31,19 @@ export const AuthHeader = ({ className, ...props }: AuthHeaderProps): JSX.Elemen
           appearance="linear-primary"
           onClick={() => {
             router.push(
-              asPath === "/auth/login" ? "/auth/register" : "/auth/login",
-              asPath === "/auth/login" ? "/auth/register" : "/auth/login",
+              {
+                pathname: "/auth/login",
+                query: asPath.startsWith("/auth/login") ? { register: "type" } : "",
+              },
+              {
+                pathname: "/auth/login",
+                query: asPath.startsWith("/auth/login") ? { register: "type" } : "",
+              },
               { locale: i18n.language }
             );
           }}
         >
-          {asPath === "/auth/login" ? t("auth:register") : t("auth:login")}
+          {asPath.startsWith("/auth/login") ? t("auth:register") : t("auth:login")}
         </Button>
       </Container>
     </header>

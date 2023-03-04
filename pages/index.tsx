@@ -18,50 +18,45 @@ import { Container } from "../components";
 
 import styles from "../styles/pages/Home.module.scss";
 
-const Home = ({ session, men, women, others }: HomePageProps): JSX.Element => {
+const Home = (): JSX.Element => {
   return (
-    <Container className={cn(styles.container)}>
-      {session ? <AuthHomePage session={session} men={men} women={women} others={others} /> : <>Not token</>}
-    </Container>
+    <>Users</>
+    // <Container className={cn(styles.container)}>
+    //   {session ? <AuthHomePage session={session} men={men} women={women} others={others} /> : <>Not token</>}
+    // </Container>
   );
 };
 
-export const getServerSideProps: GetServerSideProps<HomePageProps> = async ({
-  req,
-  res,
-  locale,
-}: GetServerSidePropsContext<ParsedUrlQuery>) => {
+export const getServerSideProps = async ({ req, res, locale }: GetServerSidePropsContext<ParsedUrlQuery>) => {
   const session = await getServerSession(req, res, authOptions);
-
-  if (!session?.token) {
-    return {
-      props: {
-        session,
-        ...(await serverSideTranslations(String(locale))),
-      },
-    };
-  }
-
-  const { data: men } = await axios.get(API.user.getByGender + "/female");
-  const { data: women } = await axios.get(API.user.getByGender + "/male");
-  const { data: others } = await axios.get(API.user.getByGender + "/shemale");
 
   return {
     props: {
-      men,
-      women,
-      others,
       session,
       ...(await serverSideTranslations(String(locale))),
     },
   };
+
+  // const { data: men } = await axios.get(API.user.getByGender + "/female");
+  // const { data: women } = await axios.get(API.user.getByGender + "/male");
+  // const { data: others } = await axios.get(API.user.getByGender + "/shemale");
+
+  // return {
+  //   props: {
+  //     men,
+  //     women,
+  //     others,
+  //     session,
+  //     ...(await serverSideTranslations(String(locale))),
+  //   },
+  // };
 };
 
 export default withLayout(Home);
 
-export interface HomePageProps extends Record<string, unknown> {
-  session: Session | null;
-  men?: UserInterface[];
-  women?: UserInterface[];
-  others?: UserInterface[];
-}
+// export interface HomePageProps extends Record<string, unknown> {
+//   session: Session | null;
+//   men?: UserInterface[];
+//   women?: UserInterface[];
+//   others?: UserInterface[];
+// }

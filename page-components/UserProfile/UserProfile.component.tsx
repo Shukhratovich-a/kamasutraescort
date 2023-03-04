@@ -18,7 +18,7 @@ export const UserProfile = ({ user, ...props }: UserProfileProps): JSX.Element =
   return (
     <Container>
       <div className={cn(styles.profile)} {...props}>
-        <div className={cn(styles.profile__images)}>
+        {/* <div className={cn(styles.profile__images)}>
           <div className={cn(styles.profile__image, styles["profile__image--first"])}>
             {user.images?.profileImageFirst && (
               <img src={`${DOMAIN}/${user.images.profileImageFirst}`} alt={user.about} width={380} height={500} />
@@ -39,14 +39,14 @@ export const UserProfile = ({ user, ...props }: UserProfileProps): JSX.Element =
               <img src={`${DOMAIN}/${user.images.profileImageFourth}`} alt={user.about} width={380} height={500} />
             )}
           </div>
-        </div>
+        </div> */}
 
         <div className={cn(styles.profile__info)}>
           <h3 className={cn(styles.profile__username)}>
             {user.username} {years}
           </h3>
 
-          <ul className={cn(styles.profile__list)}>
+          {/* <ul className={cn(styles.profile__list)}>
             {user.fullname && (
               <li className={cn(styles.profile__item)}>
                 <span className={cn(styles.profile__text)}>полное имя</span>
@@ -109,17 +109,17 @@ export const UserProfile = ({ user, ...props }: UserProfileProps): JSX.Element =
                 <span className={cn(styles.profile__text)}>{user.goal}</span>
               </li>
             )}
-          </ul>
+          </ul> */}
 
-          {user.about && (
+          {/* {user.about && (
             <div className={cn(styles.profile__about)}>
               <h4 className={cn(styles.profile__about__heading)}>О себе</h4>
 
               <p className={cn(styles.profile__about__text)}>{user.about}</p>
             </div>
-          )}
+          )} */}
 
-          {user.createdAt && (
+          {/* {user.createdAt && (
             <div className={cn(styles.profile__time)}>
               <span>На сайте с </span>
 
@@ -127,7 +127,7 @@ export const UserProfile = ({ user, ...props }: UserProfileProps): JSX.Element =
                 {format(new Date(user.createdAt), "dd.MM.yyyy")}
               </time>
             </div>
-          )}
+          )} */}
         </div>
       </div>
     </Container>

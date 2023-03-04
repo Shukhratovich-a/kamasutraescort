@@ -24,7 +24,7 @@ export const Input = React.forwardRef(
       <label
         className={cn(styles.input__label, className, {
           [styles["input__label--error"]]: error,
-          [styles["input__label--focus"]]: isFocus,
+          [styles["input__label--focus"]]: !error && isFocus,
         })}
         onFocus={() => setIsFocus(true)}
         onBlur={() => setIsFocus(false)}

@@ -25,14 +25,14 @@ export const User = ({ className, user, type = "none", ...props }: UserProps) =>
         </button>
       )}
 
-      {user.images?.profileImageFirst && (
+      {/* {user.images?.profileImageFirst && (
         <img
           className={cn(styles.user__image)}
           src={`${DOMAIN}/${user.images?.profileImageFirst}`}
           width={280}
           height={350}
         />
-      )}
+      )} */}
 
       <div className={cn(styles.user__wrapper)}>
         <div className={cn(styles.user__info)}>
