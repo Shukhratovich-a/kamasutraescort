@@ -2,16 +2,10 @@ import { GetServerSidePropsContext } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { ParsedUrlQuery } from "querystring";
 
-import { ProfileLayout, withLayout } from "../../layout/Layout";
+import { ProfileLayout, withLayout } from "../../../../layout/Layout";
 
-import { FavoritesInfo } from "../../page-components";
-
-const Favorites = (): JSX.Element => {
-  return (
-    <ProfileLayout>
-      <FavoritesInfo />
-    </ProfileLayout>
-  );
+const Create = (): JSX.Element => {
+  return <ProfileLayout>create</ProfileLayout>;
 };
 
 export const getServerSideProps = async ({ locale }: GetServerSidePropsContext<ParsedUrlQuery>) => {
@@ -22,4 +16,4 @@ export const getServerSideProps = async ({ locale }: GetServerSidePropsContext<P
   };
 };
 
-export default withLayout(Favorites);
+export default withLayout(Create);

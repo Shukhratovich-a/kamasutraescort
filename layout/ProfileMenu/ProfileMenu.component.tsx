@@ -27,9 +27,11 @@ export const ProfileMenu = () => {
                 <Link
                   className={cn(styles.profile__link, {
                     [styles["profile__link--active"]]:
-                      asPath === `/${session.user.username}${item.route}`,
+                      item.name !== "advertisements"
+                        ? asPath === `/profile/${session.user.username}${item.route}`
+                        : asPath.startsWith(`/profile/${session.user.username}${item.route}`),
                   })}
-                  href={`/${session.user.username}${item.route}`}
+                  href={`/profile/${session.user.username}${item.route}`}
                 >
                   {item.icon}
                   <span>{t(`profile:${item.name}`)}</span>
@@ -38,10 +40,7 @@ export const ProfileMenu = () => {
             ))}
         </ul>
 
-        <button
-          className={cn(styles.profile__link)}
-          onClick={() => signOut({ callbackUrl: "/" + i18n.language })}
-        >
+        <button className={cn(styles.profile__link)} onClick={() => signOut({ callbackUrl: "/" + i18n.language })}>
           <ExitIcon />
           <span>{t(`profile:exit`)}</span>
         </button>

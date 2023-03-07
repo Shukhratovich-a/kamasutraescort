@@ -6,7 +6,7 @@
   margin-bottom: 50px;
   grid-template-areas:
     "heading heading"
-    "image info";
+    "avatar info";
 }
 
 .profile__heading {
@@ -20,8 +20,8 @@
   grid-area: heading;
 }
 
-.profile__image {
-  grid-area: image;
+.profile__avatar {
+  grid-area: avatar;
 }
 
 .profile__info {
@@ -83,7 +83,7 @@
     grid-template-columns: minmax(280px, 380px);
     grid-template-areas:
       "heading"
-      "image"
+      "avatar"
       "info";
   }
 }

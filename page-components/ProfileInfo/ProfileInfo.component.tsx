@@ -7,24 +7,16 @@ import axios from "axios";
 
 import { API } from "../../helpers";
 
-import { GenderEnum } from "../../interfaces";
+// import { GenderEnum } from "../../interfaces";
 import { IProfileForm } from "./IProfileForm.interface";
 
 import { ProfileInfoProps } from "./ProfileInfo.props";
 
-import {
-  Button,
-  // GenderSelect,
-  Input,
-  Select,
-  Textarea,
-  ImageSelect,
-  DateSelect,
-} from "../../components";
+import { Button, Input, Select, DateSelect, AvatarSelect } from "../../components";
 
 import styles from "./ProfileInfo.module.scss";
 
-export const ProfileInfo = ({ session, hairs, eyes, regions }: ProfileInfoProps): JSX.Element => {
+export const ProfileInfo = ({ session, regions, ...props }: ProfileInfoProps): JSX.Element => {
   const { t, i18n } = useTranslation();
   const {
     register,
@@ -68,19 +60,23 @@ export const ProfileInfo = ({ session, hairs, eyes, regions }: ProfileInfoProps)
   };
 
   return session ? (
-    <div className={cn(styles["profile"])} onSubmit={handleSubmit(onSubmit)}>
-      {/* <h2 className={cn(styles["profile__heading"])}>{t("profile:profile")}</h2>
+    <div className={cn(styles["profile"])} {...props}>
+      <h2 className={cn(styles["profile__heading"])}>{t("profile:profile")}</h2>
 
-      <div className={cn(styles["profile__image"])}>
+      {/* <div className={cn(styles["profile__image"])}>
         <ImageSelect
           firstImage={session.user.images?.profileImageFirst}
           secondImage={session.user.images?.profileImageSecond}
           thirdImage={session.user.images?.profileImageThirth}
           fourthImage={session.user.images?.profileImageFourth}
         />
+      </div> */}
+
+      <div className={cn(styles.profile__avatar)}>
+        <AvatarSelect avatar={session.user.avatar} />
       </div>
 
-      <form className={cn(styles["profile__info"])}>
+      <form className={cn(styles["profile__info"])} onSubmit={handleSubmit(onSubmit)}>
         <div className={cn(styles["profile__main"])}>
           <h3 className={cn(styles["profile__main__heading"], styles["profile__info__heading"])}>
             {t("profile:main-info")}
@@ -93,16 +89,6 @@ export const ProfileInfo = ({ session, hairs, eyes, regions }: ProfileInfoProps)
               placeholder="Ваше имя"
               {...register("username", { required: { value: true, message: "Заполните имя" } })}
               error={errors.username}
-            />
-          </label>
-
-          <label className={cn(styles["profile__label"])}>
-            <span className={cn(styles["profile__label__text"])}>Полное имя</span>
-            <Input
-              defaultValue={session?.user.fullname}
-              placeholder="Ваше имя"
-              {...register("fullname", { required: { value: false, message: "Заполните имя" } })}
-              error={errors.fullname}
             />
           </label>
 
@@ -136,112 +122,6 @@ export const ProfileInfo = ({ session, hairs, eyes, regions }: ProfileInfoProps)
               )}
             />
           </label>
-
-          <label className={cn(styles["profile__label"])}>
-            <span className={cn(styles["profile__label__text"])}>Пол</span>
-            <Controller
-              defaultValue={session ? session?.user.gender : GenderEnum.Male}
-              control={control}
-              name="gender"
-              rules={{ required: { value: true, message: "Укажите рейтинг" } }}
-              render={({ field }) => (
-                <GenderSelect
-                  gender={field.value ? field.value : GenderEnum.Male}
-                  ref={field.ref}
-                  setGender={field.onChange}
-                  isEditable
-                />
-              )}
-            />
-          </label>
-        </div>
-
-        <div className={cn(styles["profile__main"])}>
-          <h3 className={cn(styles["profile__main__heading"], styles["profile__info__heading"])}>
-            {t("profile:personal-info")}
-          </h3>
-
-          <label className={cn(styles["profile__label"])}>
-            <span className={cn(styles["profile__label__text"])}>Рост</span>
-            <Input
-              defaultValue={session?.user.height}
-              placeholder="Предпочитаю не отвечать"
-              {...register("height", { required: { value: false, message: "Заполните имя" } })}
-              error={errors.height}
-              type={"number"}
-            />
-          </label>
-
-          <label className={cn(styles["profile__label"])}>
-            <span className={cn(styles["profile__label__text"])}>Вес</span>
-            <Input
-              defaultValue={session?.user.weight}
-              placeholder="Предпочитаю не отвечать"
-              {...register("weight", { required: { value: false, message: "Заполните имя" } })}
-              error={errors.weight}
-              type={"number"}
-            />
-          </label>
-
-          <label className={cn(styles["profile__label"])}>
-            <span className={cn(styles["profile__label__text"])}>Цвет волос</span>
-            <Controller
-              defaultValue={session.user.hairColor?.id}
-              control={control}
-              name="hairColor"
-              rules={{ required: false }}
-              render={({ field }) => (
-                <Select
-                  selectArray={hairs}
-                  ref={field.ref}
-                  selected={field.value}
-                  setSelected={field.onChange}
-                  placeholder={"Предпочитаю не отвечать"}
-                  isEditable
-                />
-              )}
-            />
-          </label>
-
-          <label className={cn(styles["profile__label"])}>
-            <span className={cn(styles["profile__label__text"])}>Цвет глаз</span>
-            <Controller
-              defaultValue={session.user.eyeColor?.id}
-              control={control}
-              name="eyeColor"
-              rules={{ required: false }}
-              render={({ field }) => (
-                <Select
-                  selectArray={eyes}
-                  ref={field.ref}
-                  selected={field.value}
-                  setSelected={field.onChange}
-                  placeholder={"Предпочитаю не отвечать"}
-                  isEditable
-                />
-              )}
-            />
-          </label>
-
-          <label className={cn(styles["profile__label"])}>
-            <span className={cn(styles["profile__label__text"])}>Цель знакомства</span>
-            <Input
-              defaultValue={session?.user.goal}
-              placeholder="Предпочитаю не отвечать"
-              {...register("goal", { required: { value: false, message: "Заполните имя" } })}
-              error={errors.goal}
-            />
-          </label>
-
-          <label className={cn(styles["profile__label"], styles["profile__label--about"])}>
-            <span className={cn(styles["profile__label__text"])}>О себе</span>
-            <Textarea
-              defaultValue={session?.user.about}
-              placeholder="Напишите о себе"
-              {...register("about", { required: { value: false, message: "Заполните имя" } })}
-              error={errors.about}
-            />
-          </label>
         </div>
 
         <div className={cn(styles["profile__main"])}>
@@ -273,7 +153,7 @@ export const ProfileInfo = ({ session, hairs, eyes, regions }: ProfileInfoProps)
         <Button className={cn(styles["profile__button"])} isLoading={isLoading}>
           Сохранить
         </Button>
-      </form> */}
+      </form>
     </div>
   ) : (
     <></>

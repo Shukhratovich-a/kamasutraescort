@@ -1,20 +1,20 @@
 import cn from "classnames";
 
-import { UserProps } from "./User.props";
+import { AdavertisementProps } from "./Adavertisement.props";
 
 import { Button } from "../Button/Button.component";
 
 import Close from "../../assets/icons/close.svg";
 import SayHello from "../../assets/icons/sayHello.svg";
 
-import styles from "./User.module.scss";
+import styles from "./Adavertisement.module.scss";
 import { calculateFullAge, DOMAIN } from "../../helpers";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 
-export const User = ({ className, user, type = "none", ...props }: UserProps) => {
-  const { years } = calculateFullAge(user.birthDate);
-  const router = useRouter();
+export const Adavertisement = ({ className, adavertisement, type = "none", ...props }: AdavertisementProps) => {
+  const { years } = calculateFullAge(adavertisement.birthDate);
+  const { push } = useRouter();
   const { t, i18n } = useTranslation();
 
   return (
@@ -37,17 +37,19 @@ export const User = ({ className, user, type = "none", ...props }: UserProps) =>
       <div className={cn(styles.user__wrapper)}>
         <div className={cn(styles.user__info)}>
           <h3 className={cn(styles.user__name)}>
-            {user.username} {years}
+            {adavertisement.advName} {years}
           </h3>
 
-          <span className={cn(styles.user__region)}>
+          {/* <span className={cn(styles.user__region)}>
             {i18n.language === "en" ? user.region.nameEn : user.region.nameRu}
-          </span>
+          </span> */}
         </div>
 
         <Button
           className={cn(styles.user__button)}
-          onClick={() => router.push(`/${user.username}`, `/${user.username}`, { locale: i18n.language })}
+          onClick={() =>
+            push(`/${adavertisement.searchName}`, `/${adavertisement.searchName}`, { locale: i18n.language })
+          }
         >
           <span>{t("button:show-profile")}</span>
           <SayHello />

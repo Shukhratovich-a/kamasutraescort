@@ -7,61 +7,57 @@ import { RoleSelectProps } from "./RoleSelect.props";
 import User from "../../assets/roleIcons/user.svg";
 import Advertiser from "../../assets/roleIcons/advertiser.svg";
 
-import { Button } from "../";
+import { Button, Modal } from "../";
 
 import styles from "./RoleSelect.module.scss";
 
-export const RoleSelect = ({ isOpen = false, ...props }: RoleSelectProps): JSX.Element => {
+export const RoleSelect = ({ isOpen, setIsOpen, ...props }: RoleSelectProps): JSX.Element => {
   const { t, i18n } = useTranslation();
 
   const { pathname, push, replace } = useRouter();
 
-  return isOpen ? (
-    <div className={cn(styles.select)} {...props}>
-      <div
-        className={cn(styles.select__back)}
-        onClick={() => push(pathname, pathname, { locale: i18n.language })}
-      ></div>
+  const handleClose = () => {
+    if (!setIsOpen) return;
 
-      <div className={cn(styles.select__inner)}>
-        <ul className={cn(styles.select__list)}>
-          <li className={cn(styles.select__item)}>
-            <h3 className={cn(styles.select__item__heading)}>User</h3>
+    push(pathname, pathname, { locale: i18n.language });
+    setIsOpen(false);
+  };
 
-            <User className={cn(styles.select__item__image)} />
+  return (
+    <Modal className={cn(styles.select)} setIsOpen={handleClose} isOpen={isOpen} border={50} {...props}>
+      <ul className={cn(styles.select__list)}>
+        <li className={cn(styles.select__item)}>
+          <h3 className={cn(styles.select__item__heading)}>User</h3>
 
-            <p className={cn(styles.select__item__text)}>Keep updated on activity in your area!</p>
+          <User className={cn(styles.select__item__image)} />
 
-            <Button
-              className={cn(styles.select__item__button)}
-              appearance="primary"
-              onClick={() => replace("/auth/register/user", "/auth/register/user", { locale: i18n.language })}
-            >
-              {t("auth:register")}
-            </Button>
-          </li>
+          <p className={cn(styles.select__item__text)}>Keep updated on activity in your area!</p>
 
-          <li className={cn(styles.select__item)}>
-            <h3 className={cn(styles.select__item__heading)}>Advertiser</h3>
+          <Button
+            className={cn(styles.select__item__button)}
+            appearance="primary"
+            onClick={() => replace("/auth/register/user", "/auth/register/user", { locale: i18n.language })}
+          >
+            {t("auth:register")}
+          </Button>
+        </li>
 
-            <Advertiser className={cn(styles.select__item__image)} />
+        <li className={cn(styles.select__item)}>
+          <h3 className={cn(styles.select__item__heading)}>Advertiser</h3>
 
-            <p className={cn(styles.select__item__text)}>Get listed for free today!</p>
+          <Advertiser className={cn(styles.select__item__image)} />
 
-            <Button
-              className={cn(styles.select__item__button)}
-              appearance="secondary"
-              onClick={() =>
-                replace("/auth/register/advertiser", "/auth/register/advertiser", { locale: i18n.language })
-              }
-            >
-              {t("auth:register")}
-            </Button>
-          </li>
-        </ul>
-      </div>
-    </div>
-  ) : (
-    <></>
+          <p className={cn(styles.select__item__text)}>Get listed for free today!</p>
+
+          <Button
+            className={cn(styles.select__item__button)}
+            appearance="secondary"
+            onClick={() => replace("/auth/register/advertiser", "/auth/register/advertiser", { locale: i18n.language })}
+          >
+            {t("auth:register")}
+          </Button>
+        </li>
+      </ul>
+    </Modal>
   );
 };

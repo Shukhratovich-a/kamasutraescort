@@ -18,7 +18,7 @@ const Login = (): JSX.Element => {
   // const { i18n } = useTranslation();
 
   // const [forgotState, setForgotState] = React.useState(false);
-  const [registerState, setRegisterState] = React.useState(false);
+  const [registerState, setRegisterState] = React.useState<boolean>(false);
 
   React.useEffect(() => {
     const { register } = query;
@@ -31,7 +31,7 @@ const Login = (): JSX.Element => {
 
   return (
     <>
-      <RoleSelect isOpen={registerState} />
+      <RoleSelect isOpen={registerState} setIsOpen={setRegisterState} />
       {/* <ForgotPassword isOpen={forgotState} /> */}
       <Container className={cn(styles.login__container)}>
         <h1 className={cn(styles.login__heading)}>{t("auth:login-heading")}</h1>

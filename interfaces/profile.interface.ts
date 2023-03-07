@@ -1,7 +1,7 @@
 export enum ProfileMenuEnum {
   Profile = "profile",
   Favorites = "favorites",
-  Account = "account",
+  Advertisements = "advertisements",
 }
 
 export interface ProfileMenuItem {

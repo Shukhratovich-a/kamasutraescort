@@ -5,24 +5,19 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { ParsedUrlQuery } from "querystring";
 import axios from "axios";
 
-import { authOptions } from "../api/auth/[...nextauth]";
-import { API, selectDefaultKeys } from "../../helpers";
+import { authOptions } from "../../api/auth/[...nextauth]";
+import { API } from "../../../helpers";
 
-import { AuthResponceInterface, SelectItem, UserInterface } from "../../interfaces";
+import { AuthResponceInterface, SelectItem, UserInterface } from "../../../interfaces";
 
-import { ProfileLayout, withLayout } from "../../layout/Layout";
+import { ProfileLayout, withLayout } from "../../../layout/Layout";
 
-import { NotFound, UserProfile, ProfileInfo } from "../../page-components";
+import { NotFound, UserProfile, ProfileInfo } from "../../../page-components";
 
 const Profile = ({ ownProfile, user }: ProfilePageProps): JSX.Element => {
   return ownProfile ? (
     <ProfileLayout>
-      <ProfileInfo
-        session={ownProfile.session}
-        hairs={ownProfile.hairs}
-        eyes={ownProfile.eyes}
-        regions={ownProfile.regions}
-      />
+      <ProfileInfo session={ownProfile.session} regions={ownProfile.regions} />
     </ProfileLayout>
   ) : user ? (
     <UserProfile user={user} />
@@ -63,22 +58,11 @@ export const getServerSideProps: GetServerSideProps<ProfilePageProps> = async ({
       );
 
       if (user.status === 200) {
-        const { data: hairs } = await axios.get<SelectItem[]>(API.hairs.getAll);
-        const { data: eyes } = await axios.get<SelectItem[]>(API.eyes.getAll);
         const { data: regions } = await axios.get(API.regions.getAll);
-
-        hairs.unshift({
-          ...selectDefaultKeys,
-        });
-        eyes.unshift({
-          ...selectDefaultKeys,
-        });
 
         return await {
           props: {
             ownProfile: {
-              hairs,
-              eyes,
               regions,
               session,
             },
@@ -125,8 +109,6 @@ export default withLayout(Profile);
 
 export interface OwnProfile {
   session: Session | null;
-  hairs: SelectItem[];
-  eyes: SelectItem[];
   regions: SelectItem[];
 }
 

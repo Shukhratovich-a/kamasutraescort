@@ -15,8 +15,7 @@ import styles from "./HeaderProfile.module.scss";
 
 export const HeaderProfile = ({ className, isMobile = false, ...props }: HeaderProfileProps): JSX.Element => {
   const { data: session } = useSession();
-  const router = useRouter();
-  const { asPath } = router;
+  const { asPath } = useRouter();
   const { i18n } = useTranslation();
 
   return (
@@ -28,15 +27,15 @@ export const HeaderProfile = ({ className, isMobile = false, ...props }: HeaderP
     >
       <Link
         className={cn(styles.profile__link, className, {
-          [styles["profile__link--active"]]: asPath.startsWith(`/${session?.user.username}`),
+          [styles["profile__link--active"]]: asPath.startsWith(`/profile/${session?.user.username}`),
         })}
-        href={asPath.startsWith(`/${session?.user.username}`) ? asPath : `/${session?.user.username}`}
+        href={asPath.startsWith(`/profile/${session?.user.username}`) ? asPath : `/profile/${session?.user.username}`}
         locale={i18n.language}
       >
         {session?.user.avatar ? (
           <img
             className={cn(styles.profile__image)}
-            src={`${DOMAIN}/files/avatar/${session.user.avatar.filename}`}
+            src={`${DOMAIN}/avatar/${session.user.avatar.filename}`}
             width={40}
             height={40}
             alt={session.user.username}

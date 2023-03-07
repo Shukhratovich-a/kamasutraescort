@@ -2,7 +2,7 @@ import { ProfileMenuItem, ProfileMenuEnum } from "../interfaces";
 
 import ProfileIcon from "./icons/profile.svg";
 import FavoritesIcon from "./icons/favorites.svg";
-import AccountIcon from "./icons/account.svg";
+import AdvertisementIcon from "./icons/account.svg";
 
 export const profileMenu: ProfileMenuItem[] = [
   {
@@ -18,9 +18,9 @@ export const profileMenu: ProfileMenuItem[] = [
     icon: <FavoritesIcon />,
   },
   {
-    id: ProfileMenuEnum.Account,
-    name: ProfileMenuEnum.Account,
-    route: "/" + ProfileMenuEnum.Account,
-    icon: <AccountIcon />,
+    id: ProfileMenuEnum.Advertisements,
+    name: ProfileMenuEnum.Advertisements,
+    route: "/" + ProfileMenuEnum.Advertisements,
+    icon: <AdvertisementIcon />,
   },
 ];

@@ -1,6 +1,4 @@
 .wrapper {
-  position: relative;
-
   display: grid;
   overflow: hidden;
   grid-template-areas:
@@ -11,24 +9,6 @@
   grid-template-rows: auto 1fr auto;
 
   min-height: 100vh;
-
-  background-image: url("../assets/background/bg.JPG");
-  background-size: cover;
-
-  &::after {
-    position: fixed;
-    z-index: 0;
-    top: -200px;
-    right: -200px;
-    bottom: -200px;
-    left: -200px;
-
-    content: "";
-    pointer-events: none;
-
-    opacity: 0.7;
-    background-color: var(--background-primary);
-  }
 
   &--profile {
     &__container {
@@ -53,8 +33,6 @@
 }
 
 .main {
-  position: relative;
-  z-index: 2;
   grid-area: main;
 
   &--auth {

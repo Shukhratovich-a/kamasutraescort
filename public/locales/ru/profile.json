@@ -1,7 +1,10 @@
 {
-  "profile": "Профиль",
-  "favorites": "Избранное",
-  "account": "Личный счет",
+  "profile": "профиль",
+  "favorites": "избранное",
+  "account": "личный счет",
+  "advertisements": "объявления",
+  "create-advetisement": "опубликовать объявление",
+
   "exit": "Выход",
   "main-info": "Основная информация",
   "personal-info": "Личная информация",

@@ -31,6 +31,12 @@ export const RegisterForm = ({ className, regions, ...props }: RegisterFormProps
     formState: { errors },
   } = useForm<IRegisterForm>({ mode: "onSubmit" });
 
+  React.useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    window.document.body.style.overflow = "visible";
+  }, []);
+
   const onSubmit = async (formData: IRegisterForm) => {
     setLoading(true);
 

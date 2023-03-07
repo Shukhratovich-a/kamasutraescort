@@ -4,7 +4,5 @@ import { SelectItem } from "../../interfaces";
 
 export interface ProfileInfoProps extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
   session: Session | null;
-  hairs: SelectItem[];
-  eyes: SelectItem[];
   regions: SelectItem[];
 }

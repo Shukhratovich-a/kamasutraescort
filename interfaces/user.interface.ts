@@ -18,8 +18,3 @@ export enum RoleEnum {
   User = "user",
   Advertiser = "advertiser",
 }
-
-export enum GenderEnum {
-  Male = "male",
-  Female = "female",
-}

@@ -4,7 +4,7 @@ import { FreeMode } from "swiper";
 
 import { UserListProps } from "./UserList.props";
 
-import { User } from "../User/User.component";
+import { User } from "../Adavertisement/Adavertisement.component";
 
 import "swiper/css";
 import "swiper/css/free-mode";

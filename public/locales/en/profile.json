@@ -1,9 +1,12 @@
 {
-  "profile": "Profile",
-  "favorites": "Favorites",
-  "account": "Personal account",
-  "exit": "Exit",
-  "main-info": "Main information",
-  "personal-info": "Personal information",
-  "account-info": "Account"
+  "profile": "profile",
+  "favorites": "favorites",
+  "account": "personal account",
+  "advertisements": "advertisements",
+  "create-advetisement": "publish an advetisement",
+
+  "exit": "exit",
+  "main-info": "main information",
+  "personal-info": "personal information",
+  "account-info": "account"
 }

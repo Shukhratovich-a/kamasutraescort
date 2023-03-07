@@ -14,9 +14,12 @@ export const API = {
     edit: DOMAIN + "/user/edit/",
   },
 
-  image: {
-    upload: DOMAIN + "/image/",
-    delete: DOMAIN + "/image/",
+  avatar: {
+    upload: DOMAIN + "/avatar/",
+  },
+
+  advertisement: {
+    getByUsername: DOMAIN + "/advertisement/username/",
   },
 
   eyes: {
