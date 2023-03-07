@@ -2,8 +2,6 @@ import cn from "classnames";
 
 import { AuthHomePageProps } from "./AuthHomePage.props";
 
-import { UserList } from "../../components/UserList/UserList.component";
-
 import styles from "./AuthHomePage.module.scss";
 
 export const AuthHomePage = ({ session, men, women }: AuthHomePageProps): JSX.Element => {

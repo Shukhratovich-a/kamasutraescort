@@ -1,12 +1,9 @@
-import { GenderEnum } from "../../interfaces";
-
 export interface IProfileForm {
   id?: number;
   username: string;
   password: string;
   email: string;
   region: number;
-  gender: GenderEnum;
   birthDate: Date;
 
   fullname?: string;
