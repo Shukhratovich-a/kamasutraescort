@@ -11,6 +11,8 @@ import { API } from "../../../../helpers";
 import { AdvertismentInterface } from "../../../../interfaces/advertisments.interface";
 
 const Account = ({ advertisments }: AdvertismentPageProps): JSX.Element => {
+  console.log(advertisments);
+
   return (
     <ProfileLayout>
       <AdvertisementsInfo advertisements={advertisments} />

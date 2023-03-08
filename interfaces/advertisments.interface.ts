@@ -23,6 +23,23 @@ export interface AdvertismentInterface {
 
   eyeColor?: number;
 
+  images: AdvImageInterface;
+
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export interface AdvImageInterface {
+  id: number;
+
+  first: string;
+
+  second: string;
+
+  third: string;
+
+  fourth: string;
+
   createdAt: Date;
   updatedAt: Date;
 }

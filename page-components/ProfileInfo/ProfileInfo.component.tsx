@@ -85,9 +85,9 @@ export const ProfileInfo = ({ session, regions, ...props }: ProfileInfoProps): J
           <label className={cn(styles["profile__label"])}>
             <span className={cn(styles["profile__label__text"])}>Имя</span>
             <Input
+              {...register("username", { required: { value: true, message: "Заполните имя" } })}
               defaultValue={session?.user.username}
               placeholder="Ваше имя"
-              {...register("username", { required: { value: true, message: "Заполните имя" } })}
               error={errors.username}
             />
           </label>

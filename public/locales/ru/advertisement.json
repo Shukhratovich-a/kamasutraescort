@@ -1,0 +1,47 @@
+{
+  "main-info": "Основная информация",
+
+  "title": {
+    "name": "название",
+    "placeholder": "укажите название"
+  },
+  "birth-date": "дата рождения",
+  "type": "тип",
+  "region": {
+    "name": "регион",
+    "placeholder": "укажите регион"
+  },
+
+  "personal-info": "личная информация",
+
+  "fullname": {
+    "name": "полное имя",
+    "placeholder": "укажите полное имя"
+  },
+  "height": {
+    "name": "рост",
+    "placeholder": "укажите рост"
+  },
+  "weight": {
+    "name": "вес",
+    "placeholder": "укажите вес"
+  },
+  "goal": {
+    "name": "цель знакомства",
+    "placeholder": "укажите цель знакомства"
+  },
+  "hair-color": {
+    "name": "цвет волос",
+    "placeholder": "укажите цвет волос"
+  },
+  "eye-color": {
+    "name": "цвет глаз",
+    "placeholder": "укажите цвет глаз"
+  },
+  "about": {
+    "name": "о себе",
+    "placeholder": "напишите о себе"
+  },
+
+  "publish": "публиковать"
+}

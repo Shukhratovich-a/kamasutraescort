@@ -7,5 +7,7 @@
 
   "day": "Day",
   "month": "Month",
-  "year": "Year"
+  "year": "Year",
+
+  "not-answer": "I prefer not to answer"
 }

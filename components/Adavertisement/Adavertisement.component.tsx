@@ -25,14 +25,14 @@ export const Adavertisement = ({ className, adavertisement, type = "none", ...pr
         </button>
       )}
 
-      {/* {user.images?.profileImageFirst && (
+      {adavertisement.images && adavertisement.images.first && (
         <img
           className={cn(styles.user__image)}
-          src={`${DOMAIN}/${user.images?.profileImageFirst}`}
+          src={`${DOMAIN}/images/${adavertisement.images.first}`}
           width={280}
           height={350}
         />
-      )} */}
+      )}
 
       <div className={cn(styles.user__wrapper)}>
         <div className={cn(styles.user__info)}>

@@ -1,0 +1,47 @@
+{
+  "main-info": "main information",
+
+  "title": {
+    "name": "title",
+    "placeholder": "specify title"
+  },
+  "birth-date": "birth date",
+  "type": "type",
+  "region": {
+    "name": "region",
+    "placeholder": "specify the region"
+  },
+
+  "personal-info": "personal information",
+
+  "fullname": {
+    "name": "full name",
+    "placeholder": "specify full name"
+  },
+  "height": {
+    "name": "height",
+    "placeholder": "specify the height"
+  },
+  "weight": {
+    "name": "weight",
+    "placeholder": "specify the weight"
+  },
+  "goal": {
+    "name": "purpose of dating",
+    "placeholder": "specify purpose of dating"
+  },
+  "hair-color": {
+    "name": "hair color",
+    "placeholder": "specify hair color"
+  },
+  "eye-color": {
+    "name": "eye color",
+    "placeholder": "specify eye color"
+  },
+  "about": {
+    "name": "about you",
+    "placeholder": "write about yourself"
+  },
+
+  "publish": "publish"
+}
