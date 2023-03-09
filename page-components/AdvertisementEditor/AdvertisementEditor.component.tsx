@@ -275,7 +275,7 @@ export const AdvertisementEditor = ({
           </label>
 
           <label className={cn(styles.editor__label)}>
-            <span className={cn(styles.editor__label__text)}>{t("advertisement:title.name")}</span>
+            <span className={cn(styles.editor__label__text)}>{t("advertisement:eye-color.name")}</span>
 
             <Controller
               control={control}
