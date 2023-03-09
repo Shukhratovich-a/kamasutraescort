@@ -22,6 +22,7 @@ export const Button = React.forwardRef(
           [styles["button--linear-blue"]]: appearance === "linear-blue",
         })}
         ref={ref}
+        disabled={isLoading}
         {...props}
       >
         {isLoading ? <Waiting /> : children}

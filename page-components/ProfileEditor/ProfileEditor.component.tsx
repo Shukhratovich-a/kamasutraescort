@@ -7,28 +7,27 @@ import axios from "axios";
 
 import { API } from "../../helpers";
 
-// import { GenderEnum } from "../../interfaces";
-import { IProfileForm } from "./IProfileForm.interface";
+import { IProfileEditor } from "./IProfileEditor.interface";
 
-import { ProfileInfoProps } from "./ProfileInfo.props";
+import { ProfileEditorProps } from "./ProfileEditor.props";
 
 import { Button, Input, Select, DateSelect, AvatarSelect } from "../../components";
 
-import styles from "./ProfileInfo.module.scss";
+import styles from "./ProfileEditor.module.scss";
 
-export const ProfileInfo = ({ session, regions, ...props }: ProfileInfoProps): JSX.Element => {
+export const ProfileEditor = ({ session, regions, ...props }: ProfileEditorProps): JSX.Element => {
   const { t, i18n } = useTranslation();
   const {
     register,
     handleSubmit,
     control,
     formState: { errors },
-  } = useForm<IProfileForm>();
+  } = useForm<IProfileEditor>();
 
   const [isLoading, setLoading] = React.useState(false);
   const currentSession = useSession();
 
-  const onSubmit = async (formData: IProfileForm) => {
+  const onSubmit = async (formData: IProfileEditor) => {
     setLoading(true);
 
     const { data } = await axios.patch(
@@ -62,15 +61,6 @@ export const ProfileInfo = ({ session, regions, ...props }: ProfileInfoProps): J
   return session ? (
     <div className={cn(styles["profile"])} {...props}>
       <h2 className={cn(styles["profile__heading"])}>{t("profile:profile")}</h2>
-
-      {/* <div className={cn(styles["profile__image"])}>
-        <ImageSelect
-          firstImage={session.user.images?.profileImageFirst}
-          secondImage={session.user.images?.profileImageSecond}
-          thirdImage={session.user.images?.profileImageThirth}
-          fourthImage={session.user.images?.profileImageFourth}
-        />
-      </div> */}
 
       <div className={cn(styles.profile__avatar)}>
         <AvatarSelect avatar={session.user.avatar} />

@@ -25,16 +25,19 @@
 
 .editor__right {
   display: grid;
+
+  width: 100%;
   gap: 50px;
 
   grid-area: right;
 }
 
 .editor__left {
-  grid-area: left;
-
   display: grid;
   align-content: start;
+
+  width: 100%;
+  grid-area: left;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: 370px 88px;
   grid-template-areas:
@@ -63,7 +66,7 @@
   }
 }
 
-.select__right__section {
+.editor__right__section {
   display: grid;
   gap: 20px;
 }
@@ -93,4 +96,102 @@
 
 .editor__button {
   margin-left: auto;
+}
+
+@media only screen and (max-width: 1220px) {
+  .editor__label {
+    grid-template-columns: minmax(280px, 380px);
+    gap: 5px;
+
+    &--big {
+      .editor__label__text {
+        margin-top: 0;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1150px) {
+  .editor {
+    margin: 0;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .editor {
+    grid-template-columns: minmax(280px, 380px);
+    grid-template-areas:
+      "heading"
+      "left"
+      "right";
+  }
+
+  .editor__left {
+    grid-template-rows: 500px 120px;
+  }
+}
+
+@media only screen and (max-width: 750px) {
+  .editor {
+    justify-items: center;
+
+    justify-content: center;
+  }
+
+  .editor__right {
+    gap: 20px;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .editor__label__text {
+    margin-left: 30px;
+
+    color: var(--text-dark);
+
+    font-size: 12px;
+    line-height: 18px;
+  }
+}
+
+@media only screen and (max-width: 475px) {
+  .editor {
+    gap: 15px;
+  }
+
+  .editor__right {
+    gap: 15px;
+  }
+
+  .editor__right__section {
+    gap: 15px;
+  }
+}
+
+@media only screen and (max-width: 420px) {
+  .editor__left {
+    $width: 100vw;
+
+    grid-template-rows: calc(($width - 30px) * 1.32) calc(($width - 30px - 16px) / 3);
+  }
+}
+
+@media only screen and (max-width: 375px) {
+  .editor {
+    gap: 10px;
+  }
+
+  .editor__left {
+    $width: 100vw;
+
+    grid-template-rows: calc(($width - 20px) * 1.32) calc(($width - 20px - 16px) / 3);
+  }
+
+  .editor__right {
+    gap: 10px;
+  }
+
+  .editor__right__section {
+    gap: 10px;
+  }
 }

@@ -3,7 +3,7 @@ export * from "./RegisterForm/RegisterForm.component";
 
 export * from "./AuthHomePage/AuthHomePage.component";
 
-export * from "./ProfileInfo/ProfileInfo.component";
+export * from "./ProfileEditor/ProfileEditor.component";
 export * from "./FavoritesInfo/FavoritesInfo.component";
 export * from "./AdvertisementsInfo/AdvertisementsInfo.component";
 

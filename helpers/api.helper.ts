@@ -15,11 +15,19 @@ export const API = {
   },
 
   avatar: {
-    upload: DOMAIN + "/avatar/",
+    get: (filename: string) => `${DOMAIN}/avatar/${filename}`,
+    upload: (id: number) => `${DOMAIN}/avatar/${id}`,
   },
 
   advertisement: {
-    getByUsername: DOMAIN + "/advertisement/username/",
+    getByUsername: (username: string, limit = 10, page = 1) =>
+      `${DOMAIN}/advertisement/username/${username}?limit=${limit}&page=${page}`,
+    create: (id: number) => `${DOMAIN}/advertisement/${id}`,
+  },
+
+  images: {
+    upload: (id: number) => `${DOMAIN}/image/${id}`,
+    delete: (id: number, type: "first" | "second" | "third" | "fourth") => `${DOMAIN}/image/${id}?type=${type}`,
   },
 
   eyes: {

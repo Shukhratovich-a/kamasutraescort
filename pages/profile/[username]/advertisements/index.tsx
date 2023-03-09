@@ -36,7 +36,7 @@ export const getServerSideProps: GetServerSideProps<AdvertismentPageProps> = asy
     };
   }
 
-  const { data: advertisments } = await axios.get(API.advertisement.getByUsername + session?.user.username);
+  const { data: advertisments } = await axios.get(API.advertisement.getByUsername(session.user.username));
 
   return {
     props: {

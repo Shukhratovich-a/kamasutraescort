@@ -1,4 +1,4 @@
-export interface IProfileForm {
+export interface IProfileEditor {
   id?: number;
   username: string;
   password: string;

@@ -56,12 +56,35 @@
   }
 }
 
-@media only screen and (max-width: 720px) {
+@media only screen and (max-width: 750px) {
   .wrapper {
     &--profile {
       &__container {
+        padding-top: 20px;
         grid-template-columns: 1fr;
         justify-items: center;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 475px) {
+  .wrapper {
+    &--profile {
+      &__container {
+        padding-top: 15px;
+        gap: 15px;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 375px) {
+  .wrapper {
+    &--profile {
+      &__container {
+        padding-top: 10px;
+        gap: 10px;
       }
     }
   }

@@ -12,12 +12,12 @@ import { AuthResponceInterface, SelectItem, UserInterface } from "../../../inter
 
 import { ProfileLayout, withLayout } from "../../../layout/Layout";
 
-import { NotFound, UserProfile, ProfileInfo } from "../../../page-components";
+import { NotFound, UserProfile, ProfileEditor } from "../../../page-components";
 
 const Profile = ({ ownProfile, user }: ProfilePageProps): JSX.Element => {
   return ownProfile ? (
     <ProfileLayout>
-      <ProfileInfo session={ownProfile.session} regions={ownProfile.regions} />
+      <ProfileEditor session={ownProfile.session} regions={ownProfile.regions} />
     </ProfileLayout>
   ) : user ? (
     <UserProfile user={user} />

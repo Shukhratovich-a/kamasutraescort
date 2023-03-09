@@ -5,7 +5,7 @@ import { useTranslation } from "next-i18next";
 import React from "react";
 import cn from "classnames";
 
-import { DOMAIN } from "../../helpers";
+import { API } from "../../helpers";
 
 import { HeaderProfileProps } from "./HeaderProfile.props";
 
@@ -35,7 +35,7 @@ export const HeaderProfile = ({ className, isMobile = false, ...props }: HeaderP
         {session?.user.avatar ? (
           <img
             className={cn(styles.profile__image)}
-            src={`${DOMAIN}/avatar/${session.user.avatar.filename}`}
+            src={API.avatar.get(session.user.avatar.filename)}
             width={40}
             height={40}
             alt={session.user.username}

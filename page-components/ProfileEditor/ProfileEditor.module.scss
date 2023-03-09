@@ -18,6 +18,10 @@
   line-height: 42px;
 
   grid-area: heading;
+
+  &::first-letter {
+    text-transform: uppercase;
+  }
 }
 
 .profile__avatar {
@@ -78,6 +82,12 @@
   }
 }
 
+@media only screen and (max-width: 1150px) {
+  .profile {
+    margin-bottom: 0;
+  }
+}
+
 @media only screen and (max-width: 1000px) {
   .profile {
     grid-template-columns: minmax(280px, 380px);
@@ -88,10 +98,15 @@
   }
 }
 
-@media only screen and (max-width: 720px) {
-  .profile__button {
-    max-width: 100%;
-    margin: 0 auto;
+@media only screen and (max-width: 750px) {
+  .profile {
+    justify-content: center;
+
+    justify-items: center;
+  }
+
+  .profile__info {
+    gap: 20px;
   }
 }
 
@@ -103,5 +118,33 @@
 
     font-size: 12px;
     line-height: 18px;
+  }
+}
+
+@media only screen and (max-width: 475px) {
+  .profile {
+    gap: 15px;
+  }
+
+  .profile__info {
+    gap: 15px;
+  }
+
+  .profile__main {
+    gap: 15px;
+  }
+}
+
+@media only screen and (max-width: 375px) {
+  .profile {
+    gap: 10px;
+  }
+
+  .profile__info {
+    gap: 10px;
+  }
+
+  .profile__main {
+    gap: 10px;
   }
 }

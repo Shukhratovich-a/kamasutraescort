@@ -112,3 +112,15 @@
     text-transform: uppercase;
   }
 }
+
+@media only screen and (max-width: 475px) {
+  .user {
+    max-width: 100%;
+    height: 400px;
+  }
+
+  .user__image {
+    max-width: 100%;
+    height: 400px;
+  }
+}

@@ -3,14 +3,13 @@ import cn from "classnames";
 import axios from "axios";
 import { signIn, useSession } from "next-auth/react";
 
-import { API, DOMAIN } from "../../helpers";
+import { API } from "../../helpers";
 
 import { AvatarSelectProps } from "./AvatarSelect.props";
 
 import { Modal } from "..";
 
 import User from "../../assets/icons/profile.svg";
-// import ImageIcon from "../../assets/icons/image.svg";
 
 import styles from "./AvatarSelect.module.scss";
 
@@ -20,7 +19,7 @@ export const AvatarSelect = ({ avatar, ...props }: AvatarSelectProps) => {
   const [isOpen, setIsOpen] = React.useState<boolean>(false);
   const [isHover, setIsHover] = React.useState<boolean>(false);
 
-  const [file, setFile] = React.useState<string>(avatar ? `${DOMAIN}/avatar/${avatar.filename}` : "");
+  const [file, setFile] = React.useState<string>(avatar ? API.avatar.get(avatar.filename) : "");
 
   const inputRef: React.Ref<HTMLInputElement> = React.useRef(null);
 
@@ -30,11 +29,12 @@ export const AvatarSelect = ({ avatar, ...props }: AvatarSelectProps) => {
 
   const handleDelete = async () => {
     setFile("");
+    if (!session) return;
 
     try {
       const { data: avatar } = await axios({
         method: "delete",
-        url: API.avatar.upload + session?.user.id,
+        url: API.avatar.upload(session.user.id),
       });
 
       if (avatar.status === 200) {
@@ -56,7 +56,7 @@ export const AvatarSelect = ({ avatar, ...props }: AvatarSelectProps) => {
   };
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!e.target.files) {
+    if (!e.target.files || !session) {
       return;
     }
 
@@ -69,7 +69,7 @@ export const AvatarSelect = ({ avatar, ...props }: AvatarSelectProps) => {
 
       const { data: avatar } = await axios({
         method: "patch",
-        url: API.avatar.upload + session?.user.id,
+        url: API.avatar.upload(session.user.id),
         data: formData,
         headers: { "Content-Type": "multipart/form-data" },
       });

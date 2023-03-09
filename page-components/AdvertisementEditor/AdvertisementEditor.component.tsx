@@ -1,3 +1,4 @@
+import React from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useTranslation } from "next-i18next";
 import cn from "classnames";
@@ -10,20 +11,84 @@ import { Button, DateSelect, Input, Select, Textarea, TypeSelect } from "../../c
 
 import styles from "./AdvertisementEditor.module.scss";
 import { ImageSelect } from "../../components/ImageSelect/ImageSelect.component";
+import axios from "axios";
+import { API } from "../../helpers";
+import { useSession } from "next-auth/react";
 
-export const AdvertisementEditor = ({ eyes, hairs, regions, ...props }: AdvertisementEditorProps): JSX.Element => {
+export const AdvertisementEditor = ({
+  eyes,
+  hairs,
+  regions,
+  advertisement,
+  ...props
+}: AdvertisementEditorProps): JSX.Element => {
   const { t } = useTranslation();
 
   const capitalizeFirstLetter = (string: string): string => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   };
 
+  const { data: session } = useSession({ required: true });
+
+  const [isLoading, setIsLoading] = React.useState<boolean>(false);
+
   const {
     register,
-    // handleSubmit,
+    handleSubmit,
     control,
     formState: { errors },
   } = useForm<IAdvertisementEditor>();
+
+  const onSubmit = async (formData: IAdvertisementEditor) => {
+    if (!session) return;
+
+    setIsLoading(true);
+
+    if (!advertisement) {
+      const { data: advertisement } = await axios.post(API.advertisement.create(session.user.id), {
+        advName: String(formData.advName).toLowerCase(),
+        birthDate: formData.birthDate,
+        type: String(formData.type).toLowerCase(),
+        region: Number(formData.region),
+        fullname: formData.fullname,
+        height: Number(formData.height),
+        weight: Number(formData.weight),
+        hairColor: formData.hairColor,
+        eyeColor: formData.eyeColor,
+        about: formData.about,
+      });
+
+      if (advertisement.status === 201) {
+        if (!formData.image) return;
+
+        const formImage = new FormData();
+
+        if (formData.image.first) {
+          formImage.append("first", formData.image.first);
+        }
+        if (formData.image.second) {
+          formImage.append("second", formData.image.second);
+        }
+        if (formData.image.third) {
+          formImage.append("third", formData.image.third);
+        }
+        if (formData.image.fourth) {
+          formImage.append("fourth", formData.image.fourth);
+        }
+
+        const { data: images } = await axios({
+          method: "patch",
+          url: API.images.upload(advertisement.advertisement.id),
+          data: formImage,
+          headers: { "Content-Type": "multipart/form-data" },
+        });
+
+        if (images.status === 200) {
+          setIsLoading(false);
+        }
+      }
+    }
+  };
 
   return (
     <div className={cn(styles.editor)} {...props}>
@@ -43,6 +108,7 @@ export const AdvertisementEditor = ({ eyes, hairs, regions, ...props }: Advertis
             />
           )}
         />
+
         <Controller
           control={control}
           name="image.second"
@@ -56,6 +122,7 @@ export const AdvertisementEditor = ({ eyes, hairs, regions, ...props }: Advertis
             />
           )}
         />
+
         <Controller
           control={control}
           name="image.third"
@@ -69,6 +136,7 @@ export const AdvertisementEditor = ({ eyes, hairs, regions, ...props }: Advertis
             />
           )}
         />
+
         <Controller
           control={control}
           name="image.fourth"
@@ -84,10 +152,10 @@ export const AdvertisementEditor = ({ eyes, hairs, regions, ...props }: Advertis
         />
       </div>
 
-      <form className={cn(styles.editor__right)}>
+      <form className={cn(styles.editor__right)} onSubmit={handleSubmit(onSubmit)}>
         <h3 className={cn(styles.editor__right__heading)}>{t("advertisement:main-info")}</h3>
 
-        <div className={cn(styles.select__right__section)}>
+        <div className={cn(styles.editor__right__section)}>
           <label className={cn(styles.editor__label)}>
             <span className={cn(styles.editor__label__text)}>{t("advertisement:title.name")}</span>
 
@@ -97,6 +165,7 @@ export const AdvertisementEditor = ({ eyes, hairs, regions, ...props }: Advertis
               autoComplete="off"
               type="text"
               placeholder={`${capitalizeFirstLetter(t("advertisement:title.placeholder"))}`}
+              error={errors.advName}
             />
           </label>
 
@@ -138,6 +207,7 @@ export const AdvertisementEditor = ({ eyes, hairs, regions, ...props }: Advertis
                   selected={field.value}
                   setSelected={field.onChange}
                   placeholder={`${capitalizeFirstLetter(t("advertisement:region.placeholder"))}`}
+                  error={errors.region}
                   isEditable
                 />
               )}
@@ -145,14 +215,14 @@ export const AdvertisementEditor = ({ eyes, hairs, regions, ...props }: Advertis
           </label>
         </div>
 
-        <div className={cn(styles.select__right__section)}>
+        <div className={cn(styles.editor__right__section)}>
           <h3 className={cn(styles.editor__right__heading)}>{t("advertisement:personal-info")}</h3>
 
           <label className={cn(styles.editor__label)}>
             <span className={cn(styles.editor__label__text)}>{t("advertisement:fullname.name")}</span>
 
             <Input
-              {...register("fullname", { required: { value: true, message: "Заполните имя" } })}
+              {...register("fullname")}
               className={cn(styles.editor__label__input)}
               autoComplete="off"
               type="text"
@@ -164,7 +234,7 @@ export const AdvertisementEditor = ({ eyes, hairs, regions, ...props }: Advertis
             <span className={cn(styles.editor__label__text)}>{t("advertisement:height.name")}</span>
 
             <Input
-              {...register("height", { required: { value: true, message: "Заполните имя" } })}
+              {...register("height")}
               className={cn(styles.editor__label__input)}
               autoComplete="off"
               type="number"
@@ -176,7 +246,7 @@ export const AdvertisementEditor = ({ eyes, hairs, regions, ...props }: Advertis
             <span className={cn(styles.editor__label__text)}>{t("advertisement:weight.name")}</span>
 
             <Input
-              {...register("weight", { required: { value: true, message: "Заполните имя" } })}
+              {...register("weight")}
               className={cn(styles.editor__label__input)}
               autoComplete="off"
               type="number"
@@ -186,6 +256,7 @@ export const AdvertisementEditor = ({ eyes, hairs, regions, ...props }: Advertis
 
           <label className={cn(styles.editor__label)}>
             <span className={cn(styles.editor__label__text)}>{t("advertisement:hair-color.name")}</span>
+
             <Controller
               control={control}
               name="hairColor"
@@ -205,6 +276,7 @@ export const AdvertisementEditor = ({ eyes, hairs, regions, ...props }: Advertis
 
           <label className={cn(styles.editor__label)}>
             <span className={cn(styles.editor__label__text)}>{t("advertisement:title.name")}</span>
+
             <Controller
               control={control}
               name="eyeColor"
@@ -226,7 +298,7 @@ export const AdvertisementEditor = ({ eyes, hairs, regions, ...props }: Advertis
             <span className={cn(styles.editor__label__text)}>{t("advertisement:about.name")}</span>
 
             <Textarea
-              {...register("about", { required: { value: true, message: "Заполните имя" } })}
+              {...register("about")}
               className={cn(styles.editor__label__input)}
               autoComplete="off"
               placeholder={`${capitalizeFirstLetter(t("advertisement:about.placeholder"))}`}
@@ -234,7 +306,9 @@ export const AdvertisementEditor = ({ eyes, hairs, regions, ...props }: Advertis
           </label>
         </div>
 
-        <Button className={cn(styles.editor__button)}>{t("advertisement:publish")}</Button>
+        <Button className={cn(styles.editor__button)} isLoading={isLoading}>
+          {t("advertisement:publish")}
+        </Button>
       </form>
     </div>
   );
