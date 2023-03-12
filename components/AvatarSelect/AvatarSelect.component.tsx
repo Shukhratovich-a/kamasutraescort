@@ -1,7 +1,7 @@
 import React from "react";
-import cn from "classnames";
-import axios from "axios";
 import { signIn, useSession } from "next-auth/react";
+import axios from "axios";
+import cn from "classnames";
 
 import { API } from "../../helpers";
 

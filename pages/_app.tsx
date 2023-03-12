@@ -1,8 +1,8 @@
 import React from "react";
 import Head from "next/head";
+import { AppProps } from "next/app";
 import { SessionProvider } from "next-auth/react";
 import { appWithTranslation } from "next-i18next";
-import { AppProps } from "next/app";
 
 import "../utils/i18n";
 

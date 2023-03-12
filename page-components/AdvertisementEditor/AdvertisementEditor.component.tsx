@@ -1,19 +1,18 @@
 import React from "react";
-import { Controller, useForm } from "react-hook-form";
 import { useTranslation } from "next-i18next";
+import { Controller, useForm } from "react-hook-form";
+import { useSession } from "next-auth/react";
+import axios from "axios";
 import cn from "classnames";
 
+import { API } from "../../helpers";
 import { IAdvertisementEditor } from "./AdvertisementEditor.interface";
 
 import { AdvertisementEditorProps } from "./AdvertisementEditor.props";
 
-import { Button, DateSelect, Input, Select, Textarea, TypeSelect } from "../../components";
+import { Button, DateSelect, Input, Select, Textarea, TypeSelect, ImageSelect } from "../../components";
 
 import styles from "./AdvertisementEditor.module.scss";
-import { ImageSelect } from "../../components/ImageSelect/ImageSelect.component";
-import axios from "axios";
-import { API } from "../../helpers";
-import { useSession } from "next-auth/react";
 
 export const AdvertisementEditor = ({
   eyes,
@@ -23,12 +22,11 @@ export const AdvertisementEditor = ({
   ...props
 }: AdvertisementEditorProps): JSX.Element => {
   const { t } = useTranslation();
+  const { data: session } = useSession({ required: true });
 
   const capitalizeFirstLetter = (string: string): string => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   };
-
-  const { data: session } = useSession({ required: true });
 
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
 

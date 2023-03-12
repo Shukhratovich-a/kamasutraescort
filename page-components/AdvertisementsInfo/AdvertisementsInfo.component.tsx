@@ -1,12 +1,13 @@
-import cn from "classnames";
+import Link from "next/link";
+import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
+import cn from "classnames";
 
 import { AdvetisementsInfoProps } from "./AdvertisementsInfo.props";
 
+import { Advertisement, Button } from "../../components";
+
 import styles from "./AdvertisementsInfo.module.scss";
-import { Adavertisement, Button } from "../../components";
-import Link from "next/link";
-import { useRouter } from "next/router";
 
 export const AdvertisementsInfo = ({ advertisements, ...props }: AdvetisementsInfoProps): JSX.Element => {
   const { t } = useTranslation();
@@ -25,7 +26,7 @@ export const AdvertisementsInfo = ({ advertisements, ...props }: AdvetisementsIn
         {advertisements.map((advertisement) => {
           return (
             <li className={cn(styles.advertisement)} key={advertisement.id}>
-              <Adavertisement adavertisement={advertisement} />
+              <Advertisement advertisement={advertisement} />
             </li>
           );
         })}

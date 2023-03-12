@@ -1,9 +1,9 @@
 import React from "react";
 import { signIn, useSession } from "next-auth/react";
-import cn from "classnames";
-import { Controller, useForm } from "react-hook-form";
 import { useTranslation } from "next-i18next";
+import { Controller, useForm } from "react-hook-form";
 import axios from "axios";
+import cn from "classnames";
 
 import { API } from "../../helpers";
 

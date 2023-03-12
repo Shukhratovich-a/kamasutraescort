@@ -1,11 +1,11 @@
 import { DetailedHTMLProps, HTMLAttributes } from "react";
 import { Session } from "next-auth";
 
-import { UserInterface } from "../../interfaces";
+import { AdvertismentInterface } from "../../interfaces";
 
 export interface AuthHomePageProps extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
   session?: Session;
-  men?: UserInterface[];
-  women?: UserInterface[];
-  others?: UserInterface[];
+  men?: AdvertismentInterface[];
+  women?: AdvertismentInterface[];
+  others?: AdvertismentInterface[];
 }

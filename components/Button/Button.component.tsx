@@ -1,3 +1,4 @@
+import React from "react";
 import cn from "classnames";
 
 import { ButtonProps } from "./Button.props";
@@ -5,13 +6,12 @@ import { ButtonProps } from "./Button.props";
 import Waiting from "../../assets/spinners/waiting.svg";
 
 import styles from "./Button.module.scss";
-import React from "react";
 
 export const Button = React.forwardRef(
   (
     { className, children, appearance = "primary", isLoading = false, ...props }: ButtonProps,
     ref: React.Ref<HTMLButtonElement>
-  ) => {
+  ): JSX.Element => {
     return (
       <button
         className={cn(styles.button, className, {

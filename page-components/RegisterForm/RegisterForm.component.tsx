@@ -1,21 +1,23 @@
 import React from "react";
 import { useRouter } from "next/router";
-import cn from "classnames";
 import { useTranslation } from "next-i18next";
+import { signIn } from "next-auth/react";
 import { Controller, useForm } from "react-hook-form";
+import axios from "axios";
+import cn from "classnames";
+
+import { API } from "../../helpers";
+
+import { AuthResponceInterface } from "../../interfaces";
+import { IRegisterForm } from "./RegisterForm.interface";
 
 import { RegisterFormProps } from "./RegisterForm.props";
-import { IRegisterForm } from "./RegisterForm.interface";
 
 import { Button, Input, Select, DateSelect } from "../../components";
 
 import Region from "../../assets/icons/region.svg";
 
 import styles from "./RegisterForm.module.scss";
-import axios from "axios";
-import { API } from "../../helpers";
-import { AuthResponceInterface } from "../../interfaces";
-import { signIn } from "next-auth/react";
 
 export const RegisterForm = ({ className, regions, ...props }: RegisterFormProps) => {
   const { t, i18n } = useTranslation();

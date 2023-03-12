@@ -1,13 +1,13 @@
 import { useTranslation } from "next-i18next";
-import cn from "classnames";
 import { useRouter } from "next/router";
+import cn from "classnames";
 
 import { RoleSelectProps } from "./RoleSelect.props";
 
 import User from "../../assets/roleIcons/user.svg";
 import Advertiser from "../../assets/roleIcons/advertiser.svg";
 
-import { Button, Modal } from "../";
+import { Button, Modal } from "..";
 
 import styles from "./RoleSelect.module.scss";
 

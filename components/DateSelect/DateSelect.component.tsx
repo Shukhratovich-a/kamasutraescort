@@ -1,17 +1,18 @@
 import React from "react";
-import cn from "classnames";
-
-import styles from "./DateSelect.module.scss";
+import { useTranslation } from "next-i18next";
 import { getDaysInMonth, getYear, format, getDate, getMonth } from "date-fns";
 import { ru, enUS } from "date-fns/locale";
+import { motion } from "framer-motion";
+import cn from "classnames";
+
 import { DateSelectProps } from "./DateSelect.props";
-import { useTranslation } from "next-i18next";
 
 import Marker from "../../assets/icons/marker.svg";
-import { motion } from "framer-motion";
+
+import styles from "./DateSelect.module.scss";
 
 export const DateSelect = React.forwardRef(
-  ({ date, setDate }: DateSelectProps, ref: React.ForwardedRef<HTMLDivElement>) => {
+  ({ date, setDate }: DateSelectProps, ref: React.ForwardedRef<HTMLDivElement>): JSX.Element => {
     const { t, i18n } = useTranslation();
 
     const [isYearOpen, setIsYearOpen] = React.useState<boolean>(false);

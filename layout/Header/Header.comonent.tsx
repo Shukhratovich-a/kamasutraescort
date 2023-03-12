@@ -1,13 +1,14 @@
 import React from "react";
 import Link from "next/link";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 import cn from "classnames";
 
 import { useMediaQuery } from "../../hooks";
 import { HeaderProps } from "./Header.props";
 
-import { Container, HeaderProfile } from "../../components";
 import { Nav } from "../Nav/Nav.component";
+
+import { Container, HeaderProfile } from "../../components";
 
 import Burger from "../../assets/icons/burger.svg";
 import Close from "../../assets/icons/x.svg";

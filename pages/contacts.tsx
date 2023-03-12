@@ -1,3 +1,5 @@
+import { GetStaticProps, GetStaticPropsContext } from "next";
+import { ParsedUrlQuery } from "querystring";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 import { withLayout } from "../layout/Layout";
@@ -8,10 +10,10 @@ const Contacts = (): JSX.Element => {
   return <Container>Contacts</Container>;
 };
 
-export const getStaticProps = async ({ locale }: { locale: string }) => {
+export const getStaticProps: GetStaticProps = async ({ locale }: GetStaticPropsContext<ParsedUrlQuery>) => {
   return {
     props: {
-      ...(await serverSideTranslations(locale)),
+      ...(await serverSideTranslations(String(locale))),
     },
   };
 };

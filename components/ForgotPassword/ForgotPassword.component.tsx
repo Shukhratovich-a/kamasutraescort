@@ -1,13 +1,13 @@
-import cn from "classnames";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "next-i18next";
+import cn from "classnames";
 
 import { ForgotPasswordProps } from "./ForgotPassword.props";
 
 import { IForgotPassword } from "./ForgotPassword.interface";
 
-import { Input, Button } from "../";
+import { Input, Button } from "..";
 
 import styles from "./ForgotPassword.module.scss";
 

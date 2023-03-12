@@ -6,7 +6,7 @@
     "dev": "next dev",
     "debug": "NODE_OPTIONS='--inspect' next dev",
     "build": "next build",
-    "start": "node server.js",
+    "start": "next start",
     "lint": "next lint",
     "stylelint": "stylelint \"**/*.scss\" --fix",
     "prepare": "husky install"
@@ -26,6 +26,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.43.1",
+    "react-html-parser": "^2.0.2",
     "rooks": "^7.4.3",
     "sass": "^1.58.0",
     "swiper": "^9.0.5"
@@ -35,6 +36,7 @@
     "@svgr/webpack": "^6.5.1",
     "@types/node": "18.14.1",
     "@types/react": "^18.0.27",
+    "@types/react-html-parser": "^2.0.2",
     "@typescript-eslint/eslint-plugin": "^5.51.0",
     "@typescript-eslint/parser": "^5.51.0",
     "eslint": "^8.33.0",

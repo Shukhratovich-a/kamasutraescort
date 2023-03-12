@@ -1,4 +1,5 @@
 import cn from "classnames";
+import { format } from "date-fns";
 import { useTranslation } from "next-i18next";
 
 import { calculateFullAge, DOMAIN } from "../../helpers";
@@ -8,7 +9,6 @@ import { UserProfileProps } from "./UserProfile.props";
 import { Container } from "../../components";
 
 import styles from "./UserProfile.module.scss";
-import { format } from "date-fns";
 
 export const UserProfile = ({ user, ...props }: UserProfileProps): JSX.Element => {
   const { t, i18n } = useTranslation();

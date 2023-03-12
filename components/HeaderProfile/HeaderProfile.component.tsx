@@ -1,8 +1,8 @@
+import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 import { useTranslation } from "next-i18next";
-import React from "react";
 import cn from "classnames";
 
 import { API } from "../../helpers";

@@ -2,18 +2,18 @@ import cn from "classnames";
 
 import { AuthHomePageProps } from "./AuthHomePage.props";
 
+import { AdvertismentsList, Container } from "../../components";
+
 import styles from "./AuthHomePage.module.scss";
 
-export const AuthHomePage = ({ session, men, women }: AuthHomePageProps): JSX.Element => {
+export const AuthHomePage = ({ session, men, women, others }: AuthHomePageProps): JSX.Element => {
   return (
-    <div className={cn(styles.home)}>
-      {/* {session?.user.gender === "female"
-        ? women?.length && <UserList users={women} heading={"Ищу девушку"} />
-        : men?.length && <UserList users={men} heading={"Ищу парня"} />}
-
-      {session?.user.gender === "male"
-        ? women?.length && <UserList users={women} heading={"Ищу девушку"} />
-        : men && <UserList users={men} heading={"Ищу парня"} />} */}
-    </div>
+    <Container>
+      <div className={cn(styles.home)}>
+        {men && <AdvertismentsList advertisements={men} />}
+        {women && <AdvertismentsList advertisements={women} />}
+        {others && <AdvertismentsList advertisements={others} />}
+      </div>
+    </Container>
   );
 };

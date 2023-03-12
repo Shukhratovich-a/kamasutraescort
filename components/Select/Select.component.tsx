@@ -1,7 +1,7 @@
 import React from "react";
-import cn from "classnames";
 import { useTranslation } from "next-i18next";
 import { motion } from "framer-motion";
+import cn from "classnames";
 
 import { SelectItem } from "../../interfaces";
 

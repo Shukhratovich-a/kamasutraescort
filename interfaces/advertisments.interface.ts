@@ -1,3 +1,5 @@
+import { SelectItem } from "./select.interface";
+
 export interface AdvertismentInterface {
   id: number;
 
@@ -19,9 +21,9 @@ export interface AdvertismentInterface {
 
   goal?: number;
 
-  hairColor?: number;
+  hairColor?: SelectItem;
 
-  eyeColor?: number;
+  eyeColor?: SelectItem;
 
   images: AdvImageInterface;
 

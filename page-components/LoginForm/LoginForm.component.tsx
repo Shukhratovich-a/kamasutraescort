@@ -1,10 +1,10 @@
 import React from "react";
 import { useRouter } from "next/router";
 import { signIn } from "next-auth/react";
-import cn from "classnames";
-import { useForm } from "react-hook-form";
 import { useTranslation } from "next-i18next";
+import { useForm } from "react-hook-form";
 import axios from "axios";
+import cn from "classnames";
 
 import { API } from "../../helpers";
 import { AuthResponceInterface, LoginInterface } from "../../interfaces";

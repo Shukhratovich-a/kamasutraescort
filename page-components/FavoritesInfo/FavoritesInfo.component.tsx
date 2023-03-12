@@ -3,11 +3,9 @@ import { useTranslation } from "next-i18next";
 
 import { FavoritesInfoProps } from "./FavoritesInfo.props";
 
-// import { User } from "../../components";
-
 import styles from "./FavoritesInfo.module.scss";
 
-export const FavoritesInfo = ({ ...props }: FavoritesInfoProps) => {
+export const FavoritesInfo = ({ ...props }: FavoritesInfoProps): JSX.Element => {
   const { t } = useTranslation();
 
   return (

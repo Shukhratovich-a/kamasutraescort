@@ -6,8 +6,8 @@ import { withLayout } from "../layout/Layout";
 
 import { Container } from "../components";
 
-const Support = (): JSX.Element => {
-  return <Container>Support</Container>;
+const Messages = (): JSX.Element => {
+  return <Container>Advertisements</Container>;
 };
 
 export const getStaticProps: GetStaticProps = async ({ locale }: GetStaticPropsContext<ParsedUrlQuery>) => {
@@ -18,4 +18,4 @@ export const getStaticProps: GetStaticProps = async ({ locale }: GetStaticPropsC
   };
 };
 
-export default withLayout(Support);
+export default withLayout(Messages);

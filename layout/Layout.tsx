@@ -7,10 +7,10 @@ import { LayoutProps } from "./Layout.props";
 
 import { Header } from "./Header/Header.comonent";
 import { AuthHeader } from "./AuthHeader/AuthHeader.comonent";
+import { ProfileMenu } from "./ProfileMenu/ProfileMenu.component";
 import { Footer } from "./Footer/Footer.component";
 
 import { Container } from "../components";
-import { ProfileMenu } from "./ProfileMenu/ProfileMenu.component";
 
 import styles from "./Layout.module.scss";
 
@@ -32,7 +32,7 @@ const Layout = ({ children, className }: LayoutProps): JSX.Element => {
 
       <Footer
         className={cn(styles.footer, {
-          [styles.footer__auth]: asPath.startsWith("/auth"),
+          [styles["footer--auth"]]: !asPath.startsWith("/auth"),
         })}
       />
     </div>

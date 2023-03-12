@@ -1,7 +1,7 @@
-import cn from "classnames";
-import { format } from "date-fns";
 import Link from "next/link";
+import { format } from "date-fns";
 import { useTranslation } from "next-i18next";
+import cn from "classnames";
 
 import { FooterProps } from "./Footer.props";
 
