@@ -15,10 +15,6 @@ import { withLayout } from "../layout/Layout";
 import { AuthHomePage } from "../page-components";
 
 const Home = ({ session, men, women, others }: HomePageProps): JSX.Element => {
-  console.log(men);
-  console.log(women);
-  console.log(others);
-
   return <AuthHomePage session={session} men={men} women={women} others={others} />;
 };
 

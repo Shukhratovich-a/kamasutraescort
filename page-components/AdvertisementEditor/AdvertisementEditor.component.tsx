@@ -90,7 +90,7 @@ export const AdvertisementEditor = ({
 
   return (
     <div className={cn(styles.editor)} {...props}>
-      <h2 className={cn(styles.editor__heading)}>craete</h2>
+      <h2 className={cn(styles.editor__heading)}>{t("advertisement:create")}</h2>
 
       <div className={cn(styles.editor__left)}>
         <Controller

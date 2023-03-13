@@ -2,3 +2,44 @@
   display: grid;
   gap: 50px;
 }
+
+.home__inner {
+  display: grid;
+  gap: 20px;
+}
+
+.home__heading {
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 42px;
+  margin: 0;
+}
+
+@media only screen and (max-width: 500px) {
+  .home {
+    gap: 30px;
+  }
+
+  .home__heading {
+    font-size: 22px;
+    line-height: 33px;
+  }
+}
+
+@media only screen and (max-width: 475px) {
+  .home__inner {
+    gap: 15px;
+  }
+}
+
+@media only screen and (max-width: 425px) {
+  .home {
+    gap: 20px;
+  }
+}
+
+@media only screen and (max-width: 375px) {
+  .home__inner {
+    gap: 10px;
+  }
+}

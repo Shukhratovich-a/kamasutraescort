@@ -10,9 +10,23 @@ export const AuthHomePage = ({ session, men, women, others }: AuthHomePageProps)
   return (
     <Container>
       <div className={cn(styles.home)}>
-        {men && <AdvertismentsList advertisements={men} />}
-        {women && <AdvertismentsList advertisements={women} />}
-        {others && <AdvertismentsList advertisements={others} />}
+        {men && men?.length > 0 && (
+          <div className={cn(styles.home__inner)}>
+            <h3 className={cn(styles.home__heading)}>Мужчины</h3>
+
+            <AdvertismentsList advertisements={men} />
+          </div>
+        )}
+
+        {women && women?.length > 0 && (
+          <div className={cn(styles.home__inner)}>
+            <h3 className={cn(styles.home__heading)}>Ищу парня</h3>
+
+            <AdvertismentsList advertisements={women} />
+          </div>
+        )}
+
+        {others && others?.length > 0 && <AdvertismentsList advertisements={others} />}
       </div>
     </Container>
   );

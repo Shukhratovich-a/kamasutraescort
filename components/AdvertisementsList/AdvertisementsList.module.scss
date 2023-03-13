@@ -1,6 +1,9 @@
-.advertisements__list {
-  margin: 0;
-  padding: 0;
+.advertisements {
+  overflow: visible;
+  max-width: calc(100vw);
+}
 
-  list-style-type: none;
+.advertisement {
+  max-width: 220px;
+  width: 100%;
 }

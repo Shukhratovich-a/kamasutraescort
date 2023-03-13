@@ -56,7 +56,7 @@ export const AdvertisementInfo = ({ advertisement, ...props }: AdvertisementInfo
           {advertisement.type && (
             <li className={cn(styles.advertisement__item)}>
               <span className={cn(styles.advertisement__item__heading)}>{t("advertisement:type")}</span>
-              <span className={cn(styles.advertisement__item__text)}>{advertisement.type}</span>
+              <span className={cn(styles.advertisement__item__text)}>{t(`type:${advertisement.type}`)}</span>
             </li>
           )}
 

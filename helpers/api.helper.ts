@@ -25,7 +25,8 @@ export const API = {
     getByUsername: (username: string, limit = 10, page = 1) =>
       `${DOMAIN}/advertisement/username/${username}?limit=${limit}&page=${page}`,
 
-    getByType: (type: TypeEnum) => `${DOMAIN}/advertisement/type/${type}`,
+    getByType: (type: TypeEnum, limit = 5, page = 1) =>
+      `${DOMAIN}/advertisement/type/${type}?limit=${limit}&page=${page}`,
 
     getBySearchName: (searchName: string) => `${DOMAIN}/advertisement/${searchName}`,
 

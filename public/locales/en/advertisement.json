@@ -39,9 +39,10 @@
     "placeholder": "specify eye color"
   },
   "about": {
-    "name": "about you",
+    "name": "about me",
     "placeholder": "write about yourself"
   },
 
+  "create": "create advertisement",
   "publish": "publish"
 }

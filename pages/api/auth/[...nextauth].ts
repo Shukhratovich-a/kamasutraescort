@@ -28,8 +28,6 @@ export const authOptions: NextAuthOptions = {
           { headers: { Authorization: JSON.stringify(token) } }
         );
 
-        // console.log(data);
-
         if (data) {
           return data;
         } else return null;

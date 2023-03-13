@@ -1,22 +1,33 @@
-import Swiper from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
 import cn from "classnames";
+
+import { useMediaQuery } from "../../hooks";
 
 import { AdvertisementsListProps } from "./AdvertisementsList.props";
 
 import { Advertisement } from "..";
 
+import "swiper/scss";
 import styles from "./AdvertisementsList.module.scss";
 
 export const AdvertismentsList = ({ advertisements, ...props }: AdvertisementsListProps): JSX.Element => {
+  const isMiddle = useMediaQuery("(max-width: 475px)");
+  const isSmall = useMediaQuery("(max-width: 375px)");
+
   return (
     <div className={cn(styles.advertisements)} {...props}>
-      <ul className={cn(styles.advertisements__list)}>
+      <Swiper
+        className={cn(styles.advertisements__list)}
+        spaceBetween={isSmall ? 10 : isMiddle ? 15 : 20}
+        grabCursor={true}
+        slidesPerView={"auto"}
+      >
         {advertisements.map((advertisement) => (
-          <li className={cn(styles.advertisement)}>
+          <SwiperSlide className={cn(styles.advertisement)} key={advertisement.id}>
             <Advertisement advertisement={advertisement} />
-          </li>
+          </SwiperSlide>
         ))}
-      </ul>
+      </Swiper>
     </div>
   );
 };
