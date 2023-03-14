@@ -1,4 +1,5 @@
 import { Swiper, SwiperSlide } from "swiper/react";
+import { FreeMode } from "swiper";
 import cn from "classnames";
 
 import { useMediaQuery } from "../../hooks";
@@ -8,6 +9,7 @@ import { AdvertisementsListProps } from "./AdvertisementsList.props";
 import { Advertisement } from "..";
 
 import "swiper/scss";
+import "swiper/scss/free-mode";
 import styles from "./AdvertisementsList.module.scss";
 
 export const AdvertismentsList = ({ advertisements, ...props }: AdvertisementsListProps): JSX.Element => {
@@ -20,6 +22,8 @@ export const AdvertismentsList = ({ advertisements, ...props }: AdvertisementsLi
         className={cn(styles.advertisements__list)}
         spaceBetween={isSmall ? 10 : isMiddle ? 15 : 20}
         grabCursor={true}
+        freeMode={true}
+        modules={[FreeMode]}
         slidesPerView={"auto"}
       >
         {advertisements.map((advertisement) => (

@@ -5,7 +5,8 @@ import { AdvertismentInterface } from "../../interfaces";
 
 export interface AuthHomePageProps extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
   session?: Session;
-  men?: AdvertismentInterface[];
-  women?: AdvertismentInterface[];
-  others?: AdvertismentInterface[];
+  man?: AdvertismentInterface[];
+  woman?: AdvertismentInterface[];
+  shemale?: AdvertismentInterface[];
+  massage?: AdvertismentInterface[];
 }

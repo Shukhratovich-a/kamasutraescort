@@ -14,8 +14,8 @@ import { withLayout } from "../layout/Layout";
 
 import { AuthHomePage } from "../page-components";
 
-const Home = ({ session, men, women, others }: HomePageProps): JSX.Element => {
-  return <AuthHomePage session={session} men={men} women={women} others={others} />;
+const Home = ({ session, man, woman, shemale, massage }: HomePageProps): JSX.Element => {
+  return <AuthHomePage session={session} man={man} woman={woman} shemale={shemale} massage={massage} />;
 };
 
 export const getServerSideProps: GetServerSideProps<HomePageProps> = async ({
@@ -41,15 +41,17 @@ export const getServerSideProps: GetServerSideProps<HomePageProps> = async ({
   //   },
   // };
 
-  const { data: men } = await axios.get(API.advertisement.getByType(TypeEnum.Male));
-  const { data: women } = await axios.get(API.advertisement.getByType(TypeEnum.Female));
-  const { data: others } = await axios.get(API.advertisement.getByType(TypeEnum.Shemale));
+  const { data: man } = await axios.get(API.advertisement.getByType(TypeEnum.Male));
+  const { data: woman } = await axios.get(API.advertisement.getByType(TypeEnum.Female));
+  const { data: shemale } = await axios.get(API.advertisement.getByType(TypeEnum.Shemale));
+  const { data: massage } = await axios.get(API.advertisement.getByType(TypeEnum.Massage));
 
   return {
     props: {
-      men,
-      women,
-      others,
+      man,
+      woman,
+      shemale,
+      massage,
       session,
       ...(await serverSideTranslations(String(locale))),
     },
@@ -60,7 +62,8 @@ export default withLayout(Home);
 
 export interface HomePageProps extends Record<string, unknown> {
   session: Session;
-  men?: AdvertismentInterface[];
-  women?: AdvertismentInterface[];
-  others?: AdvertismentInterface[];
+  man?: AdvertismentInterface[];
+  woman?: AdvertismentInterface[];
+  shemale?: AdvertismentInterface[];
+  massage?: AdvertismentInterface[];
 }

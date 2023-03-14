@@ -36,9 +36,6 @@ body {
   color: var(--text-light);
   background-color: var(--background-primary);
 
-  background-image: url("../assets/background/bg.webp");
-  background-size: cover;
-
   font-family: var(--font-family);
   font-size: 16px;
   font-weight: 400;
@@ -47,16 +44,37 @@ body {
   &::after {
     position: fixed;
     z-index: -1;
-    top: -200px;
-    right: -200px;
-    bottom: -200px;
-    left: -200px;
+    top: -100px;
+    right: -100px;
+    bottom: -100px;
+    left: -100px;
+
+    width: calc(100vw + 200px);
+    height: calc(100vh + 200px);
 
     content: "";
     pointer-events: none;
 
     opacity: 0.9;
     background-color: var(--background-primary);
+  }
+
+  &::before {
+    position: fixed;
+    z-index: -2;
+    top: -100px;
+    right: -100px;
+    bottom: -100px;
+    left: -100px;
+
+    width: calc(100vw + 200px);
+    height: calc(100vh + 200px);
+
+    content: "";
+    pointer-events: none;
+
+    background-image: url("../assets/background/bg.webp");
+    background-size: cover;
   }
 }
 
