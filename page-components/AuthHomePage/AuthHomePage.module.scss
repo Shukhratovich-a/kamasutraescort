@@ -1,6 +1,7 @@
 .home {
   display: grid;
   gap: 50px;
+  margin-bottom: 50px;
 }
 
 .home__inner {
@@ -14,6 +15,16 @@
   font-size: 28px;
   font-weight: 500;
   line-height: 42px;
+  text-decoration: none;
+
+  a {
+    text-decoration: inherit;
+    color: inherit;
+  }
+
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
 @media only screen and (max-width: 500px) {

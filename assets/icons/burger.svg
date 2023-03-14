@@ -1,18 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="none">
-  <path stroke="url(#burgerA)" stroke-linecap="round" stroke-width="3" d="M2.5 4.833h25" />
-  <path stroke="url(#burgerB)" stroke-linecap="round" stroke-width="3" d="M2.5 15h25" />
-  <path stroke="url(#burgerC)" stroke-linecap="round" stroke-width="3" d="M2.5 25.167h25" />
+  <path stroke="url(#burger)" stroke-linecap="round" stroke-width="3" d="M2.5 4.833h25" />
+  <path stroke="url(#burger)" stroke-linecap="round" stroke-width="3" d="M2.5 15h25" />
+  <path stroke="url(#burger)" stroke-linecap="round" stroke-width="3" d="M2.5 25.167h25" />
+
   <defs>
-    <linearGradient id="burgerA" x1="2.5" x2="27.5" y1="4.833" y2="4.833"
-      gradientUnits="userSpaceOnUse">
-      <stop stop-color="#EE0979" />
-      <stop offset="1" stop-color="#FF6A00" />
-    </linearGradient>
-    <linearGradient id="burgerB" x1="2.5" x2="27.5" y1="15" y2="15" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#EE0979" />
-      <stop offset="1" stop-color="#FF6A00" />
-    </linearGradient>
-    <linearGradient id="burgerC" x1="2.5" x2="27.5" y1="25.167" y2="25.167"
+    <linearGradient id="burger" x1="2.5" x2="27.5" y1="4.833" y2="4.833"
       gradientUnits="userSpaceOnUse">
       <stop stop-color="#EE0979" />
       <stop offset="1" stop-color="#FF6A00" />

@@ -1,3 +1,5 @@
+import Link from "next/link";
+import { useTranslation } from "next-i18next";
 import cn from "classnames";
 
 import { AuthHomePageProps } from "./AuthHomePage.props";
@@ -7,12 +9,18 @@ import { AdvertismentsList, Container } from "../../components";
 import styles from "./AuthHomePage.module.scss";
 
 export const AuthHomePage = ({ session, men, women, others }: AuthHomePageProps): JSX.Element => {
+  const { i18n } = useTranslation();
+
   return (
     <Container>
       <div className={cn(styles.home)}>
         {men && men?.length > 0 && (
           <div className={cn(styles.home__inner)}>
-            <h3 className={cn(styles.home__heading)}>Мужчины</h3>
+            <h3 className={cn(styles.home__heading)}>
+              <Link href={"/advertisements?type=men"} locale={i18n.language}>
+                Мужчины
+              </Link>
+            </h3>
 
             <AdvertismentsList advertisements={men} />
           </div>
@@ -20,7 +28,11 @@ export const AuthHomePage = ({ session, men, women, others }: AuthHomePageProps)
 
         {women && women?.length > 0 && (
           <div className={cn(styles.home__inner)}>
-            <h3 className={cn(styles.home__heading)}>Ищу парня</h3>
+            <h3 className={cn(styles.home__heading)}>
+              <Link href={"/advertisements?type=women"} locale={i18n.language}>
+                Ищу парня
+              </Link>
+            </h3>
 
             <AdvertismentsList advertisements={women} />
           </div>
