@@ -53,6 +53,13 @@ export const AdvertisementInfo = ({ advertisement, ...props }: AdvertisementInfo
             </span>
           </li>
 
+          <li className={cn(styles.advertisement__item)}>
+            <span className={cn(styles.advertisement__item__heading)}>{t("advertisement:region.name")}</span>
+            <span className={cn(styles.advertisement__item__text)}>
+              {i18n.language === "ru" ? advertisement.region.nameRu : advertisement.region.nameEn}
+            </span>
+          </li>
+
           {advertisement.type && (
             <li className={cn(styles.advertisement__item)}>
               <span className={cn(styles.advertisement__item__heading)}>{t("advertisement:type")}</span>

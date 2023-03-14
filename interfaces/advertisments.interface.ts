@@ -9,6 +9,8 @@ export interface AdvertismentInterface {
 
   birthDate: Date;
 
+  region: SelectItem;
+
   type: TypeEnum;
 
   fullname?: string;
